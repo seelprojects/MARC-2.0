@@ -1,0 +1,188 @@
+﻿<Page 
+    x:Class="MARC2.ImportPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:MARC2"
+    xmlns:model="clr-namespace:MARC2.Model"
+    xmlns:MetroChart ="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+    xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    mc:Ignorable="d" 
+    xmlns:self="clr-namespace:MARC2.Converter"
+    d:DesignHeight="900" d:DesignWidth="900"
+    Title="Import"
+    Name="wnd"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"     
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"
+    FontFamily="{DynamicResource MaterialDesignFont}"  UseLayoutRounding="True">
+
+    <Page.Resources>
+        <self:BindingTestConverter x:Key="bindingTestConverter" />
+
+        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+    </Page.Resources>
+
+
+
+    <Page.DataContext>
+        <model:MyViewModel />
+    </Page.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Left Content-->
+        <StackPanel Margin="5,0,0,5" Grid.Column="0" >
+            <materialDesign:Card  Margin="5,5,0,0">
+                <GroupBox Header="My Apps" Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <StackPanel>
+                        <TextBlock Name="MyAppsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no apps saved." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <Border BorderThickness="0.5" BorderBrush="Black" CornerRadius="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ListView x:Name="myAppsListbox" MaxHeight="300" FontSize="11">
+                                    <ListView.View>
+                                        <GridView>
+                                            <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Application Name" />
+                                            <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <materialDesign:ColorZone Height="30" Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth2}">
+                                    <TextBlock Margin="16"></TextBlock>
+                                </materialDesign:ColorZone>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                        Click="AddNewAppButton_Click"
+                                    Grid.Row="0" Margin="0 0 28 -20">
+                                    <Viewbox Width="22" Height="22">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
+                                        </Canvas>
+                                    </Viewbox>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <StackPanel Margin="0,10,0,10">
+                            <Button  Name="downloadReviewsButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="downloadReviewButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto">
+                                <StackPanel Height="52" Orientation="Horizontal">
+                                    <Image Source="Icons/download-3-icon.png" Height="44" Width="44"/>
+                                    <Label FontSize="11" Margin="0,15,0,0" Content="     Import Reviews            " HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+            </materialDesign:Card>
+            <materialDesign:Card Margin="5,5,0,0">
+                <GroupBox Header="Import from Local File" Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <StackPanel Margin="0,10,0,10">
+                        <TextBox Name="browseLocalFileTextbox" BorderThickness="1" Margin="10,10,10,10" KeyDown="browseLocalFileTextbox_KeyDown" ></TextBox>
+                        <Button Name="browseLocalFileButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="browseLocalFileButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="auto" >
+                            <StackPanel Height="52" Orientation="Horizontal">
+                                <Image Source="Icons/browse.ico" Height="44" Width="44"/>
+                                <Label FontSize="11" Margin="0,15,0,0" Content="     Browse local file     " HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </GroupBox>
+            </materialDesign:Card>
+        </StackPanel>
+
+        <!--Pie Chart-->
+        <liveCharts:PieChart 
+            Grid.Column="1" 
+            Height="100" 
+            Width="100" 
+            Name="Chart" 
+            Margin="0,-110,0,0" 
+            Grid.Row="1" 
+            Series="{Binding Model.ImportedReviewsCollection}" 
+            LegendLocation="Right" 
+            InnerRadius="25" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top">
+            <liveCharts:PieChart.ChartLegend>
+                <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
+            </liveCharts:PieChart.ChartLegend>
+            <liveCharts:PieChart.DataTooltip>
+                <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
+            </liveCharts:PieChart.DataTooltip>
+        </liveCharts:PieChart>
+
+        <!--Right Content-->
+        <Grid Grid.Column="1" Margin="20,0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="8*" />
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,10,0,5" Grid.RowSpan="2">
+                <StackPanel>
+                    <TextBlock Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select and app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                    <ListView x:Name="importedReviewsListbox" Margin="0,0,0,0" MaxHeight="550">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                                <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
+                                <GridViewColumn DisplayMemberBinding="{Binding Review}" Header="User Reviews" />
+                                <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
+                            </GridView>
+                        </ListView.View>
+                        <!--<ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Review}"  />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>-->
+                    </ListView>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+
+        <!--Loading Spinner-->
+        <StackPanel Visibility="Collapsed" Opacity="0.6" Name="progressBarContainer" Grid.ColumnSpan="2" Background="Black">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Column="1" Grid.Row="0">
+                    <ProgressBar Visibility="Hidden" Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" Height="119" Width="104" />
+                </DockPanel>
+                <DockPanel Margin="-50,50,0,0" Grid.Column="1" Grid.Row="1">
+                    <materialDesign:Card Opacity="1" UniformCornerRadius="20" Margin="5,5,0,0" Padding="10,10,10,10">
+                        <StackPanel Background="White" Orientation="Vertical">
+                            <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" Height="119" Width="104" />
+                            <TextBlock FontSize="14" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">Importing Reviews</TextBlock>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </DockPanel>
+                <DockPanel Grid.Column="1" Grid.Row="2">
+                    <ProgressBar Visibility="Hidden" Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" Height="119" Width="104" />
+                </DockPanel>
+            </Grid>
+        </StackPanel>
+
+    </Grid>
+</Page>
