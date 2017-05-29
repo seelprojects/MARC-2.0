@@ -114,7 +114,6 @@ namespace WekaClassifier
         /// <param name="inputFrames"></param>
         private void ConstructFramesArffFile(List<List<string>> inputFrames, string directoryName)
         {
-            //var directoryName = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString());
             var testDatatsetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\Test.arff";
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(testDatatsetFilePath))
@@ -274,7 +273,6 @@ namespace WekaClassifier
                     default:
                         break;
                 }
-
                 for (int i = 0; i < classifyInsts.numInstances(); i++)
                 {
                     classifyInsts.instance(i).setClassMissing();
