@@ -194,7 +194,6 @@
     <Content Include="Summarizer.dll" />
     <Resource Include="Icons\Browse-Icon.png" />
     <Resource Include="Icons\browse.ico" />
-    <Content Include="Icons\circle-search-icon.svg" />
     <Resource Include="Icons\Download.png" />
   </ItemGroup>
   <ItemGroup>
