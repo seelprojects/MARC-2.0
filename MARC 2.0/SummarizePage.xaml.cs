@@ -117,11 +117,12 @@ namespace MARC2
                 case SummarizationAlgorithm.HTFIDF:
                     HybridTFIDF.HybridTFIDF htfidfBugReports = new HybridTFIDF.HybridTFIDF(Model.BugReportList);
                     htfidfBugReports.PerformHybridTFIDF();
-                    Model.BugReportSummaryList = htfidfBugReports.FinalSortedReviewswithScores.Select(m => m.Key).ToList().GetRange(0, numberOfBRReviews);
+                    Model.BugReportSummaryList = htfidfBugReports.FinalReviewList.GetRange(0, numberOfBRReviews);
+                    
 
                     HybridTFIDF.HybridTFIDF htfidfUserRequirements = new HybridTFIDF.HybridTFIDF(Model.UserRequirementList);
                     htfidfUserRequirements.PerformHybridTFIDF();
-                    Model.UserRequirementsSummaryList = htfidfUserRequirements.FinalSortedReviewswithScores.Select(m => m.Key).ToList().GetRange(0, numberOfURReviews);
+                    Model.UserRequirementsSummaryList = htfidfUserRequirements.FinalReviewList.GetRange(0, numberOfURReviews);
                     break;
                 case SummarizationAlgorithm.SumBasic:
                     SumBasic.SumBasic SBBugReports = new SumBasic.SumBasic(Model.BugReportList, Model.BugReportList.Count);

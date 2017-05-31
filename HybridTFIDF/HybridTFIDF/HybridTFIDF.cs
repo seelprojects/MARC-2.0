@@ -14,11 +14,12 @@ namespace HybridTFIDF
     {
         List<string> ReviewList { get; set; }
         List<double> ReviewListScore { get; set; }
+        public List<string> FinalReviewList { get; set; }
 
         Dictionary<string, int> WordCountsDictionary { get; set; }
         Dictionary<string, int> NumberofReviewsWithWord { get; set; }
-        public Dictionary<string, double> FinalSortedReviewswithScores { get; set; }
-
+        public Dictionary<string, double> SortedReviewswithScoresBeforeCosineSim { get; set; }
+        
         /// <summary>
         /// Static Entry point for testing purpose 
         /// </summary>
@@ -36,6 +37,15 @@ namespace HybridTFIDF
             }
             HybridTFIDF hybridtfidf = new HybridTFIDF(tempList);
             hybridtfidf.PerformHybridTFIDF();
+
+            //Cosine Similarity Test Code
+            //int[] vecA = { 2, 0, 1, 1, 0, 2, 1, 1 };
+            //int[] vecB = { 2, 1, 1, 0, 1, 1, 1, 1 };
+
+            //var cosSimilarity = CalculateCosineSimilarity(vecA, vecB);
+
+            //Console.WriteLine(cosSimilarity);
+            //Console.Read();
         }
 
         /// <summary>
@@ -46,7 +56,7 @@ namespace HybridTFIDF
         {
             ReviewList = reviewList;
             WordCountsDictionary = new Dictionary<string, int>();
-            FinalSortedReviewswithScores = new Dictionary<string, double>();
+            SortedReviewswithScoresBeforeCosineSim = new Dictionary<string, double>();
             NumberofReviewsWithWord = new Dictionary<string, int>();
         }
 
@@ -75,6 +85,67 @@ namespace HybridTFIDF
             CalculateNumberOfOccuranceOfWordsInDocument();
             CalculateScoreForEachReview(WordCountsDictionary.Sum(x => x.Value));
             ReorderReviewsBasedOnScore();
+            ApplyCosineSimilarityToRemoveSimilarConsecutiveReviews(0.7);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="v"></param>
+        private void ApplyCosineSimilarityToRemoveSimilarConsecutiveReviews(double v)
+        {
+            FinalReviewList = new List<string>();
+            List<string> tempReviewList = new List<string>();
+            foreach (var item in SortedReviewswithScoresBeforeCosineSim)
+            {
+                tempReviewList.Add(item.Key);
+            }
+
+            var review1 = tempReviewList[0];
+            FinalReviewList.Add(review1);
+            for (int i = 1; i < tempReviewList.Count; i++)
+            {      
+                var review2 = tempReviewList[i];
+                if ((CosineSimilarity(review1, review2)) < v)
+                {
+                    FinalReviewList.Add(review2);
+                    review1 = review2;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Perform Cosine Similarity between two reviews
+        /// </summary>
+        /// <param name="review1"></param>
+        /// <param name="review2"></param>
+        /// <returns></returns>
+        private double CosineSimilarity(string review1, string review2)
+        {
+            List<string> uniqueWordsBetweenReview1and2 = new List<string>();
+            var wordsFromReview1 = review1.Split(' ').ToList();
+            var wordsFromReview2 = review2.Split(' ').ToList();
+
+            uniqueWordsBetweenReview1and2.AddRange(wordsFromReview1);
+            uniqueWordsBetweenReview1and2.AddRange(wordsFromReview2);
+            uniqueWordsBetweenReview1and2 = RemoveDuplicates(uniqueWordsBetweenReview1and2);
+
+            //Construct Vector A
+            List<int> A = new List<int>();
+            foreach (var item in uniqueWordsBetweenReview1and2)
+            {
+                A.Add(wordsFromReview1.Where(s => s == item).Count());
+            }
+
+            //Construct Vector B
+            List<int> B = new List<int>();
+            foreach (var item in uniqueWordsBetweenReview1and2)
+            {
+                B.Add(wordsFromReview2.Where(s => s == item).Count());
+            }
+
+            return CalculateCosineSimilarity(A.ToArray(), B.ToArray());
         }
 
         //Calculates the number of user reviews in Documents that has the words w
@@ -102,6 +173,7 @@ namespace HybridTFIDF
         /// </summary>
         private void ReorderReviewsBasedOnScore()
         {
+            //First Combine review and scores as key and pair to form a dictionary
             Dictionary<string, double> tempDict = new Dictionary<string, double>();
 
             for (int i = 0; i < ReviewList.Count; i++)
@@ -111,8 +183,9 @@ namespace HybridTFIDF
                     tempDict.Add(ReviewList[i], ReviewListScore[i]);
                 }
             }
+            //Reorder list according to score
             tempDict = tempDict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-            FinalSortedReviewswithScores = tempDict;
+            SortedReviewswithScoresBeforeCosineSim = tempDict;
         }
 
 
@@ -172,5 +245,48 @@ namespace HybridTFIDF
                 WordCountsDictionary[word]++;
             }
         }
+
+        #region CosineSimilarity
+
+        /// <summary>
+        /// Calculates cosine similarity between two vectors
+        /// </summary>
+        /// <param name="vecA"></param>
+        /// <param name="vecB"></param>
+        /// <returns></returns>
+        private static double CalculateCosineSimilarity(int[] vecA, int[] vecB)
+        {
+            var dotProduct = DotProduct(vecA, vecB);
+            var magnitudeOfA = Magnitude(vecA);
+            var magnitudeOfB = Magnitude(vecB);
+
+            return dotProduct / (magnitudeOfA * magnitudeOfB);
+        }
+        
+
+        /// <summary>
+        /// Performs Dot Product- Part of Cosine Similarity
+        /// </summary>
+        /// <param name="vecA"></param>
+        /// <param name="vecB"></param>
+        /// <returns></returns>
+        private static double DotProduct(int[] vecA, int[] vecB)
+        {
+            // I'm not validating inputs here for simplicity.            
+            double dotProduct = 0;
+            for (var i = 0; i < vecA.Length; i++)
+            {
+                dotProduct += (vecA[i] * vecB[i]);
+            }
+
+            return dotProduct;
+        }
+
+        // Magnitude of the vector is the square root of the dot product of the vector with itself.
+        private static double Magnitude(int[] vector)
+        {
+            return Math.Sqrt(DotProduct(vector, vector));
+        }
+        #endregion CosineSimilarity
     }
 }
