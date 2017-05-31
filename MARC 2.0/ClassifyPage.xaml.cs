@@ -445,20 +445,28 @@ namespace MARC2
         {
             if (Model.BugReportList == null || Model.BugReportList.Count == 0)
             {
-                MessageBox.Show("No Bug Reports to Export.");
+                MessageBox.Show("One or more list may be empty.");
             }
             else if (Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {
-                MessageBox.Show("No User Requirements to Export.");
+                MessageBox.Show("One or more list may be empty.");
             }
-            else
+
+            try
             {
-                var outputDialogFolder = ShowSelectOutputFolderDialog();
-                if (outputDialogFolder != null)
+                if (Model.BugReportList.Count != 0 || Model.UserRequirementList.Count != 0)
                 {
-                    ExportClassificationResults(outputDialogFolder);
-                    Process.Start("explorer.exe", outputDialogFolder);
+                    var outputDialogFolder = ShowSelectOutputFolderDialog();
+                    if (outputDialogFolder != null)
+                    {
+                        ExportClassificationResults(outputDialogFolder);
+                        Process.Start("explorer.exe", outputDialogFolder);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+
             }
         }
 

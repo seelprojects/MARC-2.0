@@ -16,6 +16,7 @@ using MARC2.Model;
 using WpfApplicationTest.Enums;
 using System.Diagnostics;
 using System.IO;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace MARC2
 {
@@ -278,5 +279,91 @@ namespace MARC2
         {
             threshold = e.NewValue;
         }
+
+        private void exportSummarizationResults_button(object sender, RoutedEventArgs e)
+        {
+            if (Model.BugReportSummaryList == null || Model.BugReportSummaryList.Count == 0)
+            {
+                MessageBox.Show("One or more list may be empty.");
+            }
+            else if (Model.UserRequirementsSummaryList == null || Model.UserRequirementsSummaryList.Count == 0)
+            {
+                MessageBox.Show("One or more list may be empty.");
+            }
+
+            try
+            {
+                if (Model.BugReportSummaryList.Count != 0 || Model.UserRequirementsSummaryList.Count != 0)
+                {
+                    var outputDialogFolder = ShowSelectOutputFolderDialog();
+                    if (outputDialogFolder != null)
+                    {
+                        ExportSummarizationResults(outputDialogFolder);
+                        Process.Start("explorer.exe", outputDialogFolder);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+           
+        }
+
+        private void ExportSummarizationResults(string outputFolder)
+        {
+            //Write Bug Reports to OutputFolder
+            using (var brWriter = new StreamWriter(outputFolder + @"\Bug Reports Summary.txt"))
+            {
+                if (Model.BugReportSummaryList != null && Model.BugReportSummaryList.Count > 0)
+                {
+                    foreach (var item in Model.BugReportSummaryList)
+                    {
+                        brWriter.WriteLine(item);
+                    }
+                }
+            }
+
+            //Write User Requierments to OutputFolder
+            using (var urWriter = new StreamWriter(outputFolder + @"\User Requirement Summary.txt"))
+            {
+                if (Model.UserRequirementsSummaryList != null && Model.UserRequirementsSummaryList.Count > 0)
+                {
+                    foreach (var item in Model.UserRequirementsSummaryList)
+                    {
+                        urWriter.WriteLine(item);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Show Select Output Folder Dialog
+        /// </summary>
+        /// <returns></returns>
+        private string ShowSelectOutputFolderDialog()
+        {
+            var dlg = new CommonOpenFileDialog();
+            dlg.Title = "MARC 2.0 : Select Directory To Save Classification Results";
+            dlg.IsFolderPicker = true;
+            dlg.InitialDirectory = Directory.GetCurrentDirectory();
+
+            dlg.AddToMostRecentlyUsedList = false;
+            dlg.AllowNonFileSystemItems = false;
+            dlg.DefaultDirectory = Directory.GetCurrentDirectory();
+            dlg.EnsureFileExists = true;
+            dlg.EnsurePathExists = true;
+            dlg.EnsureReadOnly = false;
+            dlg.EnsureValidNames = true;
+            dlg.Multiselect = false;
+            dlg.ShowPlacesList = true;
+
+            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                return dlg.FileName;
+            }
+            return null;
+        }        
+        
     }
 }
