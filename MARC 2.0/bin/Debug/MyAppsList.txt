@@ -1,0 +1,7 @@
+iOS,CNN,331786748
+iOS,Facebook,284882215
+iOS,Adobe Acrobat Reader: Annotate, Scan, & Send PDFs,469337564
+iOS,Netflix,363590051
+iOS,Progressive,349731802
+iOS,eBay: Buy, Sell, Save! Electronics, Fashion & More,282614216
+iOS,Uber,368677368
