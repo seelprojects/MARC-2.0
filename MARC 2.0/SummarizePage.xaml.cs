@@ -106,8 +106,6 @@ namespace MARC2
                     HybridTF.HybridTF htfBugReports = new HybridTF.HybridTF(Model.BugReportList);
                     htfBugReports.PerformHybridTF();
 
-
-
                     Model.BugReportSummaryList = htfBugReports.SortedDictionary.Select(m => m.Key).ToList().GetRange(0,numberOfBRReviews);
 
                     HybridTF.HybridTF htfUserRequirements = new HybridTF.HybridTF(Model.UserRequirementList);
@@ -117,12 +115,13 @@ namespace MARC2
                 case SummarizationAlgorithm.HTFIDF:
                     HybridTFIDF.HybridTFIDF htfidfBugReports = new HybridTFIDF.HybridTFIDF(Model.BugReportList);
                     htfidfBugReports.PerformHybridTFIDF();
-                    Model.BugReportSummaryList = htfidfBugReports.FinalReviewList.GetRange(0, numberOfBRReviews);
+                    Model.BugReportSummaryList = htfidfBugReports.FinalReviewList.GetRange(0, (htfidfBugReports.FinalReviewList.Count > numberOfBRReviews ? numberOfBRReviews: htfidfBugReports.FinalReviewList.Count));
                     
 
                     HybridTFIDF.HybridTFIDF htfidfUserRequirements = new HybridTFIDF.HybridTFIDF(Model.UserRequirementList);
                     htfidfUserRequirements.PerformHybridTFIDF();
-                    Model.UserRequirementsSummaryList = htfidfUserRequirements.FinalReviewList.GetRange(0, numberOfURReviews);
+                    //Todo:
+                    Model.UserRequirementsSummaryList = htfidfUserRequirements.FinalReviewList.GetRange(0, (htfidfUserRequirements.FinalReviewList.Count > numberOfURReviews ? numberOfURReviews : htfidfUserRequirements.FinalReviewList.Count));
                     break;
                 case SummarizationAlgorithm.SumBasic:
                     SumBasic.SumBasic SBBugReports = new SumBasic.SumBasic(Model.BugReportList, Model.BugReportList.Count);

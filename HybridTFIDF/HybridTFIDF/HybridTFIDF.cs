@@ -95,23 +95,32 @@ namespace HybridTFIDF
         private void ApplyCosineSimilarityToRemoveSimilarConsecutiveReviews(double v)
         {
             FinalReviewList = new List<string>();
-            List<string> tempReviewList = new List<string>();
-            foreach (var item in SortedReviewswithScoresBeforeCosineSim)
+            try
             {
-                tempReviewList.Add(item.Key);
-            }
-
-            var review1 = tempReviewList[0];
-            FinalReviewList.Add(review1);
-            for (int i = 1; i < tempReviewList.Count; i++)
-            {      
-                var review2 = tempReviewList[i];
-                if ((CosineSimilarity(review1, review2)) < v)
+                List<string> tempReviewList = new List<string>();
+                foreach (var item in SortedReviewswithScoresBeforeCosineSim)
                 {
-                    FinalReviewList.Add(review2);
-                    review1 = review2;
+                    tempReviewList.Add(item.Key);
+                }
+
+                var review1 = tempReviewList[0];
+                FinalReviewList.Add(review1);
+                for (int i = 1; i < tempReviewList.Count; i++)
+                {
+                    var review2 = tempReviewList[i];
+                    if ((CosineSimilarity(review1, review2)) < v)
+                    {
+                        FinalReviewList.Add(review2);
+                        review1 = review2;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                //Means there are no reviews at all
+                
+            }
+            
 
         }
 
