@@ -151,8 +151,20 @@ namespace MARC2
         /// <param name="classification"></param>
         private void PerformLexRank(List<string> reviews, Classifications classification)
         {
+            var currDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+
             var tempPath = Directory.GetCurrentDirectory().ToString();
-            var summarizationInputFile = tempPath + "\\SummarizeTemp.txt";
+
+
+            var summarizationInputFile = specificFolder + "\\SummarizeTemp.txt";
             //Copy reviews to a temp file for LexRank to Read it
             using (var sW = new StreamWriter(summarizationInputFile))
             {
@@ -280,6 +292,11 @@ namespace MARC2
             threshold = e.NewValue;
         }
 
+        /// <summary>
+        /// Export Summarization Results Button Click Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exportSummarizationResults_button(object sender, RoutedEventArgs e)
         {
             if (Model.BugReportSummaryList == null || Model.BugReportSummaryList.Count == 0)
@@ -310,6 +327,10 @@ namespace MARC2
            
         }
 
+        /// <summary>
+        /// Export Summarization Results in User Specified Folder
+        /// </summary>
+        /// <param name="outputFolder"></param>
         private void ExportSummarizationResults(string outputFolder)
         {
             //Write Bug Reports to OutputFolder

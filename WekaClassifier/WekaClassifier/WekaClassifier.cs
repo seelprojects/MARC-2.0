@@ -88,8 +88,17 @@ namespace WekaClassifier
         /// <param name="inputBOW"></param>
         private void ConstructBOWArffFile(List<string> inputBOW, string directoryName)
         {
-            //var directoryName = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString());
-            var testDatatsetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\Test.arff";
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+
+            var testDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Test.arff";
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(testDatatsetFilePath))
             {
@@ -114,7 +123,17 @@ namespace WekaClassifier
         /// <param name="inputFrames"></param>
         private void ConstructFramesArffFile(List<List<string>> inputFrames, string directoryName)
         {
-            var testDatatsetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\Test.arff";
+
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var testDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Test.arff";
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(testDatatsetFilePath))
             {
@@ -144,19 +163,29 @@ namespace WekaClassifier
         /// <param name="type"></param>
         private void FilteredNaiveBayes(string type, string trainingFilePath, string directoryName, TextFilterType textFilterType)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+
             try
             {
                 var trainingDatatsetFilePath = "";
                 if (type == "BOF")
                 {
-                    trainingDatatsetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\BOF Dataset.arff";
+                    trainingDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\BOF Dataset.arff";
                 }
                 else
                 {
-                    trainingDatatsetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\BOW Dataset.arff";
+                    trainingDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\BOW Dataset.arff";
                 }
                 
-                var testDatasetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\Test.arff";
+                var testDatasetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Test.arff";
 
                 if (trainingFilePath != null)
                 {
@@ -182,6 +211,9 @@ namespace WekaClassifier
 
                 bool exists;
                 var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+
+                //Pointig to appdata folder
+                directoryRoot = specificFolder;
                 //Check if the model exists and if not then build a model
                 switch (textFilterType)
                 {
@@ -297,7 +329,18 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool NBSWRSTCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
             var folder = directoryRoot + @"\Model\NB";
             if (System.IO.File.Exists(folder + @"\NBSWRSTFilterModel.dat") && System.IO.File.Exists(folder + @"\NBSWRSTFile.dat"))
             {
@@ -316,7 +359,17 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool NBSTCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
             var folder = directoryRoot + @"\Model\NB";
             if (System.IO.File.Exists(folder + @"\NBSTFilterModel.dat") && System.IO.File.Exists(folder + @"\NBSTFile.dat"))
             {
@@ -335,7 +388,17 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool NBSWRCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
             var folder = directoryRoot + @"\Model\NB";
             if (System.IO.File.Exists(folder + @"\NBSWRFilterModel.dat") && System.IO.File.Exists(folder + @"\NBSWRFile.dat"))
             {
@@ -354,7 +417,17 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool NBNoFilterCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
             var folder = directoryRoot + @"\Model\NB";
             if (System.IO.File.Exists(folder + @"\NBNoFilterModel.dat") && System.IO.File.Exists(folder + @"\NBNoFilterFile.dat"))
             {
@@ -373,19 +446,30 @@ namespace WekaClassifier
         /// <param name="type"></param>
         private void FilteredSVM(string type, string trainingFilePath, string directoryName, TextFilterType textFilterType)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            
+
             try
             {
                 var trainingDatatsetFilePath = "";
                 if (type == "BOF")
                 {
-                    trainingDatatsetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\BOF Dataset.arff";
+                    trainingDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\BOF Dataset.arff";
                 }
                 else
                 {
-                    trainingDatatsetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\BOW Dataset.arff";
+                    trainingDatatsetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\BOW Dataset.arff";
                 }
 
-                var testDatasetFilePath = directoryName.ToString() + "\\InputData\\TrainingDatasets\\Test.arff";
+                var testDatasetFilePath = specificFolder + "\\InputData\\TrainingDatasets\\Test.arff";
 
                 // If training file path is supplied then use it.
                 if (trainingFilePath != null)
@@ -416,6 +500,7 @@ namespace WekaClassifier
 
                 bool exists;
                 var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+                directoryRoot = specificFolder;
                 //Check if the model exists and if not then build a model
                 switch (textFilterType)
                 {
@@ -533,7 +618,18 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool SVMSWRSTCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
             var folder = directoryRoot + @"\Model\SVM";
             if (System.IO.File.Exists(folder + @"\SVMSWRSTFilterModel.dat") && System.IO.File.Exists(folder + @"\SVMSWRSTFile.dat"))
             {
@@ -552,7 +648,18 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool SVMSTCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
             var folder = directoryRoot + @"\Model\SVM";
             if (System.IO.File.Exists(folder + @"\SVMSTFilterModel.dat") && System.IO.File.Exists(folder + @"\SVMSTFile.dat"))
             {
@@ -571,7 +678,18 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool SVMSWRCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
             var folder = directoryRoot + @"\Model\SVM";
             if (System.IO.File.Exists(folder + @"\SVMSWRFilterModel.dat") && System.IO.File.Exists(folder + @"\SVMSWRFile.dat"))
             {
@@ -590,7 +708,18 @@ namespace WekaClassifier
         /// <returns></returns>
         private bool SVMNoFilterCheckifModelExists(string trainingDatatsetFilePath)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
             var directoryRoot = System.IO.Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            directoryRoot = specificFolder;
+
             var folder = directoryRoot + @"\Model\SVM";
             if (System.IO.File.Exists(folder + @"\SVMNoFilterModel.dat") && System.IO.File.Exists(folder + @"\SVMNoFilterFile.dat"))
             {

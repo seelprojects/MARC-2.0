@@ -51,8 +51,18 @@ namespace MARC2
         private void ReadLocalAppDataFile()
         {
             var myAppsList = new List<string>();
-            var currDir = System.IO.Directory.GetCurrentDirectory();
-            using (var localAppDataFileStreamReader = new StreamReader(currDir + @"/MyAppsList.txt"))
+
+            var currDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            //var currDir = System.IO.Directory.GetCurrentDirectory();
+            using (var localAppDataFileStreamReader = new StreamReader(specificFolder + @"/MyAppsList.txt"))
             {
                 string line = "";
                 while ((line = localAppDataFileStreamReader.ReadLine()) != null)
@@ -104,8 +114,18 @@ namespace MARC2
 
         private void RetrieveAppNameUpdateControl()
         {
-            AddNewAppToAppList(appID, appName);
-            progressBarContainer.Visibility = Visibility.Hidden;
+            //MessageBox.Show(appName);
+            if (null != appName && appName != "")
+            {
+                AddNewAppToAppList(appID, appName);
+                progressBarContainer.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                progressBarContainer.Visibility = Visibility.Hidden;
+                MessageBox.Show("App name could not be resolved!");
+            }
+            
         }
 
         private void RetrieveAppName(string appID, int v)
@@ -123,13 +143,14 @@ namespace MARC2
                     text = sr.ReadToEnd();
                     text = text.Replace("im:name", "AppName").Replace("im:image","Image");
                 }
+
                 JObject jsonObject = JObject.Parse(text);
                 Apple_User_Review_Sniffer.RootObject deserializedObject = JsonConvert.DeserializeObject<Apple_User_Review_Sniffer.RootObject>(jsonObject.ToString());
                 appName = deserializedObject.feed.entry[0].AppName.label;
             }
             catch (Exception ex)
             {
-                
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -139,8 +160,17 @@ namespace MARC2
         /// <param name="appID"></param>
         private void AddNewAppToAppList(string appID, string appName)
         {
-            var currDir = System.IO.Directory.GetCurrentDirectory();
-            using (var localAppDataFileStreamWriter= new StreamWriter(currDir + @"/MyAppsList.txt",true))
+            var currDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            //var currDir = System.IO.Directory.GetCurrentDirectory();
+            using (var localAppDataFileStreamWriter= new StreamWriter(specificFolder + @"/MyAppsList.txt",true))
             {
                 localAppDataFileStreamWriter.WriteLine("iOS," + appName + "," + appID);
             }

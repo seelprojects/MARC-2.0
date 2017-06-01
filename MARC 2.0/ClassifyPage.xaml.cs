@@ -426,7 +426,9 @@ namespace MARC2
         private void browseCustomTrainingFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.InitialDirectory = System.IO.Directory.GetCurrentDirectory() + "\\InputData\\TrainingDatasets";
+
+
+            //fdlg.InitialDirectory = System.IO.Directory.GetCurrentDirectory() + "\\InputData\\TrainingDatasets";
             fdlg.Filter = "Arff Files (*.arff)|*.arff";
             fdlg.FilterIndex = 2;
             fdlg.RestoreDirectory = true;
