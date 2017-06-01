@@ -186,7 +186,7 @@ namespace MARC2
         {
             OpenFileDialog fdlg = new OpenFileDialog();
             fdlg.InitialDirectory = System.IO.Directory.GetCurrentDirectory();
-            fdlg.Filter = "Arff Files (*.arff)|*.arff";
+            fdlg.Filter = "Text Files (*.txt)|*.txt";
             fdlg.FilterIndex = 2;
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == true)
@@ -206,7 +206,7 @@ namespace MARC2
             progressBarContainer.Visibility = Visibility.Visible;
             try {
                 var selectedIndex = myAppsListbox.SelectedIndex;
-                var appId = Model.AppList[selectedIndex].Split(',').ToList()[2];
+                var appId = Model.AppList[selectedIndex].Split(',').ToList().Last();
                 var numPage = 50;
                 var bw = new BackgroundWorker();
                 bw.DoWork += (o, args) => RetrieveUserReviews(appId, numPage);
