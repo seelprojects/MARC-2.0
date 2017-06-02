@@ -42,7 +42,7 @@ namespace SumBasic
         /// <param name="nos"></param>
         public SumBasic(List<string> inputList, int nos)
         {
-            ReviewList = inputList;
+            ReviewList = inputList.Distinct().ToList();
             WordCountsDictionary = new Dictionary<string, double>();
             numberOfSummary = nos;
         }
