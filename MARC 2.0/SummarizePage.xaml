@@ -50,20 +50,20 @@
                             </Grid.ColumnDefinitions>
 
                             <!--> TF-IDF <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Hybrid TF</TextBlock>
-                            <CheckBox Name="HTFCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked" ></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Hybrid TF</TextBlock>-->
+                            <CheckBox Name="HTFCheckbox" Grid.ColumnSpan="2" Content="Hybrid TF" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked" ></CheckBox>
 
                             <!--> Hybrid TF-IDF <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Hybrid TF-IDF</TextBlock>
-                            <CheckBox Name="HTFIDFCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Hybrid TF-IDF</TextBlock>-->
+                            <CheckBox Name="HTFIDFCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Hybrid TF-IDF" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
 
                             <!--> SumBasic <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">SumBasic</TextBlock>
-                            <CheckBox Name="SBCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">SumBasic</TextBlock>-->
+                            <CheckBox Name="SBCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.ColumnSpan="2" Content="SumBasic" Grid.Row="2" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
 
                             <!--> LexRank <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">LexRank</TextBlock>
-                            <CheckBox Name="LRCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">LexRank</TextBlock>-->
+                            <CheckBox Name="LRCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.ColumnSpan="2" Content="LexRank" Grid.Row="3" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
                                 <TextBlock VerticalAlignment="Bottom">Threshold</TextBlock>

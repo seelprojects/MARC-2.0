@@ -42,7 +42,7 @@
                             <ImageBrush ImageSource="Icons/download-3-icon.png" Stretch="Uniform"/>
                         </Button.Background>
                     </Button>
-                    <Label FontSize="12" Content="Import" HorizontalAlignment="Center"/>
+                    <Label FontSize="12" Content=" Home" HorizontalAlignment="Center"/>
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card MouseDown="classifyPageButton_Click" Cursor="Hand" Grid.Column="1" Grid.Row="0" Margin="5,10,0,10">

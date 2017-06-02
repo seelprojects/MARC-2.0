@@ -48,12 +48,12 @@
                             </Grid.ColumnDefinitions>
 
                             <!--> Naive Bayes <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Naive Bayes</TextBlock>
-                            <CheckBox Name="NBCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked" Unchecked="ClassifierCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Naive Bayes</TextBlock>-->
+                            <CheckBox Name="NBCheckbox" Grid.ColumnSpan="2" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked" Unchecked="ClassifierCheckbox_Checked" Content="Naive Bayes"></CheckBox>
 
                             <!--> Support Vector Machine <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Support Vector Machine</TextBlock>
-                            <CheckBox Name="SVMCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked" Unchecked="ClassifierCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Support Vector Machine</TextBlock>-->
+                            <CheckBox Name="SVMCheckbox" Grid.ColumnSpan="2" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked" Unchecked="ClassifierCheckbox_Checked" Content="Support Vector Machine"></CheckBox>
 
                             <!--> Random Forest <!--><!--
                             <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">Random Forest</TextBlock>
@@ -77,12 +77,12 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <!--> Default Training <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Left">Default Training</TextBlock>
-                            <CheckBox  Name="DTCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Checked="TrainingCheckbox_Checked" Unchecked="TrainingCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Left">Default Training</TextBlock>-->
+                            <CheckBox  Name="DTCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Grid.ColumnSpan="5" Content="Default Training" Checked="TrainingCheckbox_Checked" Unchecked="TrainingCheckbox_Checked"></CheckBox>
 
                             <!--> Custom Training <!-->
-                            <TextBlock  Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Left">Custom Training</TextBlock>
-                            <CheckBox Name="CTCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Checked="TrainingCheckbox_Checked" Unchecked="TrainingCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock  Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Left">Custom Training</TextBlock>-->
+                            <CheckBox Name="CTCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Grid.ColumnSpan="5" Content="Custom Training" Checked="TrainingCheckbox_Checked" Unchecked="TrainingCheckbox_Checked"></CheckBox>
 
                             <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Name="browseCustomTrainingFileTextbox" BorderThickness="1" Margin="10,10,10,10" />
                             <Button FontSize="11" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Name="browseCustomTrainingFileButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  HorizontalAlignment="Right" VerticalAlignment="Center" Content="Browse" Click="browseCustomTrainingFileButton_Click" >
@@ -103,12 +103,12 @@
                             </Grid.ColumnDefinitions>
 
                             <!--> No Stopwords <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Stopwords Removal</TextBlock>
-                            <CheckBox Name="NoSWCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Checked="FilterCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Stopwords Removal</TextBlock>-->
+                            <CheckBox Name="NoSWCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Stopwords Removal"  HorizontalAlignment="Left" Checked="FilterCheckbox_Checked"></CheckBox>
 
                             <!--> Stemming <!-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Stemming</TextBlock>
-                            <CheckBox Name="STCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left" Checked="FilterCheckbox_Checked"></CheckBox>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Stemming</TextBlock>-->
+                            <CheckBox Name="STCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Stemming" HorizontalAlignment="Left" Checked="FilterCheckbox_Checked"></CheckBox>
 
 
                         </Grid>
@@ -126,12 +126,12 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- Bag-of-words -->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Bag-Of-Words</TextBlock>
-                            <CheckBox Name="BOWCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Click="ApproachCheckbox_Checked" Unchecked="ApproachCheckbox_Checked"/>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Bag-Of-Words</TextBlock>-->
+                            <CheckBox Name="BOWCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Bag-Of-Words"  HorizontalAlignment="Left" Click="ApproachCheckbox_Checked" Unchecked="ApproachCheckbox_Checked"/>
 
                             <!-- Bag-of-Frames-->
-                            <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Bag-Of-Frames</TextBlock>
-                            <CheckBox Name="BOFCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1"  HorizontalAlignment="Left" Checked="ApproachCheckbox_Checked" Unchecked="ApproachCheckbox_Checked"/>
+                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Bag-Of-Frames</TextBlock>-->
+                            <CheckBox Name="BOFCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Bag-Of-Frames" HorizontalAlignment="Left" Checked="ApproachCheckbox_Checked" Unchecked="ApproachCheckbox_Checked"/>
                         </Grid>
 
                         <Button Margin="0,10,0,0" Name="classifyButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="classifyButton_Click" >
