@@ -220,6 +220,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\export.png" />
+    <Resource Include="Icons\Arrows-Down-icon.png" />
+    <Resource Include="Icons\home-icon.png" />
+    <Resource Include="Icons\about.png" />
     <Content Include="Summarizer.dll" />
     <Resource Include="Icons\Browse-Icon.png" />
     <Resource Include="Icons\browse.ico" />

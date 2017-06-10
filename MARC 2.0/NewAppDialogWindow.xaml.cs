@@ -18,10 +18,10 @@ namespace MARC2
     /// <summary>
     /// Interaction logic for NewAppDialogWindow.xaml
     /// </summary>
-    public partial class NewAppDialogWindow : Window
+    public partial class AboutWindow : Window
     {
         public MyViewModel Model { get; set; }
-        public NewAppDialogWindow()
+        public AboutWindow()
         {
             InitializeComponent();
             Model = new MyViewModel();

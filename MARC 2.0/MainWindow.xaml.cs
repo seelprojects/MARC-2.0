@@ -55,6 +55,13 @@ namespace MARC2
         private void importPageButton_Click(object sender, RoutedEventArgs e)
         {
             LeftContent.Content = importPage;
+            importPageCard.Background = Brushes.OrangeRed;
+            classifyPageCard.Background = Brushes.White;
+            summarizePageCard.Background = Brushes.White;
+
+            importPageArrow.Visibility = Visibility.Visible;
+            classifyPageArrow.Visibility = Visibility.Hidden;
+            summarizePageArrow.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -68,6 +75,13 @@ namespace MARC2
             {
                 classifyPage = new ClassifyPage(Model);
                 LeftContent.Content = classifyPage;
+                classifyPageCard.Background = Brushes.OrangeRed;
+                importPageCard.Background = Brushes.White;
+                summarizePageCard.Background = Brushes.White;
+
+                importPageArrow.Visibility = Visibility.Hidden;
+                classifyPageArrow.Visibility = Visibility.Visible;
+                summarizePageArrow.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -87,11 +101,23 @@ namespace MARC2
             {
                 summarizePage = new SummarizePage(Model);
                 LeftContent.Content = summarizePage;
+                classifyPageCard.Background = Brushes.White;
+                importPageCard.Background = Brushes.White;
+                summarizePageCard.Background = Brushes.OrangeRed;
+
+                importPageArrow.Visibility = Visibility.Hidden;
+                classifyPageArrow.Visibility = Visibility.Hidden;
+                summarizePageArrow.Visibility = Visibility.Visible;
             }
             else
             {
                 MessageBox.Show("Please classify reviews before trying to summarize");
             }   
+        }
+
+        private void aboutPageButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

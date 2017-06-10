@@ -322,9 +322,7 @@ namespace MARC2
             }
             catch (Exception)
             {
-
-            }
-           
+            }       
         }
 
         /// <summary>

@@ -244,7 +244,7 @@
                 </DockPanel>
             </Grid>
         </StackPanel>
-        <Frame x:Name="frame" Content="Frame" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="260,-133,-120,0" VerticalAlignment="Top" Width="100"/>
+        <Frame x:Name="frame" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="260,-133,-120,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Page>
