@@ -45,8 +45,8 @@
                                 <RowDefinition Height="1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
 
                             <!--> TF-IDF <!-->
@@ -65,10 +65,11 @@
                             <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">LexRank</TextBlock>-->
                             <CheckBox Name="LRCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.ColumnSpan="2" Content="LexRank" Grid.Row="3" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
 
+                            <TextBlock Grid.Column="0" Grid.Row="5" VerticalAlignment="Bottom">Summary Size</TextBlock>
+                            <TextBox BorderThickness="1"  Grid.Row="5" Grid.Column="1" Name="ThresholdTextbox" TextChanged="Threshold_TextChanged"></TextBox>
                             <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
-                                <TextBlock VerticalAlignment="Bottom">Threshold</TextBlock>
-                                <Slider Name="ThresholdSlider"  Minimum="0" Maximum="50" Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                                    ToolTip="Number of Reviews to Generate as Summary" Value="50" MinWidth="150" Margin="8 0 0 0" ValueChanged="ThresholdValueChanged"/>
+                                <!--<Slider Name="ThresholdSlider"  Minimum="0" Maximum="50" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                                    ToolTip="Number of Reviews to Generate as Summary" Value="50" MinWidth="150" Margin="8 0 0 0" ValueChanged="ThresholdValueChanged"/>-->                     
                             </StackPanel>
                         </Grid>
                         

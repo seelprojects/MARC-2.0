@@ -35,6 +35,7 @@ namespace MARC2
         bool LRCheckboxCheckedState = false;
 
         double threshold = 10;
+        private string previousText;
 
         public SummarizePage(MyViewModel model)
         {
@@ -43,7 +44,9 @@ namespace MARC2
             this.DataContext = this;
 
             HTFCheckbox.IsChecked = true;
-
+            ThresholdTextbox.Text = "20";
+            previousText = ThresholdTextbox.Text;
+            
             PopulateViewFromModel();
         }
 
@@ -60,8 +63,10 @@ namespace MARC2
             //Retrieve the reviews
             var bugReports = Model.BugReportList;
             var userRequirements = Model.UserRequirementList;
-
-            threshold = ThresholdSlider.Value;
+            
+            
+            //threshold = ThresholdSlider.Value;
+            threshold = Double.Parse(ThresholdTextbox.Text);
 
             HTFCheckboxCheckedState = HTFCheckbox.IsChecked ?? false;
             HTFIDFCheckboxCheckedState = HTFIDFCheckbox.IsChecked ?? false;
@@ -282,15 +287,15 @@ namespace MARC2
             }
         }
 
-        /// <summary>
-        /// Threshold value change event handler
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ThresholdValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            threshold = e.NewValue;
-        }
+        ///// <summary>
+        ///// Threshold value change event handler
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void ThresholdValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        //{
+        //    threshold = e.NewValue;
+        //}
 
         /// <summary>
         /// Export Summarization Results Button Click Handler
@@ -382,7 +387,24 @@ namespace MARC2
                 return dlg.FileName;
             }
             return null;
-        }        
-        
+        }
+
+
+        /// <summary>
+        /// Threshold Value change handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Threshold_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            double num = 0;
+            bool success = double.TryParse(((TextBox)sender).Text, out num);
+            if (success & num >= 0)
+                previousText = ((TextBox)sender).Text;
+            else
+                ((TextBox)sender).Text = previousText;
+
+
+        }
     }
 }
