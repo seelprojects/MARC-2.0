@@ -12,7 +12,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"
-        FontFamily="{DynamicResource MaterialDesignFont}" Title="MARC 2.0" Icon="Icons/MARC.ico" MaxHeight="900" MaxWidth="1600" MinWidth="1024" MinHeight="768" UseLayoutRounding="True" WindowStartupLocation="CenterScreen" Height="800">
+        FontFamily="{DynamicResource MaterialDesignFont}" Title="MARC 2.0" Icon="Icons/MARC.ico"  MinWidth="1300" MinHeight="850" UseLayoutRounding="True" WindowStartupLocation="CenterScreen" Height="800">
 
     <Grid Background="LightGray" >
         <Grid.RowDefinitions>

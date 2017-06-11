@@ -128,6 +128,8 @@ namespace MARC2
                         DataLabels = true
                     });
                 progressBarContainer.Visibility = Visibility.Hidden;
+
+
             }
             catch (Exception)
             {

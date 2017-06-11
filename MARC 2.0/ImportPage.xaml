@@ -125,13 +125,13 @@
         <!--Pie Chart-->
         <liveCharts:PieChart 
             Grid.Column="1" 
-            Height="100" 
-            Width="100" 
+            Height="90" 
+            Width="90" 
             Name="Chart" 
             Margin="0,-110,0,0" 
             Grid.Row="1" 
             Series="{Binding Model.ImportedReviewsCollection}" 
-            LegendLocation="Right" 
+            LegendLocation="Right"
             InnerRadius="25" 
             HorizontalAlignment="Right" 
             VerticalAlignment="Top">
