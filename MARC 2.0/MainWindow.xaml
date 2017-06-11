@@ -80,7 +80,7 @@
                     <Label FontSize="12" Content="About" HorizontalAlignment="Center"/>
                 </StackPanel>
             </materialDesign:Card>
-            
+            <Image Grid.Column="3" Grid.Row="1" Visibility="Hidden" x:Name="aboutPageArrow" HorizontalAlignment="Center" Height="42" VerticalAlignment="Center" Width="42" Source="Icons/Arrows-Down-icon.png" Margin="7,-12,0,0"/>
         </Grid>
 
         <DockPanel Grid.Column="0" Grid.Row="1" Margin="10,0,10.333,9.667" LastChildFill="True" Grid.ColumnSpan="4" >

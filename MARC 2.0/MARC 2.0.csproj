@@ -128,6 +128,9 @@
     <Compile Include="Enums\SummarizationAlgorithm.cs" />
     <Compile Include="Extensions\HexToColor.cs" />
     <Compile Include="Model\MyViewModel.cs" />
+    <Compile Include="NewAboutPage.xaml.cs">
+      <DependentUpon>NewAboutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewAppDialogWindow.xaml.cs">
       <DependentUpon>NewAppDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NewAboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="NewAppDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,6 +237,8 @@
     <Resource Include="Icons\Arrows-Down-icon.png" />
     <Resource Include="Icons\home-icon.png" />
     <Resource Include="Icons\about.png" />
+    <Resource Include="Icons\GitHub-Logo.png" />
+    <Resource Include="Icons\seel-logo.png" />
     <Content Include="Summarizer.dll" />
     <Resource Include="Icons\Browse-Icon.png" />
     <Resource Include="Icons\browse.ico" />

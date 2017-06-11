@@ -1,0 +1,51 @@
+﻿<Page x:Class="WpfApplicationTest.NewAboutPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApplicationTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="NewAboutPage"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"     
+      TextOptions.TextFormattingMode="Ideal" 
+      TextOptions.TextRenderingMode="Auto"
+      FontFamily="{DynamicResource MaterialDesignFont}"  UseLayoutRounding="True">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="12*" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0">MARC 2.0 - A Mobile Application Review Classifier</Label>
+        <TextBlock Grid.Row="1" Margin="5,0,0,10">Copyright@ 2017 SEEL</TextBlock>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Image Height="34"  Source="Icons/GitHub-Logo.png"></Image>
+            <TextBlock Margin="0,10,0,0">           
+                <Hyperlink NavigateUri="https://github.com/seelprojects/MARC-2.0" RequestNavigate="Hyperlink_RequestNavigate">
+                    https://github.com/seelprojects/MARC-2.0
+                </Hyperlink>        
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Image Height="34" Margin="20,0,5,0" Source="Icons/seel-logo.png"></Image>
+            <TextBlock Margin="18,10,0,0">           
+                <Hyperlink NavigateUri="http://seel.cse.lsu.edu/" RequestNavigate="Hyperlink_RequestNavigate">
+                    http://seel.cse.lsu.edu/
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>
