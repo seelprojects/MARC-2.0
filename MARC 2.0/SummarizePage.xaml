@@ -69,20 +69,19 @@
                             <TextBox BorderThickness="1"  Grid.Row="5" Grid.Column="1" Name="ThresholdTextbox" TextChanged="Threshold_TextChanged"></TextBox>
                             <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
                                 <!--<Slider Name="ThresholdSlider"  Minimum="0" Maximum="50" Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                                    ToolTip="Number of Reviews to Generate as Summary" Value="50" MinWidth="150" Margin="8 0 0 0" ValueChanged="ThresholdValueChanged"/>-->                     
+                                    ToolTip="Number of Reviews to Generate as Summary" Value="50" MinWidth="150" Margin="8 0 0 0" ValueChanged="ThresholdValueChanged"/>-->
                             </StackPanel>
                         </Grid>
-                        
-                        <Button Margin="0,10,0,0" Name="summarizeButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="summarizeButton_Click" >
-                            <StackPanel Height="48" Orientation="Horizontal">
-                                <Image Source="Icons/summary-icon.png" Height="36" Width="36"/>
-                                <Label Foreground="White"  FontSize="12" Margin="0,15,0,0" Content="         Summarize                   " HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </Button>
-
+                        <!--Moved Button from here to below Material Design card-->
                     </StackPanel>
                 </GroupBox>
             </materialDesign:Card>
+            <Button Margin="10,10,0,0" Name="summarizeButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="summarizeButton_Click" >
+                <StackPanel Height="48" Orientation="Horizontal">
+                    <Image Source="Icons/summary-icon.png" Height="36" Width="36"/>
+                    <Label Foreground="White"  FontSize="12" Margin="0,15,0,0" Content="         Summarize                   " HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportSummarizationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportSummarizationResults_button">Export Results</Button>

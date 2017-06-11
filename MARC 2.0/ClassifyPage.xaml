@@ -55,7 +55,8 @@
                             <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Support Vector Machine</TextBlock>-->
                             <CheckBox Name="SVMCheckbox" Grid.ColumnSpan="2" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked" Unchecked="ClassifierCheckbox_Checked" Content="Support Vector Machine"></CheckBox>
 
-                            <!--> Random Forest <!--><!--
+                            <!--> Random Forest <!-->
+                            <!--
                             <TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">Random Forest</TextBlock>
                             <CheckBox Name="RFCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Checked="ClassifierCheckbox_Checked"></CheckBox>-->
 
@@ -133,17 +134,16 @@
                             <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Bag-Of-Frames</TextBlock>-->
                             <CheckBox Name="BOFCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Bag-Of-Frames" HorizontalAlignment="Left" Checked="ApproachCheckbox_Checked" Unchecked="ApproachCheckbox_Checked"/>
                         </Grid>
-
-                        <Button Margin="0,10,0,0" Name="classifyButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="classifyButton_Click" >
-                            <StackPanel Height="48" Orientation="Horizontal">
-                                <Image Source="Icons/classify-icon.png" Height="36" Width="36"/>
-                                <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Classify                   " HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </Button>
-
+                        <!--Moved Classification button from here to below that material design card-->
                     </StackPanel>
                 </GroupBox>
             </materialDesign:Card>
+            <Button Margin="10,10,0,0" Name="classifyButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="classifyButton_Click" >
+                <StackPanel Height="48" Orientation="Horizontal">
+                    <Image Source="Icons/classify-icon.png" Height="36" Width="36"/>
+                    <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Classify                   " HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportClassificationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportClassificationResults_button">Export Results</Button>
@@ -169,7 +169,7 @@
             </liveCharts:PieChart.DataTooltip>
         </liveCharts:PieChart>
 
-        
+
 
         <!--Right Content-->
         <Grid Grid.Column="1" Margin="20,0" >
