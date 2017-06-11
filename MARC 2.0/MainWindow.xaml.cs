@@ -56,7 +56,7 @@ namespace MARC2
         private void importPageButton_Click(object sender, RoutedEventArgs e)
         {
             LeftContent.Content = importPage;
-            importPageCard.Background = Brushes.OrangeRed;
+            importPageCard.Background = Brushes.LightBlue;
             classifyPageCard.Background = Brushes.White;
             summarizePageCard.Background = Brushes.White;
 
@@ -76,7 +76,7 @@ namespace MARC2
             {
                 classifyPage = new ClassifyPage(Model);
                 LeftContent.Content = classifyPage;
-                classifyPageCard.Background = Brushes.OrangeRed;
+                classifyPageCard.Background = Brushes.LightBlue;
                 importPageCard.Background = Brushes.White;
                 summarizePageCard.Background = Brushes.White;
 
@@ -104,7 +104,7 @@ namespace MARC2
                 LeftContent.Content = summarizePage;
                 classifyPageCard.Background = Brushes.White;
                 importPageCard.Background = Brushes.White;
-                summarizePageCard.Background = Brushes.OrangeRed;
+                summarizePageCard.Background = Brushes.LightBlue;
 
                 importPageArrow.Visibility = Visibility.Hidden;
                 classifyPageArrow.Visibility = Visibility.Hidden;
