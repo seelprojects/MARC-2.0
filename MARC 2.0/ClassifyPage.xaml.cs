@@ -221,20 +221,33 @@ namespace MARC2
             DTCheckboxCheckedState = DTCheckbox.IsChecked ?? false;
             CTCheckboxCheckedState = CTCheckbox.IsChecked ?? false;
 
-            var CTFilePath = browseCustomTrainingFileTextbox.Text;
-            if (userReviews.Count != 0)
+
+            //Check For Custom training file option checked and file not selected
+            if (CTCheckboxCheckedState && browseCustomTrainingFileTextbox.Text == "")
             {
-                var bwClassifyAllAndExport = new BackgroundWorker();
-                bwClassifyAllAndExport.DoWork += (o, args)
-                    => classifyAllReviews
-                    (
-                        userReviews,
-                        CTCheckboxCheckedState ? CTFilePath : null,
-                        SVMCheckboxCheckedState ? ClassifierName.SupportVectorMachine : ClassifierName.NaiveBayes
-                        );
-                bwClassifyAllAndExport.RunWorkerCompleted += (o, args) => classifyAllAndExportUpdateControl();
-                bwClassifyAllAndExport.RunWorkerAsync();
+                progressBarContainer.Visibility = Visibility.Hidden;
+                MessageBox.Show("Custom training file field empty.");
             }
+            else
+            {
+                var CTFilePath = browseCustomTrainingFileTextbox.Text;
+                if (userReviews.Count != 0)
+                {
+                    var bwClassifyAllAndExport = new BackgroundWorker();
+                    bwClassifyAllAndExport.DoWork += (o, args)
+                        => classifyAllReviews
+                        (
+                            userReviews,
+                            CTCheckboxCheckedState ? CTFilePath : null,
+                            SVMCheckboxCheckedState ? ClassifierName.SupportVectorMachine : ClassifierName.NaiveBayes
+                            );
+                    bwClassifyAllAndExport.RunWorkerCompleted += (o, args) => classifyAllAndExportUpdateControl();
+                    bwClassifyAllAndExport.RunWorkerAsync();
+                }
+            }
+
+
+
         }
 
         /// <summary>
