@@ -83,7 +83,7 @@ namespace MARC2
                 myAppsListbox.ItemsSource = items;
 
                 MyAppsMessageTextBlock.Visibility = myAppsList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
-            } 
+            }
         }
 
 
@@ -100,10 +100,15 @@ namespace MARC2
             {
                 appID = newAppInputDialog.Answer;
                 progressBarContainer.Visibility = Visibility.Visible;
-                GetiOSAppName(appID);             
-            }     
+                GetiOSAppName(appID);
+            }
         }
 
+
+        /// <summary>
+        /// Initiator of retieveing app name
+        /// </summary>
+        /// <param name="appID"></param>
         private void GetiOSAppName(string appID)
         {
             var bw = new BackgroundWorker();
@@ -112,22 +117,33 @@ namespace MARC2
             bw.RunWorkerAsync();
         }
 
+
+        /// <summary>
+        /// Invoked after Name is Retrieved
+        /// </summary>
         private void RetrieveAppNameUpdateControl()
         {
             //MessageBox.Show(appName);
             if (null != appName && appName != "")
             {
                 AddNewAppToAppList(appID, appName);
-                progressBarContainer.Visibility = Visibility.Hidden;
+                downloadReviewButton_Click(null,null);
+                //progressBarContainer.Visibility = Visibility.Hidden;
             }
             else
             {
                 progressBarContainer.Visibility = Visibility.Hidden;
                 MessageBox.Show("App name could not be resolved!");
             }
-            
+
         }
 
+
+        /// <summary>
+        /// Method to retrieve app name
+        /// </summary>
+        /// <param name="appID"></param>
+        /// <param name="v"></param>
         private void RetrieveAppName(string appID, int v)
         {
             try
@@ -141,7 +157,7 @@ namespace MARC2
                 using (var sr = new StreamReader(response.GetResponseStream()))
                 {
                     text = sr.ReadToEnd();
-                    text = text.Replace("im:name", "AppName").Replace("im:image","Image");
+                    text = text.Replace("im:name", "AppName").Replace("im:image", "Image");
                 }
 
                 JObject jsonObject = JObject.Parse(text);
@@ -150,7 +166,8 @@ namespace MARC2
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
+                //MessageBox.Show("hello");
             }
         }
 
@@ -170,7 +187,7 @@ namespace MARC2
                 Directory.CreateDirectory(specificFolder);
 
             //var currDir = System.IO.Directory.GetCurrentDirectory();
-            using (var localAppDataFileStreamWriter= new StreamWriter(specificFolder + @"/MyAppsList.txt",true))
+            using (var localAppDataFileStreamWriter = new StreamWriter(specificFolder + @"/MyAppsList.txt", true))
             {
                 localAppDataFileStreamWriter.WriteLine("iOS," + appName + "," + appID);
             }
@@ -193,33 +210,56 @@ namespace MARC2
             {
                 browseLocalFileTextbox.Text = fdlg.FileName;
                 importLocalReviews(browseLocalFileTextbox.Text);
-            }   
+            }
         }
 
         /// <summary>
-        /// Download selected Review
+        /// appID from first import is sent if app is imported for the first time
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// <param name="appIDFromFirstImport"></param>
         private void downloadReviewButton_Click(object sender, RoutedEventArgs e)
         {
             progressBarContainer.Visibility = Visibility.Visible;
-            try {
-                var selectedIndex = myAppsListbox.SelectedIndex;
-                var appId = Model.AppList[selectedIndex].Split(',').ToList().Last();
+
+            var selectedIndex = 0;
+            var appId = "";
+            if (null == sender)
+            {
+                appId = appID;
+            }
+            else
+            {
+                if (myAppsListbox.SelectedIndex == -1)
+                {
+                    myAppsListbox.SelectedIndex = 0;
+                }
+                selectedIndex = myAppsListbox.SelectedIndex;
+                appId = Model.AppList[selectedIndex].Split(',').ToList().Last();
+            }
+
+            try
+            {      
                 var numPage = 50;
                 var bw = new BackgroundWorker();
                 bw.DoWork += (o, args) => RetrieveUserReviews(appId, numPage);
                 bw.RunWorkerCompleted += (o, args) => RetrieveUserReviewsUpdateControl();
                 bw.RunWorkerAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Please select an app before importing reviews!");
                 progressBarContainer.Visibility = Visibility.Hidden;
             }
         }
 
+        /// <summary>
+        /// Server call to retrieve reviews
+        /// </summary>
+        /// <param name="appID"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         private List<string> makeServerCall(string appID, int page)
         {
             List<string> allReviews = new List<string>();
@@ -261,6 +301,12 @@ namespace MARC2
             return allReviews;
         }
 
+
+        /// <summary>
+        /// Initiator for retrieving user Reviews 
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <param name="numPage"></param>
         private void RetrieveUserReviews(string appId, int numPage)
         {
             userReviews = new List<string>();
@@ -277,6 +323,10 @@ namespace MARC2
             }
         }
 
+
+        /// <summary>
+        /// Control for after Reviews are retieved
+        /// </summary>
         private void RetrieveUserReviewsUpdateControl()
         {
             //Remove all empty strings
@@ -304,6 +354,7 @@ namespace MARC2
 
         }
 
+
         /// <summary>
         /// Import Local Reviews Based on the input Path Supplied
         /// </summary>
@@ -314,7 +365,7 @@ namespace MARC2
             using (var sR = new StreamReader(text))
             {
                 string line = "";
-                while ((line=sR.ReadLine()) != null)
+                while ((line = sR.ReadLine()) != null)
                 {
                     importedComments.Add(line);
                 }
@@ -358,17 +409,25 @@ namespace MARC2
 
                 MessageBox.Show("File Location is invalid.");
             }
-            
+
         }
     }
 
+
+
+    /// <summary>
+    /// Class AppItem
+    /// </summary>
     public class AppItem
     {
-        public string Name { get; set; } 
-        public string Platform { get; set; }      
+        public string Name { get; set; }
+        public string Platform { get; set; }
         public string Link { get; set; }
     }
 
+    /// <summary>
+    /// Class ReviewItem
+    /// </summary>
     public class ReviewItem
     {
         public string Review { get; set; }
