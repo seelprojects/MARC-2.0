@@ -95,7 +95,7 @@ namespace MARC2
         /// <param name="e"></param>
         private void AddNewAppButton_Click(object sender, RoutedEventArgs e)
         {
-            AboutWindow newAppInputDialog = new AboutWindow();
+            NewAppDialogWindow newAppInputDialog = new NewAppDialogWindow();
             if (newAppInputDialog.ShowDialog() == true)
             {
                 appID = newAppInputDialog.Answer;

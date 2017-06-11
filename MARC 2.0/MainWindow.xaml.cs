@@ -17,6 +17,7 @@ using MARC2.Enums;
 using MARC2.Extensions;
 using MARC2.Model;
 using System.Diagnostics;
+using WpfApplicationTest;
 
 namespace MARC2
 {
@@ -117,7 +118,8 @@ namespace MARC2
 
         private void aboutPageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AboutPage newAppInputDialog = new AboutPage();
+            newAppInputDialog.Show();
         }
     }
 }
