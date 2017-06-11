@@ -186,12 +186,38 @@ namespace MARC2
             if (!Directory.Exists(specificFolder))
                 Directory.CreateDirectory(specificFolder);
 
-            //var currDir = System.IO.Directory.GetCurrentDirectory();
-            using (var localAppDataFileStreamWriter = new StreamWriter(specificFolder + @"/MyAppsList.txt", true))
+
+            //Check if app is already added
+
+            var tempAppIDs = new List<string>();
+            using (var sR = new StreamReader(specificFolder + @"/MyAppsList.txt"))
             {
-                localAppDataFileStreamWriter.WriteLine("iOS," + appName + "," + appID);
+                var line = "";
+                while ((line = sR.ReadLine()) != null)
+                {
+                    tempAppIDs.Add(line.Split(',').ToList().Last());
+
+                }
+                sR.Close();
             }
-            ReadLocalAppDataFile();
+
+
+            if (tempAppIDs.Contains(appID))
+            {
+                progressBarContainer.Visibility = Visibility.Hidden;
+                MessageBox.Show("App already exists in the app list.");
+            }
+            else
+            {
+                //var currDir = System.IO.Directory.GetCurrentDirectory();
+                using (var localAppDataFileStreamWriter = new StreamWriter(specificFolder + @"/MyAppsList.txt", true))
+                {
+                    localAppDataFileStreamWriter.WriteLine("iOS," + appName + "," + appID);
+                }
+                ReadLocalAppDataFile();
+            }
+
+            
         }
 
         /// <summary>
@@ -410,6 +436,48 @@ namespace MARC2
                 MessageBox.Show("File Location is invalid.");
             }
 
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            var currDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            var tempAppIDs = new List<string>();
+            using (var sR = new StreamReader(specificFolder + @"/MyAppsList.txt"))
+            {
+                var line = "";
+                while ((line = sR.ReadLine()) != null)
+                {
+                    tempAppIDs.Add(line);
+
+                }
+                sR.Close();
+            }
+
+            tempAppIDs.RemoveAt(myAppsListbox.SelectedIndex);
+            using (var localAppDataFileStreamWriter = new StreamWriter(specificFolder + @"/MyAppsList.txt", false))
+            {
+                foreach (var item in tempAppIDs)
+                {
+                    localAppDataFileStreamWriter.WriteLine(item);
+                }         
+            }
+
+            ReadLocalAppDataFile();
         }
     }
 

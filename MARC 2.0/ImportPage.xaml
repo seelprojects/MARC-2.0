@@ -36,35 +36,53 @@
     </Page.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="232"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
         <!--Left Content-->
-        <StackPanel Margin="5,0,0,5" Grid.Column="0" >
+        <StackPanel Margin="5,0,0,5" Grid.Column="0">
             <materialDesign:Card  Margin="5,5,0,0">
                 <GroupBox Header="My Apps" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel>
                         <TextBlock Name="MyAppsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no apps saved." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <!--<Button FontSize="11" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="AddNewAppButton_Click" Margin="0,0,0,10">Add an app</Button>-->
+                        <Button  Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="AddNewAppButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Margin="0,0,0,10">
+                            <StackPanel Height="48" Orientation="Horizontal">
+                                <Image Source="Icons/document-add-icon.png" Height="36" Width="36"/>
+                                <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="         Add an app              " HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+
+
                         <Border BorderThickness="0.5" BorderBrush="Black" CornerRadius="2">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
+
+                                
                                 <ListView x:Name="myAppsListbox" MaxHeight="300" FontSize="11">
                                     <ListView.View>
                                         <GridView>
                                             <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
-                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Application Name" />
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="My Applications" />
                                             <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
                                         </GridView>
                                     </ListView.View>
+                                    <ListBox.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Delete" Click="MenuItem_Click"></MenuItem>
+                                        </ContextMenu>
+                                    </ListBox.ContextMenu>
                                 </ListView>
-                                <materialDesign:ColorZone Height="30" Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth2}">
+                                <!--<materialDesign:ColorZone Height="30" Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth2}">
                                     <TextBlock Margin="16"></TextBlock>
-                                </materialDesign:ColorZone>
-                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
+                                </materialDesign:ColorZone>-->
+                                
+                                <!--<Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
                                     VerticalAlignment="Bottom" HorizontalAlignment="Right" 
                                         Click="AddNewAppButton_Click"
                                     Grid.Row="0" Margin="0 0 28 -20">
@@ -73,14 +91,15 @@
                                             <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
                                         </Canvas>
                                     </Viewbox>
-                                </Button>
+                                </Button>-->
+                                
                             </Grid>
                         </Border>
                         <StackPanel Margin="0,10,0,10">
                             <Button  Name="downloadReviewsButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="downloadReviewButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto">
-                                <StackPanel Height="52" Orientation="Horizontal">
-                                    <Image Source="Icons/download-3-icon.png" Height="44" Width="44"/>
-                                    <Label FontSize="11" Margin="0,15,0,0" Content="     Import Reviews            " HorizontalAlignment="Center"/>
+                                <StackPanel Height="48" Orientation="Horizontal">
+                                    <Image Source="Icons/download-3-icon.png" Height="36" Width="36"/>
+                                    <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="     Import Reviews            " HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
                         </StackPanel>
@@ -93,9 +112,9 @@
                     <StackPanel Margin="0,10,0,10">
                         <TextBox Name="browseLocalFileTextbox" BorderThickness="1" Margin="10,10,10,10" KeyDown="browseLocalFileTextbox_KeyDown" ></TextBox>
                         <Button Name="browseLocalFileButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="browseLocalFileButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center"  Height="auto" >
-                            <StackPanel Height="52" Orientation="Horizontal">
-                                <Image Source="Icons/browse.ico" Height="44" Width="44"/>
-                                <Label FontSize="11" Margin="0,15,0,0" Content="     Browse local file     " HorizontalAlignment="Center"/>
+                            <StackPanel Height="48" Orientation="Horizontal">
+                                <Image Source="Icons/browse.ico" Height="36" Width="36"/>
+                                <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="     Browse local file     " HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -133,7 +152,7 @@
 
             <GroupBox Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,10,0,5" Grid.RowSpan="2">
                 <StackPanel>
-                    <TextBlock Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select and app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                    <TextBlock Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select an app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                     <ListView x:Name="importedReviewsListbox" Margin="0,0,0,0" MaxHeight="550">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
@@ -142,13 +161,6 @@
                                 <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
                             </GridView>
                         </ListView.View>
-                        <!--<ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Content="{Binding Review}"  />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>-->
                     </ListView>
                 </StackPanel>
             </GroupBox>
