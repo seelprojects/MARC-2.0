@@ -85,7 +85,7 @@
                             <CheckBox Name="CTCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Grid.ColumnSpan="5" Content="Custom Training" Checked="TrainingCheckbox_Checked" Unchecked="TrainingCheckbox_Checked"></CheckBox>
 
                             <TextBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Name="browseCustomTrainingFileTextbox" BorderThickness="1" Margin="10,10,10,10" />
-                            <Button FontSize="11" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Name="browseCustomTrainingFileButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  HorizontalAlignment="Right" VerticalAlignment="Center" Content="Browse" Click="browseCustomTrainingFileButton_Click" >
+                            <Button Foreground="White" FontSize="11" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Name="browseCustomTrainingFileButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"  HorizontalAlignment="Right" VerticalAlignment="Center" Content="Browse" Click="browseCustomTrainingFileButton_Click" >
                             </Button>
 
                         </Grid>
@@ -135,9 +135,9 @@
                         </Grid>
 
                         <Button Margin="0,10,0,0" Name="classifyButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="classifyButton_Click" >
-                            <StackPanel Height="52" Orientation="Horizontal">
-                                <Image Source="Icons/classify-icon.png" Height="44" Width="44"/>
-                                <Label Foreground="Black" FontSize="12" Margin="0,15,0,0" Content="         Classify                   " HorizontalAlignment="Center"/>
+                            <StackPanel Height="48" Orientation="Horizontal">
+                                <Image Source="Icons/classify-icon.png" Height="36" Width="36"/>
+                                <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Classify                   " HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
@@ -146,7 +146,7 @@
             </materialDesign:Card>
         </StackPanel>
 
-        <Button Name="exportClassificationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportClassificationResults_button">Export Results</Button>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportClassificationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportClassificationResults_button">Export Results</Button>
 
         <!--Pie Chart-->
         <liveCharts:PieChart 
