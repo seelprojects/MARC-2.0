@@ -52,7 +52,7 @@ namespace HybridTFIDF
         /// Default Constructor
         /// </summary>
         /// <param name="reviewList"></param>
-        public HybridTFIDF(List<string> reviewList)
+        public HybridTFIDF(List<string> reviewList, string threshold = null)
         {
             ReviewList = reviewList;
             WordCountsDictionary = new Dictionary<string, int>();
@@ -63,7 +63,8 @@ namespace HybridTFIDF
         /// <summary>
         /// Performs Hybrid TF operation 
         /// </summary>
-        public void PerformHybridTFIDF()
+        /// <param name="thresholdValue"></param>
+        public void PerformHybridTFIDF(double thresholdValue = 0.7)
         {
             foreach (var review in ReviewList)
             {
@@ -85,7 +86,7 @@ namespace HybridTFIDF
             CalculateNumberOfOccuranceOfWordsInDocument();
             CalculateScoreForEachReview(WordCountsDictionary.Sum(x => x.Value));
             ReorderReviewsBasedOnScore();
-            ApplyCosineSimilarityToRemoveSimilarConsecutiveReviews(0.7);
+            ApplyCosineSimilarityToRemoveSimilarConsecutiveReviews(thresholdValue);
         }
 
         /// <summary>
@@ -117,11 +118,8 @@ namespace HybridTFIDF
             }
             catch (Exception ex)
             {
-                //Means there are no reviews at all
-                
+                //Means there are no reviews at all           
             }
-            
-
         }
 
         /// <summary>

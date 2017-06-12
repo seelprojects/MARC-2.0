@@ -17,6 +17,7 @@ using WpfApplicationTest.Enums;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Text.RegularExpressions;
 
 namespace MARC2
 {
@@ -36,7 +37,13 @@ namespace MARC2
 
         double threshold = 10;
         private string previousText;
+        private double HTFIDFThresholdValue = 0.7;
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
         public SummarizePage(MyViewModel model)
         {
             InitializeComponent();
@@ -46,7 +53,7 @@ namespace MARC2
             HTFCheckbox.IsChecked = true;
             ThresholdTextbox.Text = "20";
             previousText = ThresholdTextbox.Text;
-            
+            HTFIDFThreshold.Text = "0.7";
             PopulateViewFromModel();
         }
 
@@ -63,8 +70,8 @@ namespace MARC2
             //Retrieve the reviews
             var bugReports = Model.BugReportList;
             var userRequirements = Model.UserRequirementList;
-            
-            
+
+
             //threshold = ThresholdSlider.Value;
             threshold = Double.Parse(ThresholdTextbox.Text);
 
@@ -73,6 +80,16 @@ namespace MARC2
             SBCheckboxCheckedState = SBCheckbox.IsChecked ?? false;
             LRCheckboxCheckedState = LRCheckbox.IsChecked ?? false;
 
+
+            try
+            {
+                var value = Double.Parse(HTFIDFThreshold.Text);
+                HTFIDFThresholdValue = value;
+            } catch (Exception expp)
+            {
+                HTFIDFThreshold.Text = "0.7";
+                HTFIDFThresholdValue = 0.7;
+            }
 
 
             var slowTask = Task.Factory.StartNew(() => SummarizeReviewThread());
@@ -89,10 +106,10 @@ namespace MARC2
         /// </summary>
         private void SummarizeReviewThread()
         {
-            if (HTFCheckboxCheckedState) {  SummarizeReviews(SummarizationAlgorithm.HTF); }
-            else if (HTFIDFCheckboxCheckedState) {  SummarizeReviews(SummarizationAlgorithm.HTFIDF); }
-            else if (SBCheckboxCheckedState) {  SummarizeReviews(SummarizationAlgorithm.SumBasic); }
-            else if (LRCheckboxCheckedState) {  SummarizeReviews(SummarizationAlgorithm.LexRank); }
+            if (HTFCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.HTF); }
+            else if (HTFIDFCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.HTFIDF); }
+            else if (SBCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.SumBasic); }
+            else if (LRCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.LexRank); }
             else { MessageBox.Show("Something went wrong!"); }
 
 
@@ -112,7 +129,7 @@ namespace MARC2
                     HybridTF.HybridTF htfBugReports = new HybridTF.HybridTF(Model.BugReportList);
                     htfBugReports.PerformHybridTF();
 
-                    Model.BugReportSummaryList = htfBugReports.SortedDictionary.Select(m => m.Key).ToList().GetRange(0,numberOfBRReviews);
+                    Model.BugReportSummaryList = htfBugReports.SortedDictionary.Select(m => m.Key).ToList().GetRange(0, numberOfBRReviews);
 
                     HybridTF.HybridTF htfUserRequirements = new HybridTF.HybridTF(Model.UserRequirementList);
                     htfUserRequirements.PerformHybridTF();
@@ -120,12 +137,12 @@ namespace MARC2
                     break;
                 case SummarizationAlgorithm.HTFIDF:
                     HybridTFIDF.HybridTFIDF htfidfBugReports = new HybridTFIDF.HybridTFIDF(Model.BugReportList);
-                    htfidfBugReports.PerformHybridTFIDF();
-                    Model.BugReportSummaryList = htfidfBugReports.FinalReviewList.GetRange(0, (htfidfBugReports.FinalReviewList.Count > numberOfBRReviews ? numberOfBRReviews: htfidfBugReports.FinalReviewList.Count));
-                    
+                    htfidfBugReports.PerformHybridTFIDF(HTFIDFThresholdValue);
+                    Model.BugReportSummaryList = htfidfBugReports.FinalReviewList.GetRange(0, (htfidfBugReports.FinalReviewList.Count > numberOfBRReviews ? numberOfBRReviews : htfidfBugReports.FinalReviewList.Count));
+
 
                     HybridTFIDF.HybridTFIDF htfidfUserRequirements = new HybridTFIDF.HybridTFIDF(Model.UserRequirementList);
-                    htfidfUserRequirements.PerformHybridTFIDF();
+                    htfidfUserRequirements.PerformHybridTFIDF(HTFIDFThresholdValue);
                     //Todo:
                     Model.UserRequirementsSummaryList = htfidfUserRequirements.FinalReviewList.GetRange(0, (htfidfUserRequirements.FinalReviewList.Count > numberOfURReviews ? numberOfURReviews : htfidfUserRequirements.FinalReviewList.Count));
                     break;
@@ -215,10 +232,10 @@ namespace MARC2
             bool enabled = false;
             int i = 0;
             foreach (var item in list)
-            {        
+            {
                 if (item.Contains("*** SUMMARY"))
                 {
-                    enabled = true;  
+                    enabled = true;
                 }
                 if (enabled)
                 {
@@ -284,6 +301,16 @@ namespace MARC2
                 LRCheckbox.IsChecked = false;
                 (sender as CheckBox).IsChecked = true;
                 changeInProgress = false;
+
+                if ((sender as CheckBox).Name == "HTFIDFCheckbox")
+                {
+                    HTFIDFThreshold.IsEnabled = true;
+                }
+                else
+                {
+                    HTFIDFThreshold.IsEnabled = false;
+                }
+
             }
         }
 
@@ -327,7 +354,7 @@ namespace MARC2
             }
             catch (Exception)
             {
-            }       
+            }
         }
 
         /// <summary>
@@ -405,6 +432,32 @@ namespace MARC2
                 ((TextBox)sender).Text = previousText;
 
 
+        }
+
+
+        /// <summary>
+        /// Hybrid TFIDF threshold Value text change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HTFIDFThreshold_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            Int32 selectionStart = textBox.SelectionStart;
+            Int32 selectionLength = textBox.SelectionLength;
+            String newText = String.Empty;
+            int count = 0;
+            foreach (Char c in textBox.Text.ToCharArray())
+            {
+                if (Char.IsDigit(c) || Char.IsControl(c) || (c == '.' && count == 0))
+                {
+                    newText += c;
+                    if (c == '.')
+                        count += 1;
+                }
+            }
+            textBox.Text = newText;
+            textBox.SelectionStart = selectionStart <= textBox.Text.Length ? selectionStart : textBox.Text.Length;
         }
     }
 }
