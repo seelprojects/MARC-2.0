@@ -45,6 +45,7 @@ namespace MARC2
             this.DataContext = this;
             importPage = new ImportPage(Model);
             LeftContent.Content = importPage;
+            this.Title = "Mobile Application Review Classifier : Home";
         }
 
 
@@ -60,11 +61,12 @@ namespace MARC2
             classifyPageCard.Background = Brushes.White;
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = Brushes.White;
+            this.Title = "Mobile Application Review Classifier : Home"; this.Title = "Nishant";
 
-            importPageArrow.Visibility = Visibility.Visible;
-            classifyPageArrow.Visibility = Visibility.Hidden;
-            summarizePageArrow.Visibility = Visibility.Hidden;
-            aboutPageArrow.Visibility = Visibility.Hidden;
+            //importPageArrow.Visibility = Visibility.Visible;
+            //classifyPageArrow.Visibility = Visibility.Hidden;
+            //summarizePageArrow.Visibility = Visibility.Hidden;
+            //aboutPageArrow.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -83,10 +85,13 @@ namespace MARC2
                 summarizePageCard.Background = Brushes.White;
                 aboutPageCard.Background = Brushes.White;
 
-                importPageArrow.Visibility = Visibility.Hidden;
-                classifyPageArrow.Visibility = Visibility.Visible;
-                summarizePageArrow.Visibility = Visibility.Hidden;
-                aboutPageArrow.Visibility = Visibility.Hidden;
+                this.Title = "Mobile Application Review Classifier : Classify";
+
+                //importPageArrow.Visibility = Visibility.Hidden;
+                //classifyPageArrow.Visibility = Visibility.Visible;
+                //summarizePageArrow.Visibility = Visibility.Hidden;
+                //aboutPageArrow.Visibility = Visibility.Hidden;
+
             }
             else
             {
@@ -111,10 +116,12 @@ namespace MARC2
                 summarizePageCard.Background = Brushes.LightBlue;
                 aboutPageCard.Background = Brushes.White;
 
-                importPageArrow.Visibility = Visibility.Hidden;
-                classifyPageArrow.Visibility = Visibility.Hidden;
-                summarizePageArrow.Visibility = Visibility.Visible;
-                aboutPageArrow.Visibility = Visibility.Hidden;
+                this.Title = "Mobile Application Review Classifier : Summarize";
+
+                //importPageArrow.Visibility = Visibility.Hidden;
+                //classifyPageArrow.Visibility = Visibility.Hidden;
+                //summarizePageArrow.Visibility = Visibility.Visible;
+                //aboutPageArrow.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -122,6 +129,12 @@ namespace MARC2
             }   
         }
 
+
+        /// <summary>
+        /// About Button Click handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void aboutPageButton_Click(object sender, RoutedEventArgs e)
         {
             //AboutPage newAppInputDialog = new AboutPage();
@@ -131,10 +144,12 @@ namespace MARC2
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = Brushes.LightBlue;
 
-            importPageArrow.Visibility = Visibility.Hidden;
-            classifyPageArrow.Visibility = Visibility.Hidden;
-            summarizePageArrow.Visibility = Visibility.Hidden;
-            aboutPageArrow.Visibility = Visibility.Visible;
+            this.Title = "Mobile Application Review Classifier : About";
+
+            //importPageArrow.Visibility = Visibility.Hidden;
+            //classifyPageArrow.Visibility = Visibility.Hidden;
+            //summarizePageArrow.Visibility = Visibility.Hidden;
+            //aboutPageArrow.Visibility = Visibility.Visible;
 
             NewAboutPage newAboutPage = new NewAboutPage();
             LeftContent.Content = newAboutPage;

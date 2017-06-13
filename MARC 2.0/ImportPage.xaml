@@ -10,9 +10,9 @@
     xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     mc:Ignorable="d" 
     xmlns:self="clr-namespace:MARC2.Converter"
-    d:DesignHeight="900" d:DesignWidth="900"
     Title="Import"
     Name="wnd"
+    Height="{Binding ElementName=LeftContent, Path=ActualHeight}"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     TextElement.FontWeight="Regular"
@@ -28,16 +28,13 @@
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
     </Page.Resources>
-
-
-
     <Page.DataContext>
         <model:MyViewModel />
     </Page.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="232"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="230"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!--Left Content-->
@@ -146,14 +143,12 @@
         <!--Right Content-->
         <Grid Grid.Column="1" Margin="20,0" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="8*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
             <GroupBox Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,10,0,5" Grid.RowSpan="2">
                 <StackPanel>
                     <TextBlock Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select an app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                    <ListView x:Name="importedReviewsListbox" Margin="0,0,0,0" MaxHeight="550">
+                    <ListView  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" Height="{Binding ElementName=wnd, Path=ActualHeight}" x:Name="importedReviewsListbox" Margin="0,0,0,0">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                                 <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
