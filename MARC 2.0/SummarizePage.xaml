@@ -35,7 +35,7 @@
                 <GroupBox Header="Summary Settings" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel>
                         <!--Classifier-->
-                        <TextBlock TextDecorations="Underline" Style="{DynamicResource MaterialDesignBody2TextBlock}" Margin="0,10,0,10" Text="Select Summary Approach"  HorizontalAlignment="Left"  Visibility="Visible" />
+                        <TextBlock TextDecorations="Underline" Style="{DynamicResource MaterialDesignBody2TextBlock}" Margin="0,10,0,10" Text="Select Algorithm"  HorizontalAlignment="Left"  Visibility="Visible" />
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"></RowDefinition>

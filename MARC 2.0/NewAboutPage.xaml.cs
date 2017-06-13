@@ -24,6 +24,7 @@ namespace WpfApplicationTest
         public NewAboutPage()
         {
             InitializeComponent();
+            appTitle.Foreground = (Brush)(new BrushConverter().ConvertFrom("#607D8B"));
 
         }
 

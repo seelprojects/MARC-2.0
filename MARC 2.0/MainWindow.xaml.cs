@@ -31,6 +31,7 @@ namespace MARC2
         ClassifyPage classifyPage;
 
         SummarizePage summarizePage;
+        private Brush themeColor = (Brush)(new BrushConverter().ConvertFrom("#607D8B"));
 
         public MyViewModel Model { get; set; }
 
@@ -46,6 +47,8 @@ namespace MARC2
             importPage = new ImportPage(Model);
             LeftContent.Content = importPage;
             this.Title = "Mobile Application Review Classifier : Home";
+            importPageCard.Background = themeColor;
+            homeLabel.Foreground = Brushes.White;
         }
 
 
@@ -57,11 +60,16 @@ namespace MARC2
         private void importPageButton_Click(object sender, RoutedEventArgs e)
         {
             LeftContent.Content = importPage;
-            importPageCard.Background = Brushes.LightBlue;
+            importPageCard.Background = themeColor;
             classifyPageCard.Background = Brushes.White;
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = Brushes.White;
             this.Title = "Mobile Application Review Classifier : Home"; this.Title = "Nishant";
+
+            homeLabel.Foreground = Brushes.White;
+            classifyLabel.Foreground = Brushes.Black;
+            summarizeLabel.Foreground = Brushes.Black;
+            aboutLabel.Foreground = Brushes.Black;
 
             //importPageArrow.Visibility = Visibility.Visible;
             //classifyPageArrow.Visibility = Visibility.Hidden;
@@ -80,12 +88,16 @@ namespace MARC2
             {
                 classifyPage = new ClassifyPage(Model);
                 LeftContent.Content = classifyPage;
-                classifyPageCard.Background = Brushes.LightBlue;
+                classifyPageCard.Background = themeColor;
                 importPageCard.Background = Brushes.White;
                 summarizePageCard.Background = Brushes.White;
                 aboutPageCard.Background = Brushes.White;
 
                 this.Title = "Mobile Application Review Classifier : Classify";
+                homeLabel.Foreground = Brushes.Black;
+                classifyLabel.Foreground = Brushes.White;
+                summarizeLabel.Foreground = Brushes.Black;
+                aboutLabel.Foreground = Brushes.Black;
 
                 //importPageArrow.Visibility = Visibility.Hidden;
                 //classifyPageArrow.Visibility = Visibility.Visible;
@@ -113,10 +125,14 @@ namespace MARC2
                 LeftContent.Content = summarizePage;
                 classifyPageCard.Background = Brushes.White;
                 importPageCard.Background = Brushes.White;
-                summarizePageCard.Background = Brushes.LightBlue;
+                summarizePageCard.Background = themeColor;
                 aboutPageCard.Background = Brushes.White;
 
                 this.Title = "Mobile Application Review Classifier : Summarize";
+                homeLabel.Foreground = Brushes.Black;
+                classifyLabel.Foreground = Brushes.Black;
+                summarizeLabel.Foreground = Brushes.White;
+                aboutLabel.Foreground = Brushes.Black;
 
                 //importPageArrow.Visibility = Visibility.Hidden;
                 //classifyPageArrow.Visibility = Visibility.Hidden;
@@ -142,9 +158,13 @@ namespace MARC2
             classifyPageCard.Background = Brushes.White;
             importPageCard.Background = Brushes.White;
             summarizePageCard.Background = Brushes.White;
-            aboutPageCard.Background = Brushes.LightBlue;
+            aboutPageCard.Background = themeColor;
 
             this.Title = "Mobile Application Review Classifier : About";
+            homeLabel.Foreground = Brushes.Black;
+            classifyLabel.Foreground = Brushes.Black;
+            summarizeLabel.Foreground = Brushes.Black;
+            aboutLabel.Foreground = Brushes.White;
 
             //importPageArrow.Visibility = Visibility.Hidden;
             //classifyPageArrow.Visibility = Visibility.Hidden;
