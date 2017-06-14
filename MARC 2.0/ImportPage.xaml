@@ -26,6 +26,7 @@
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
+
     </Page.Resources>
     <Page.DataContext>
         <model:MyViewModel />
@@ -49,17 +50,12 @@
                                 <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="         Add an app              " HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
-
-
-
                         <Border BorderThickness="0.5" BorderBrush="Black" CornerRadius="2">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-
-
                                 <ListView x:Name="myAppsListbox" MaxHeight="300" FontSize="11">
                                     <ListView.View>
                                         <GridView>
@@ -147,16 +143,54 @@
             <GroupBox Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,10,0,5" Grid.RowSpan="2">
                 <StackPanel>
                     <TextBlock Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select an app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                    <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded" Background="AliceBlue" Height="{Binding ElementName=wnd, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
-                        <ListView  x:Name="importedReviewsListbox" >
+                    <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=wnd, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                        <!--<ListView  x:Name="importedReviewsListbox" >
                             <ListView.View>
                                 <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
-                                    <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
+                                    -->
+                        <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
+                        <!--
                                     <GridViewColumn DisplayMemberBinding="{Binding Review}" Header="User Reviews" />
-                                    <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
+                                    -->
+                        <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
+                        <!--
                                 </GridView>
                             </ListView.View>
-                        </ListView>
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical"></WrapPanel>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>-->
+
+                        <ListBox  x:Name="importedReviewsListbox" AlternationCount="2">
+                            <ListBox.ItemTemplate >
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Margin="5" Grid.Column="0">
+                                            <TextBlock FontFamily="Verdana" Text="{Binding Review}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                            <Setter Property="Background" Value="AliceBlue"></Setter>
+                                        </Trigger>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="White"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
                     </ScrollViewer>
                 </StackPanel>
             </GroupBox>

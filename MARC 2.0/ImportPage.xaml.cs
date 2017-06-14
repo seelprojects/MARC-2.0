@@ -42,6 +42,9 @@ namespace MARC2
             Model = model;
             this.DataContext = this;
             ReadLocalAppDataFile();
+            fixListviewVisibleLengthIssue();
+
+//            importedReviewsListbox.item
         }
 
 
@@ -350,11 +353,25 @@ namespace MARC2
         }
 
 
+        private void fixListviewVisibleLengthIssue()
+        {
+            //var temp = String.Format("{0,1000}", " ");
+            //List<ReviewItem> items = new List<ReviewItem>();
+            
+            //items.Add(new ReviewItem() { Review = String.Format("{0,1000}", " ") });
+            //importedReviewsListbox.ItemsSource = items;
+            //importedReviewsListbox.Visibility = Visibility.Collapsed;
+            //items.Clear();
+            
+        }
+
         /// <summary>
         /// Control for after Reviews are retieved
         /// </summary>
         private void RetrieveUserReviewsUpdateControl()
         {
+            importedReviewsListbox.Visibility = Visibility.Visible;
+            importedReviewsListbox.ItemsSource = null;
             //Remove all empty strings
             userReviews.Remove("");
             Model.ReviewList = userReviews;
@@ -377,7 +394,7 @@ namespace MARC2
                 Values = new ChartValues<ObservableValue> { new ObservableValue(Model.ReviewList.Count) },
                 DataLabels = true
             });
-
+            
         }
 
 
