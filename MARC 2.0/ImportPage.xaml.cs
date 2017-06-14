@@ -127,7 +127,7 @@ namespace MARC2
             if (null != appName && appName != "")
             {
                 AddNewAppToAppList(appID, appName);
-                downloadReviewButton_Click(null,null);
+                downloadReviewButton_Click(null, null);
                 //progressBarContainer.Visibility = Visibility.Hidden;
             }
             else
@@ -217,7 +217,7 @@ namespace MARC2
                 ReadLocalAppDataFile();
             }
 
-            
+
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace MARC2
             }
 
             try
-            {      
+            {
                 var numPage = 50;
                 var bw = new BackgroundWorker();
                 bw.DoWork += (o, args) => RetrieveUserReviews(appId, numPage);
@@ -474,10 +474,35 @@ namespace MARC2
                 foreach (var item in tempAppIDs)
                 {
                     localAppDataFileStreamWriter.WriteLine(item);
-                }         
+                }
             }
 
             ReadLocalAppDataFile();
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void instScroll_Loaded(object sender, RoutedEventArgs e)
+        {
+            importedReviewsListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH), true);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Initiator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMouseWheelH(object sender, RoutedEventArgs e)
+        {
+            MouseWheelEventArgs eargs = (MouseWheelEventArgs)e;
+            double x = (double)eargs.Delta;
+            double y = instScroll.VerticalOffset;
+            instScroll.ScrollToVerticalOffset(y - x);
         }
     }
 

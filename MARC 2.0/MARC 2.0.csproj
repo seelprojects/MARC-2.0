@@ -119,7 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converter\BindingTest.cs" />
+    <Compile Include="Converter\ScrollViewHeightConverter.cs" />
     <Compile Include="Enums\colors.cs" />
     <Compile Include="Enums\Classifications.cs" />
     <Compile Include="Enums\SummarizationAlgorithm.cs" />

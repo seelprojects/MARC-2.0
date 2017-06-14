@@ -11,12 +11,16 @@ using MARC2.Model;
 
 namespace MARC2.Converter
 {
-    public class BindingTestConverter : IValueConverter
+    public class ScrollViewHeightConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            //Debugger.Break();
-            return value;
+            var input = value as System.Double?;
+            if (input == 0)
+            {
+                return input;
+            }
+            return (null != input ? input - 70 :0);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
