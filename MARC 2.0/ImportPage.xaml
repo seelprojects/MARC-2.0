@@ -26,7 +26,6 @@
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
-
     </Page.Resources>
     <Page.DataContext>
         <model:MyViewModel />
@@ -39,10 +38,10 @@
 
         <!--Left Content-->
         <StackPanel Margin="5,0,0,5" Grid.Column="0">
-            <materialDesign:Card  Margin="5,5,0,0">
+            <materialDesign:Card  Margin="5,5,5,5">
                 <GroupBox Header="My Apps" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel>
-                        <TextBlock Name="MyAppsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no apps saved." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <TextBlock FontSize="11" Name="MyAppsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no apps saved." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                         <!--<Button FontSize="11" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="AddNewAppButton_Click" Margin="0,0,0,10">Add an app</Button>-->
                         <Button  Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="AddNewAppButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Margin="0,0,0,10">
                             <StackPanel Height="48" Orientation="Horizontal">
@@ -56,12 +55,13 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <ListView x:Name="myAppsListbox" MaxHeight="300" FontSize="11">
+                                
+                                <!--<ListView x:Name="myAppsListbox" MaxHeight="300" FontSize="11">
                                     <ListView.View>
                                         <GridView>
-                                            <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
+                                            --><!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />--><!--
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="My Applications" />
-                                            <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
+                                            --><!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />--><!--
                                         </GridView>
                                     </ListView.View>
                                     <ListBox.ContextMenu>
@@ -69,37 +69,46 @@
                                             <MenuItem Header="Delete" Click="MenuItem_Click"></MenuItem>
                                         </ContextMenu>
                                     </ListBox.ContextMenu>
-                                </ListView>
+                                </ListView>-->
+
+                                <ListBox x:Name="myAppsListbox" MaxHeight="300" FontSize="11">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Margin="5" Grid.Column="0">
+                                                    <TextBlock FontFamily="Verdana" Text="{Binding Name}"></TextBlock>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <ListBox.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Delete" Click="MenuItem_Click"></MenuItem>
+                                        </ContextMenu>
+                                    </ListBox.ContextMenu>
+                                </ListBox>
+
+
                                 <!--<materialDesign:ColorZone Height="30" Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth2}">
                                     <TextBlock Margin="16"></TextBlock>
                                 </materialDesign:ColorZone>-->
-
-                                <!--<Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"                                
-                                    VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                        Click="AddNewAppButton_Click"
-                                    Grid.Row="0" Margin="0 0 28 -20">
-                                    <Viewbox Width="22" Height="22">
-                                        <Canvas Width="24" Height="24">
-                                            <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Button}, Path=Foreground}" />
-                                        </Canvas>
-                                    </Viewbox>
-                                </Button>-->
-
                             </Grid>
                         </Border>
-                        <StackPanel Margin="0,10,0,10">
-                            <Button  Name="downloadReviewsButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="downloadReviewButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto">
-                                <StackPanel Height="48" Orientation="Horizontal">
-                                    <Image Source="Icons/download-3-icon.png" Height="36" Width="36"/>
-                                    <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="     Import Reviews            " HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Button>
-                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
-
             </materialDesign:Card>
-            <materialDesign:Card Margin="5,5,0,0">
+            <StackPanel Margin="0,10,0,10">
+                <Button  Name="downloadReviewsButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Click="downloadReviewButton_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto">
+                    <StackPanel Height="48" Orientation="Horizontal">
+                        <Image Source="Icons/download-3-icon.png" Height="36" Width="36"/>
+                        <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="     Import Reviews            " HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <materialDesign:Card Margin="5,5,5,5">
                 <GroupBox Header="Import from Local File" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel Margin="0,10,0,10">
                         <TextBox Name="browseLocalFileTextbox" BorderThickness="1" Margin="10,10,10,10" KeyDown="browseLocalFileTextbox_KeyDown" ></TextBox>
@@ -140,20 +149,21 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <GroupBox Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,10,0,5" Grid.RowSpan="2">
-                <StackPanel>
-                    <TextBlock Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select an app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                    <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=wnd, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
-                        <!--<ListView  x:Name="importedReviewsListbox" >
+            <materialDesign:Card Margin="0,5">
+                <GroupBox Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="2">
+                    <StackPanel>
+                        <TextBlock FontSize="15" FontFamily="Verdana" Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select an app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=wnd, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                            <!--<ListView  x:Name="importedReviewsListbox" >
                             <ListView.View>
                                 <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
                                     -->
-                        <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
-                        <!--
+                            <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
+                            <!--
                                     <GridViewColumn DisplayMemberBinding="{Binding Review}" Header="User Reviews" />
                                     -->
-                        <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
-                        <!--
+                            <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
+                            <!--
                                 </GridView>
                             </ListView.View>
                             <ListView.ItemsPanel>
@@ -163,37 +173,37 @@
                             </ListView.ItemsPanel>
                         </ListView>-->
 
-                        <ListBox  x:Name="importedReviewsListbox" AlternationCount="2">
-                            <ListBox.ItemTemplate >
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Margin="5" Grid.Column="0">
-                                            <TextBlock FontFamily="Verdana" Text="{Binding Review}" />
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Style.Triggers>
-                                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                            <Setter Property="Background" Value="AliceBlue"></Setter>
-                                        </Trigger>
-                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                            <Setter Property="Background" Value="White"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
-                    </ScrollViewer>
-                </StackPanel>
-            </GroupBox>
+                            <ListBox  x:Name="importedReviewsListbox" AlternationCount="2">
+                                <ListBox.ItemTemplate >
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Margin="5" Grid.Column="0">
+                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Style.Triggers>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                <Setter Property="Background" Value="AliceBlue"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                <Setter Property="Background" Value="White"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
+                </GroupBox>
+            </materialDesign:Card>
         </Grid>
 
         <!--Loading Spinner-->

@@ -558,5 +558,48 @@ namespace MARC2
                 }
             }
         }
+
+        /// <summary>
+        /// Vertical Scroll Event Handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void instScroll_Loaded(object sender, RoutedEventArgs e)
+        {
+            bugReportListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH), true);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Initiator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMouseWheelH(object sender, RoutedEventArgs e)
+        {
+            MouseWheelEventArgs eargs = (MouseWheelEventArgs)e;
+            double x = (double)eargs.Delta;
+            double y = instScroll.VerticalOffset;
+            instScroll.ScrollToVerticalOffset(y - x);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Initiator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMouseWheelH2(object sender, RoutedEventArgs e)
+        {
+            MouseWheelEventArgs eargs = (MouseWheelEventArgs)e;
+            double x = (double)eargs.Delta;
+            double y = instScroll2.VerticalOffset;
+            instScroll2.ScrollToVerticalOffset(y - x);
+        }
+
+        private void instScroll2_Loaded(object sender, RoutedEventArgs e)
+        {
+            userRequirementListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
+        }
     }
 }
