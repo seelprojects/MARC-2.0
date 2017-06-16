@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:MARC2"
     mc:Ignorable="d" 
-    d:DesignHeight="900" d:DesignWidth="900"
     Title="SummarizePage"
     Name="summarizePage"
     xmlns:converter="clr-namespace:MARC2.Converter"
@@ -29,8 +28,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!--Left Content-->
@@ -50,42 +49,56 @@
                                 <RowDefinition Height="1*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
 
                             <!--> TF-IDF <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">Hybrid TF</TextBlock>-->
                             <CheckBox Name="HTFCheckbox" Grid.ColumnSpan="2" Content="Hybrid TF" Margin="10,5,0,10" Grid.Column="0" Grid.Row="0"  HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked" ></CheckBox>
 
-                            <!--> Hybrid TF-IDF <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">Hybrid TF-IDF</TextBlock>-->
-                            <CheckBox Name="HTFIDFCheckbox" Margin="10,5,0,5" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Hybrid TF-IDF" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
-                            <TextBlock Margin="30,10,0,20" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom">Threshold</TextBlock>
-                            <TextBox Name="HTFIDFThreshold" BorderThickness="1" IsEnabled="False" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" TextChanged="HTFIDFThreshold_TextChanged"/>
-
-
-
                             <!--> SumBasic <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">SumBasic</TextBlock>-->
-                            <CheckBox Name="SBCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.ColumnSpan="2" Content="SumBasic" Grid.Row="3" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
+                            <CheckBox Name="SBCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.ColumnSpan="2" Content="SumBasic" Grid.Row="1" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
 
                             <!--> LexRank <!-->
-                            <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">LexRank</TextBlock>-->
-                            <CheckBox Name="LRCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.ColumnSpan="2" Content="LexRank" Grid.Row="4" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
+                            <CheckBox Name="LRCheckbox" Margin="10,5,0,10" Grid.Column="0" Grid.ColumnSpan="2" Content="LexRank" Grid.Row="2" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
 
-                            <TextBlock Grid.Column="0" Grid.Row="5" VerticalAlignment="Bottom">Summary Size</TextBlock>
-                            <TextBox BorderThickness="1"  Grid.Row="5" Grid.Column="1" Name="ThresholdTextbox" TextChanged="Threshold_TextChanged"></TextBox>
-                            <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
-                                <!--<Slider Name="ThresholdSlider"  Minimum="0" Maximum="50" Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                                    ToolTip="Number of Reviews to Generate as Summary" Value="50" MinWidth="150" Margin="8 0 0 0" ValueChanged="ThresholdValueChanged"/>-->
-                            </StackPanel>
+                            <!--> Hybrid TF-IDF <!-->
+                            <CheckBox Name="HTFIDFCheckbox" Grid.ColumnSpan="3" Margin="10,5,0,-25" Grid.Column="0" Grid.Row="3" Content="Hybrid TF-IDF" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
+                            <TextBlock Margin="35,0,0,00" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom">Threshold</TextBlock>
+                            <!--<TextBox Name="HTFIDFThreshold" BorderThickness="1" IsEnabled="False" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" TextChanged="HTFIDFThreshold_TextChanged"/>-->
+                            <Slider Margin="0,0,0,0" Minimum="0.1" Maximum="1.0" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                            TickFrequency="0.1" IsSelectionRangeEnabled="True" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" ValueChanged="ThresholdValueChanged" Grid.ColumnSpan="2" Width="100" HorizontalAlignment="Left" ToolTip="MaterialDesignDiscreteSlider"/>
                         </Grid>
                         <!--Moved Button from here to below Material Design card-->
                     </StackPanel>
                 </GroupBox>
             </materialDesign:Card>
-            <Button Margin="10,10,0,0" Name="summarizeButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="summarizeButton_Click" >
+
+            <Grid Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontWeight="Bold" FontSize="14" Grid.Column="1" VerticalAlignment="Bottom">Summary Size</TextBlock>
+
+                <ComboBox FontSize="14" FontWeight="SemiBold" SelectionChanged="summarySizeComboBox_SelectionChanged" Name="summarySizeComboBox" Grid.Column="2">
+                    <ComboBoxItem Tag="5" IsSelected="True">5</ComboBoxItem>
+                    <ComboBoxItem Tag="10">10</ComboBoxItem>
+                    <ComboBoxItem Tag="15">15</ComboBoxItem>
+                    <ComboBoxItem Tag="20">20</ComboBoxItem>
+                    <ComboBoxItem Tag="25">25</ComboBoxItem>
+                    <ComboBoxItem Tag="30">30</ComboBoxItem>
+                    <ComboBoxItem Tag="35">35</ComboBoxItem>
+                    <ComboBoxItem Tag="40">40</ComboBoxItem>
+                    <ComboBoxItem Tag="45">45</ComboBoxItem>
+                    <ComboBoxItem Tag="50">50</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+
+            <!--<TextBox Height="15" Grid.Column="2" BorderThickness="1" Name="ThresholdTextbox" TextChanged="Threshold_TextChanged"></TextBox>-->
+            <Button Margin="10,20,0,0" Name="summarizeButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="summarizeButton_Click" >
                 <StackPanel Height="48" Orientation="Horizontal">
                     <Image Source="Icons/summary-icon.png" Height="36" Width="36"/>
                     <Label Foreground="White"  FontSize="12" Margin="0,15,0,0" Content="         Summarize                   " HorizontalAlignment="Center"/>
@@ -94,27 +107,6 @@
         </StackPanel>
 
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportSummarizationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportSummarizationResults_button">Export Results</Button>
-
-        <!--Pie Chart-->
-        <!--<liveCharts:PieChart 
-            Grid.Column="1" 
-            Height="100" 
-            Width="100" 
-            Name="Chart" 
-            Margin="0,-110,0,0" 
-            Grid.Row="1" 
-            Series="{Binding Model.ClassfyReviewsResultsCollection}" 
-            LegendLocation="Right" 
-            InnerRadius="20" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Top">
-            <liveCharts:PieChart.ChartLegend>
-                <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
-            </liveCharts:PieChart.ChartLegend>
-            <liveCharts:PieChart.DataTooltip>
-                <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
-            </liveCharts:PieChart.DataTooltip>
-        </liveCharts:PieChart>-->
 
         <!--Right Content-->
         <Grid Grid.Column="1" Margin="20,0" >

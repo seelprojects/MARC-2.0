@@ -51,9 +51,9 @@ namespace MARC2
             this.DataContext = this;
 
             HTFCheckbox.IsChecked = true;
-            ThresholdTextbox.Text = "20";
-            previousText = ThresholdTextbox.Text;
-            HTFIDFThreshold.Text = "0.7";
+
+            previousText = summarySizeComboBox.SelectedValue.ToString();
+            //HTFIDFThreshold.Text = "0.7";
             PopulateViewFromModel();
         }
 
@@ -72,8 +72,8 @@ namespace MARC2
             var userRequirements = Model.UserRequirementList;
 
 
-            //threshold = ThresholdSlider.Value;
-            threshold = Double.Parse(ThresholdTextbox.Text);
+            threshold = (summarySizeComboBox.SelectedIndex +1) *5;
+            //threshold = Double.Parse(ThresholdTextbox.Text);
 
             HTFCheckboxCheckedState = HTFCheckbox.IsChecked ?? false;
             HTFIDFCheckboxCheckedState = HTFIDFCheckbox.IsChecked ?? false;
@@ -83,11 +83,12 @@ namespace MARC2
 
             try
             {
-                var value = Double.Parse(HTFIDFThreshold.Text);
-                HTFIDFThresholdValue = value;
+                //var value = Double.Parse(HTFIDFThreshold.Text);
+                //HTFIDFThresholdValue = value;
+                HTFIDFThresholdValue = 0.7;
             } catch (Exception expp)
             {
-                HTFIDFThreshold.Text = "0.7";
+                //HTFIDFThreshold.Text = "0.7";
                 HTFIDFThresholdValue = 0.7;
             }
 
@@ -304,25 +305,25 @@ namespace MARC2
 
                 if ((sender as CheckBox).Name == "HTFIDFCheckbox")
                 {
-                    HTFIDFThreshold.IsEnabled = true;
+                    //HTFIDFThreshold.IsEnabled = true;
                 }
                 else
                 {
-                    HTFIDFThreshold.IsEnabled = false;
+                    //HTFIDFThreshold.IsEnabled = false;
                 }
 
             }
         }
 
-        ///// <summary>
-        ///// Threshold value change event handler
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void ThresholdValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    threshold = e.NewValue;
-        //}
+        /// <summary>
+        /// Threshold value change event handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ThresholdValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            threshold = e.NewValue;
+        }
 
         /// <summary>
         /// Export Summarization Results Button Click Handler
@@ -508,6 +509,12 @@ namespace MARC2
         private void instScroll2_Loaded(object sender, RoutedEventArgs e)
         {
             userRequirementSummaryListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
+        }
+
+        private void summarySizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var combobox = sender as ComboBox;
+            threshold = ((combobox.SelectedIndex +1)*5.0);
         }
     }
 }
