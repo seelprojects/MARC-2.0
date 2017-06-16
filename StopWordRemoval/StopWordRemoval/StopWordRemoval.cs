@@ -20,7 +20,6 @@ namespace StopWordRemoval
             //var directoryName = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString()).ToString());
             //var directoryName = Application.StartupPath.ToString();
 
-
             string[] lines = System.IO.File.ReadAllLines(directoryName + "\\InputData\\stopwords_en.txt");
             
             //StringBuilder input = new StringBuilder(sentence);

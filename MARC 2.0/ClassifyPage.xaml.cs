@@ -388,10 +388,20 @@ namespace MARC2
         /// <returns></returns>
         private string FilterText(string text)
         {
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+
             text.Replace('.', ' ');
             if (NoSWCheckboxCheckedState)
             {
-                StopWordRemoval.StopWordRemoval temp = new StopWordRemoval.StopWordRemoval(text, Directory.GetCurrentDirectory());
+                StopWordRemoval.StopWordRemoval temp = new StopWordRemoval.StopWordRemoval(text, specificFolder);
                 text = temp.output;
             }
             if (STCheckboxCheckedState)
