@@ -48,14 +48,14 @@
                                 <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="         Add an app              " HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
-                        <Border BorderThickness="0.5" BorderBrush="Black" CornerRadius="2">
+                        <Border BorderThickness="0.5" BorderBrush="Black" CornerRadius="2" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <ListBox x:Name="myAppsListbox" MaxHeight="300" FontSize="11">
+                                <ListBox x:Name="myAppsListbox" MaxHeight="300" MaxWidth="225" FontSize="11">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
