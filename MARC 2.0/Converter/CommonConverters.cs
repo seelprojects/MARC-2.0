@@ -12,6 +12,10 @@ using System.Windows.Media;
 
 namespace MARC2.Converter
 {
+
+    /// <summary>
+    /// Alternate Color Background
+    /// </summary>
     public class AltBackgroundConverter : IValueConverter
     {
         private Brush whiteBrush = new SolidColorBrush(Colors.White);

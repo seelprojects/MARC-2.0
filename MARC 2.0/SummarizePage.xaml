@@ -1,23 +1,27 @@
-﻿<Page x:Class="MARC2.SummarizePage"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:MARC2"
-      mc:Ignorable="d" 
-      d:DesignHeight="900" d:DesignWidth="900"
-      Title="SummarizePage"
-      xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-      TextElement.FontWeight="Regular"
-      TextElement.FontSize="13"     
-      TextOptions.TextFormattingMode="Ideal" 
-      TextOptions.TextRenderingMode="Auto"
-      FontFamily="{DynamicResource MaterialDesignFont}"  UseLayoutRounding="True">
-
+﻿<Page 
+    x:Class="MARC2.SummarizePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:MARC2"
+    mc:Ignorable="d" 
+    d:DesignHeight="900" d:DesignWidth="900"
+    Title="SummarizePage"
+    Name="summarizePage"
+    xmlns:converter="clr-namespace:MARC2.Converter"
+    Height="{Binding ElementName=LeftContent, Path=ActualHeight}"
+    xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"     
+    TextOptions.TextFormattingMode="Ideal" 
+    TextOptions.TextRenderingMode="Auto"
+    FontFamily="{DynamicResource MaterialDesignFont}"  UseLayoutRounding="True">
 
     <Page.Resources>
+        <converter:ScrollViewHalfHeightConverter x:Key="convertHeight" />
         <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
@@ -60,7 +64,7 @@
                             <TextBlock Margin="30,10,0,20" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom">Threshold</TextBlock>
                             <TextBox Name="HTFIDFThreshold" BorderThickness="1" IsEnabled="False" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" TextChanged="HTFIDFThreshold_TextChanged"/>
 
-                            
+
 
                             <!--> SumBasic <!-->
                             <!--<TextBlock Margin="10,5,0,10" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">SumBasic</TextBlock>-->
@@ -90,7 +94,7 @@
         </StackPanel>
 
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportSummarizationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportSummarizationResults_button">Export Results</Button>
-        
+
         <!--Pie Chart-->
         <!--<liveCharts:PieChart 
             Grid.Column="1" 
@@ -119,38 +123,80 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <!--Bug Reports Summary Section-->
-            <GroupBox Grid.Row="0" Header="Bug Reports Summary" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,10,0,5" Grid.RowSpan="1">
-                <StackPanel>
-                    <TextBlock Name="noBugReportSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no bug report summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                    <ListView x:Name="bugReportSummaryListbox" Margin="0,0,0,0" MaxHeight="240">
-                        <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
-                                <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
-                                <GridViewColumn DisplayMemberBinding="{Binding Review}" Header="User Reviews" />
-                                <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </StackPanel>
-            </GroupBox>
+            <materialDesign:Card Margin="0,5" Grid.Row="0">
+                <GroupBox Header="Bug Reports Summary" Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <StackPanel>
+                        <TextBlock Name="noBugReportSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no bug report summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                            <ListBox x:Name="bugReportSummaryListbox"  AlternationCount="2">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Margin="5" Grid.Column="0">
+                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Style.Triggers>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                <Setter Property="Background" Value="AliceBlue"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                <Setter Property="Background" Value="White"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </ScrollViewer>
 
+                    </StackPanel>
+                </GroupBox>
+            </materialDesign:Card>
             <!--User Requirements Summary Section-->
-            <GroupBox Grid.Row="1" Header="User Requirements Summary" Style="{DynamicResource MaterialDesignCardGroupBox}" Margin="0,10,0,5" Grid.RowSpan="1">
-                <StackPanel>
-                    <TextBlock Name="noUserRequirementSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no user requirement summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                    <ListView x:Name="userRequirementSummaryListbox" Margin="0,0,0,0" MaxHeight="240">
-                        <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
-                                <!--<GridViewColumn DisplayMemberBinding="{Binding Platform}" Header="Code" />-->
-                                <GridViewColumn DisplayMemberBinding="{Binding Review}" Header="User Reviews" />
-                                <!--<GridViewColumn DisplayMemberBinding="{Binding Link}" Header="Description" />-->
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-
-                </StackPanel>
-            </GroupBox>
-
+            <materialDesign:Card Margin="0,5" Grid.Row="1">
+                <GroupBox Header="User Requirements Summary" Style="{DynamicResource MaterialDesignCardGroupBox}">
+                    <StackPanel>
+                        <TextBlock Name="noUserRequirementSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no user requirement summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                        <ScrollViewer Name="instScroll2" Loaded="instScroll2_Loaded"  Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                            <ListBox x:Name="userRequirementSummaryListbox"  AlternationCount="2">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Margin="5" Grid.Column="0">
+                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Style.Triggers>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                <Setter Property="Background" Value="AliceBlue"></Setter>
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                <Setter Property="Background" Value="White"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                            </ListBox>
+                        </ScrollViewer>
+                    </StackPanel>
+                </GroupBox>
+            </materialDesign:Card>
 
         </Grid>
 

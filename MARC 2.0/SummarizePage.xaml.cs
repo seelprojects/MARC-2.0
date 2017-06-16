@@ -459,5 +459,55 @@ namespace MARC2
             textBox.Text = newText;
             textBox.SelectionStart = selectionStart <= textBox.Text.Length ? selectionStart : textBox.Text.Length;
         }
+
+
+        /// <summary>
+        /// Vertical Scroll Event Handler for Bug Report ListBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void instScroll_Loaded(object sender, RoutedEventArgs e)
+        {
+            bugReportSummaryListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH), true);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Initiator for Bug Report Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMouseWheelH(object sender, RoutedEventArgs e)
+        {
+            MouseWheelEventArgs eargs = (MouseWheelEventArgs)e;
+            double x = (double)eargs.Delta;
+            double y = instScroll.VerticalOffset;
+            instScroll.ScrollToVerticalOffset(y - x);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Initiator for User Requirements Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyMouseWheelH2(object sender, RoutedEventArgs e)
+        {
+            MouseWheelEventArgs eargs = (MouseWheelEventArgs)e;
+            double x = (double)eargs.Delta;
+            double y = instScroll2.VerticalOffset;
+            instScroll2.ScrollToVerticalOffset(y - x);
+        }
+
+
+        /// <summary>
+        /// Vertical Scroll Handler for User Requirement Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void instScroll2_Loaded(object sender, RoutedEventArgs e)
+        {
+            userRequirementSummaryListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
+        }
     }
 }

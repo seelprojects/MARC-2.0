@@ -560,7 +560,7 @@ namespace MARC2
         }
 
         /// <summary>
-        /// Vertical Scroll Event Handler
+        /// Vertical Scroll Event Handler for Bug Report ListBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -571,7 +571,7 @@ namespace MARC2
 
 
         /// <summary>
-        /// Vertical Scroll Initiator
+        /// Vertical Scroll Initiator for Bug Report Listbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -585,7 +585,7 @@ namespace MARC2
 
 
         /// <summary>
-        /// Vertical Scroll Initiator
+        /// Vertical Scroll Initiator for User Requirements Listbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -597,6 +597,12 @@ namespace MARC2
             instScroll2.ScrollToVerticalOffset(y - x);
         }
 
+
+        /// <summary>
+        /// Vertical Scroll Handler for User Requirement Listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void instScroll2_Loaded(object sender, RoutedEventArgs e)
         {
             userRequirementListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
