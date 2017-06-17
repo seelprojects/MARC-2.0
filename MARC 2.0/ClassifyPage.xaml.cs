@@ -404,6 +404,8 @@ namespace MARC2
                 StopWordRemoval.StopWordRemoval temp = new StopWordRemoval.StopWordRemoval(text, specificFolder);
                 text = temp.output;
             }
+
+
             if (STCheckboxCheckedState)
             {
                 string[] words = text.Split(' ');

@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Text.RegularExpressions;
+using PorterStemmer;
 
 namespace MARC2
 {
@@ -53,7 +54,6 @@ namespace MARC2
             HTFCheckbox.IsChecked = true;
 
             previousText = summarySizeComboBox.SelectedValue.ToString();
-            //HTFIDFThreshold.Text = "0.7";
             PopulateViewFromModel();
         }
 
@@ -71,27 +71,22 @@ namespace MARC2
             var bugReports = Model.BugReportList;
             var userRequirements = Model.UserRequirementList;
 
-
-            threshold = (summarySizeComboBox.SelectedIndex +1) *5;
-            //threshold = Double.Parse(ThresholdTextbox.Text);
+            threshold = (summarySizeComboBox.SelectedIndex + 1) * 5;
 
             HTFCheckboxCheckedState = HTFCheckbox.IsChecked ?? false;
             HTFIDFCheckboxCheckedState = HTFIDFCheckbox.IsChecked ?? false;
             SBCheckboxCheckedState = SBCheckbox.IsChecked ?? false;
             LRCheckboxCheckedState = LRCheckbox.IsChecked ?? false;
 
-
             try
             {
-                //var value = Double.Parse(HTFIDFThreshold.Text);
-                //HTFIDFThresholdValue = value;
-                HTFIDFThresholdValue = 0.7;
-            } catch (Exception expp)
-            {
-                //HTFIDFThreshold.Text = "0.7";
                 HTFIDFThresholdValue = 0.7;
             }
+            catch (Exception expp)
+            {
 
+                HTFIDFThresholdValue = 0.7;
+            }
 
             var slowTask = Task.Factory.StartNew(() => SummarizeReviewThread());
 
@@ -111,9 +106,10 @@ namespace MARC2
             else if (HTFIDFCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.HTFIDF); }
             else if (SBCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.SumBasic); }
             else if (LRCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.LexRank); }
-            else { MessageBox.Show("Something went wrong!"); }
-
-
+            else
+            {
+                MessageBox.Show("Select a summarization algorithm");
+            }
         }
 
         /// <summary>
@@ -122,6 +118,11 @@ namespace MARC2
         /// <param name="SumAlgo"></param>
         private void SummarizeReviews(SummarizationAlgorithm SumAlgo)
         {
+
+            List<string> noStopwordsBugReportList = ApplyStopwordsRemoval(Model.BugReportList);
+            List<string> stemmedBugReportList = ApplyStemming(noStopwordsBugReportList);
+            
+
             int numberOfBRReviews = (Model.BugReportList.Count <= Convert.ToInt32(threshold)) ? Model.BugReportList.Count : Convert.ToInt32(threshold);
             int numberOfURReviews = (Model.UserRequirementList.Count <= Convert.ToInt32(threshold)) ? Model.UserRequirementList.Count : Convert.ToInt32(threshold);
             switch (SumAlgo)
@@ -163,7 +164,49 @@ namespace MARC2
                 default:
                     break;
             }
+        }
 
+        private List<string> ApplyStemming(List<string> noStopwordsBugReportList)
+        {
+            List<string> stemmedList = new List<string>();
+
+            foreach (var item in noStopwordsBugReportList)
+            {
+                string[] words = item.Split(' ');
+                string finalStemOutput = "";
+                foreach (string word in words)
+                {
+                    Stemmer temp = new Stemmer();
+                    temp.add(word.ToCharArray(), word.Length);
+                    temp.stem();
+                    var stemOutput = temp.ToString();
+                    finalStemOutput += stemOutput + " ";
+                }
+                stemmedList.Add(finalStemOutput);
+            }
+            return stemmedList;
+        }
+
+        private List<string> ApplyStopwordsRemoval(List<string> bugReportList)
+        {
+            List<string> nostopwordsList = new List<string>();
+
+            var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+            // Combine the base folder with your specific folder....
+            string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+            // Check if folder exists and if not, create it
+            if (!Directory.Exists(specificFolder))
+                Directory.CreateDirectory(specificFolder);
+
+            foreach (var item in bugReportList)
+            {
+                StopWordRemoval.StopWordRemoval temp = new StopWordRemoval.StopWordRemoval(item.Replace('.',' '), specificFolder);
+                nostopwordsList.Add(temp.output);
+            }
+
+            return nostopwordsList;
         }
 
 
@@ -254,7 +297,6 @@ namespace MARC2
             {
                 Model.UserRequirementsSummaryList = newList;
             }
-
         }
 
 
@@ -305,13 +347,12 @@ namespace MARC2
 
                 if ((sender as CheckBox).Name == "HTFIDFCheckbox")
                 {
-                    //HTFIDFThreshold.IsEnabled = true;
+                    thresholdSlider.IsEnabled = true;
                 }
                 else
                 {
-                    //HTFIDFThreshold.IsEnabled = false;
+                    thresholdSlider.IsEnabled = false;
                 }
-
             }
         }
 
@@ -431,8 +472,6 @@ namespace MARC2
                 previousText = ((TextBox)sender).Text;
             else
                 ((TextBox)sender).Text = previousText;
-
-
         }
 
 
@@ -511,10 +550,15 @@ namespace MARC2
             userRequirementSummaryListbox.AddHandler(MouseWheelEvent, new RoutedEventHandler(MyMouseWheelH2), true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void summarySizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var combobox = sender as ComboBox;
-            threshold = ((combobox.SelectedIndex +1)*5.0);
+            threshold = ((combobox.SelectedIndex + 1) * 5.0);
         }
     }
 }

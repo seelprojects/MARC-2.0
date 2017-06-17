@@ -67,8 +67,8 @@
                             <CheckBox Name="HTFIDFCheckbox" Grid.ColumnSpan="3" Margin="10,5,0,-25" Grid.Column="0" Grid.Row="3" Content="Hybrid TF-IDF" HorizontalAlignment="Left" Checked="SummarizerCheckbox_Checked"></CheckBox>
                             <TextBlock Margin="35,0,0,00" Grid.Column="0" Grid.Row="4" VerticalAlignment="Bottom">Threshold</TextBlock>
                             <!--<TextBox Name="HTFIDFThreshold" BorderThickness="1" IsEnabled="False" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" TextChanged="HTFIDFThreshold_TextChanged"/>-->
-                            <Slider Margin="0,0,0,0" Minimum="0.1" Maximum="1.0" Style="{StaticResource MaterialDesignDiscreteSlider}" 
-                            TickFrequency="0.1" IsSelectionRangeEnabled="True" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" ValueChanged="ThresholdValueChanged" Grid.ColumnSpan="2" Width="100" HorizontalAlignment="Left" ToolTip="MaterialDesignDiscreteSlider"/>
+                            <Slider Name="thresholdSlider" Margin="0,0,0,0" Minimum="0.1" Maximum="1.0" Style="{StaticResource MaterialDesignDiscreteSlider}" 
+                            TickFrequency="0.1" IsSelectionRangeEnabled="True" VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" ValueChanged="ThresholdValueChanged" Grid.ColumnSpan="2" Width="100" HorizontalAlignment="Left" ToolTip="Select the threshold value"/>
                         </Grid>
                         <!--Moved Button from here to below Material Design card-->
                     </StackPanel>
