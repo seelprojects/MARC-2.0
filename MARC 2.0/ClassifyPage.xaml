@@ -157,30 +157,7 @@
             </Button>
         </StackPanel>
 
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportClassificationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportClassificationResults_button">Export Results</Button>
-
-        <!--Pie Chart-->
-        <liveCharts:PieChart 
-            Grid.Column="1" 
-            Height="100" 
-            Width="100" 
-            Name="Chart" 
-            Margin="0,-110,140,0" 
-            Grid.Row="1" 
-            Series="{Binding Model.ClassfyReviewsResultsCollection}" 
-            LegendLocation="Right" 
-            InnerRadius="20" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Top">
-            <liveCharts:PieChart.ChartLegend>
-                <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
-            </liveCharts:PieChart.ChartLegend>
-            <liveCharts:PieChart.DataTooltip>
-                <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
-            </liveCharts:PieChart.DataTooltip>
-        </liveCharts:PieChart>
-
-
+        <Button Visibility="Hidden" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportClassificationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportClassificationResults_button">Export Results</Button>
 
         <!--Right Content-->
         <Grid Grid.Column="1" Margin="20,0" >

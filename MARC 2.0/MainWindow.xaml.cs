@@ -71,10 +71,8 @@ namespace MARC2
             summarizeLabel.Foreground = Brushes.Black;
             aboutLabel.Foreground = Brushes.Black;
 
-            //importPageArrow.Visibility = Visibility.Visible;
-            //classifyPageArrow.Visibility = Visibility.Hidden;
-            //summarizePageArrow.Visibility = Visibility.Hidden;
-            //aboutPageArrow.Visibility = Visibility.Hidden;
+            ChartImportReviews.Visibility = Visibility.Visible;
+            ChartClassifyReviews.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -99,10 +97,8 @@ namespace MARC2
                 summarizeLabel.Foreground = Brushes.Black;
                 aboutLabel.Foreground = Brushes.Black;
 
-                //importPageArrow.Visibility = Visibility.Hidden;
-                //classifyPageArrow.Visibility = Visibility.Visible;
-                //summarizePageArrow.Visibility = Visibility.Hidden;
-                //aboutPageArrow.Visibility = Visibility.Hidden;
+                ChartImportReviews.Visibility = Visibility.Collapsed;
+                ChartClassifyReviews.Visibility = Visibility.Visible;
 
             }
             else
@@ -128,16 +124,15 @@ namespace MARC2
                 summarizePageCard.Background = themeColor;
                 aboutPageCard.Background = Brushes.White;
 
+
+                ChartImportReviews.Visibility = Visibility.Collapsed;
+                ChartClassifyReviews.Visibility = Visibility.Collapsed;
+
                 this.Title = "Mobile Application Review Classifier : Summarize";
                 homeLabel.Foreground = Brushes.Black;
                 classifyLabel.Foreground = Brushes.Black;
                 summarizeLabel.Foreground = Brushes.White;
                 aboutLabel.Foreground = Brushes.Black;
-
-                //importPageArrow.Visibility = Visibility.Hidden;
-                //classifyPageArrow.Visibility = Visibility.Hidden;
-                //summarizePageArrow.Visibility = Visibility.Visible;
-                //aboutPageArrow.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -165,11 +160,9 @@ namespace MARC2
             classifyLabel.Foreground = Brushes.Black;
             summarizeLabel.Foreground = Brushes.Black;
             aboutLabel.Foreground = Brushes.White;
+            ChartImportReviews.Visibility = Visibility.Collapsed;
+            ChartClassifyReviews.Visibility = Visibility.Collapsed;
 
-            //importPageArrow.Visibility = Visibility.Hidden;
-            //classifyPageArrow.Visibility = Visibility.Hidden;
-            //summarizePageArrow.Visibility = Visibility.Hidden;
-            //aboutPageArrow.Visibility = Visibility.Visible;
 
             NewAboutPage newAboutPage = new NewAboutPage();
             LeftContent.Content = newAboutPage;

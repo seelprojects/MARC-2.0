@@ -103,38 +103,41 @@ namespace MARC2
             }
 
             //Update Pie Chart for Bug Reports, User Requirements and Miscellaneous
+
             try
             {
-                Model.ClassfyReviewsResultsCollection.Clear();
+                if (Model.ClassfyReviewsResultsCollection != null && Model.ClassfyReviewsResultsCollection.Count > 0)
+                    Model.ClassfyReviewsResultsCollection.Clear();
+
                 Model.ClassfyReviewsResultsCollection.Add(
                     new PieSeries
                     {
                         Title = "Bug Reports",
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.BugReportList.Count) },
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.BugReportList != null ? Model.BugReportList.Count : 0) },
                         DataLabels = true
                     });
                 Model.ClassfyReviewsResultsCollection.Add(
                     new PieSeries
                     {
                         Title = "User Requirements",
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.UserRequirementList.Count) },
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.UserRequirementList != null ? Model.UserRequirementList.Count : 0) },
                         DataLabels = true
                     });
                 Model.ClassfyReviewsResultsCollection.Add(
                     new PieSeries
                     {
                         Title = "Miscellaneous",
-                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.MiscellaneousList.Count) },
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(Model.MiscellaneousList != null ? Model.MiscellaneousList.Count : 0) },
                         DataLabels = true
                     });
+
+
                 progressBarContainer.Visibility = Visibility.Hidden;
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                //Todo: 
             }
         }
 

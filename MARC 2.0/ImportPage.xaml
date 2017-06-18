@@ -109,6 +109,7 @@
             Width="90" 
             Name="Chart" 
             Margin="0,-110,0,0" 
+            Visibility="Hidden"
             Grid.Row="1" 
             Series="{Binding Model.ImportedReviewsCollection}" 
             LegendLocation="Right"

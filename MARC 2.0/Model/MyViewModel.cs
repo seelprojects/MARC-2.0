@@ -17,7 +17,7 @@ namespace MARC2.Model
 
         public SeriesCollection ImportedReviewsCollection { get; set; }
         public SeriesCollection ClassfyReviewsResultsCollection { get; set; }
-        
+
 
         /// <summary>
         /// Default Constructor
@@ -58,6 +58,7 @@ namespace MARC2.Model
                     DataLabels = true
                 }
             };
+
         }
 
         private List<string> appList;

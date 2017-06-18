@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MARC2"
         mc:Ignorable="d"
-
+        xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -81,13 +81,53 @@
                 </StackPanel>
             </materialDesign:Card>
             <!--<Image Grid.Column="3" Grid.Row="1" Visibility="Hidden" x:Name="aboutPageArrow" HorizontalAlignment="Center" Height="42" VerticalAlignment="Center" Width="42" Source="Icons/Arrows-Down-icon.png" Margin="7,-12,0,0"/>-->
+            <liveCharts:PieChart 
+                Grid.Column="4" 
+                Height="90" 
+                Width="90" 
+                Name="ChartImportReviews" 
+                Grid.Row="0" 
+                Visibility="Visible"
+                Series="{Binding Model.ImportedReviewsCollection}" 
+                LegendLocation="Right"
+                InnerRadius="25" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top">
+                    <liveCharts:PieChart.ChartLegend>
+                        <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
+                    </liveCharts:PieChart.ChartLegend>
+                    <liveCharts:PieChart.DataTooltip>
+                        <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
+                    </liveCharts:PieChart.DataTooltip>
+            </liveCharts:PieChart>
+
+            <liveCharts:PieChart 
+                Grid.Column="4" 
+                Height="90" 
+                Width="90" 
+                Name="ChartClassifyReviews" 
+                Grid.Row="0"
+                Visibility="Collapsed"
+                Series="{Binding Model.ClassfyReviewsResultsCollection}" 
+                LegendLocation="Right"
+                InnerRadius="25" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top">
+                <liveCharts:PieChart.ChartLegend>
+                    <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
+                </liveCharts:PieChart.ChartLegend>
+                <liveCharts:PieChart.DataTooltip>
+                    <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
+                </liveCharts:PieChart.DataTooltip>
+            </liveCharts:PieChart>
+
+
         </Grid>
 
         <DockPanel Grid.Column="0" Grid.Row="1" Height="auto" Margin="10,-5,10.333,10" LastChildFill="True" Grid.ColumnSpan="4" >
             <Border CornerRadius="6" BorderBrush="Gray" Background="White" BorderThickness="2" DockPanel.Dock="Top">
-                
-                    <Grid Name="ContainerGrid">
-                        <Grid.RowDefinitions>
+                <Grid Name="ContainerGrid">
+                    <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Margin="0,0,0,0" Grid.Row="0" Grid.IsSharedSizeScope="True" Height="{Binding ElementName=ContainerGrid, Path=ActualHeight}"   Name="LeftContentContainer" >
