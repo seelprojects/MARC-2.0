@@ -77,13 +77,13 @@
 
             <Grid Margin="0,20,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="4*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock FontWeight="Bold" FontSize="14" Grid.Column="1" VerticalAlignment="Bottom">Summary Size</TextBlock>
 
-                <ComboBox FontSize="14" FontWeight="SemiBold" SelectionChanged="summarySizeComboBox_SelectionChanged" Name="summarySizeComboBox" Grid.Column="2">
+                <ComboBox Margin="-5,0,5,0" FontSize="14" FontWeight="SemiBold" SelectionChanged="summarySizeComboBox_SelectionChanged" Name="summarySizeComboBox" Grid.Column="2">
                     <ComboBoxItem Tag="5" IsSelected="True">5</ComboBoxItem>
                     <ComboBoxItem Tag="10">10</ComboBoxItem>
                     <ComboBoxItem Tag="15">15</ComboBoxItem>
