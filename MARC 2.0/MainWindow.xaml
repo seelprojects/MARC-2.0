@@ -93,7 +93,7 @@
                 LegendLocation="Right"
                 InnerRadius="25" 
                 HorizontalAlignment="Right" 
-                VerticalAlignment="Top">
+                VerticalAlignment="Center">
                     <liveCharts:PieChart.ChartLegend>
                         <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
                     </liveCharts:PieChart.ChartLegend>
@@ -113,7 +113,7 @@
                 LegendLocation="Right"
                 InnerRadius="25" 
                 HorizontalAlignment="Right" 
-                VerticalAlignment="Top">
+                VerticalAlignment="Center">
                 <liveCharts:PieChart.ChartLegend>
                     <liveCharts:DefaultLegend Margin="-250,0,0,0" BulletSize="20"></liveCharts:DefaultLegend>
                 </liveCharts:PieChart.ChartLegend>
@@ -124,7 +124,7 @@
             <Button  Name="exportButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center" Height="auto" Grid.Column="5" Grid.Row="0" Click="exportResultsButton_Click">
                 <StackPanel Height="48" Orientation="Horizontal">
                     <Image Source="Icons/export.png" Height="36" Width="36"/>
-                    <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Export Reviews      " HorizontalAlignment="Center"/>
+                    <Label Name="exportButtonLabel" Foreground="White" FontSize="12" Margin="0,15,0,0" Content=" Save Imported Reviews " HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
             <!--<Button Visibility="Visible" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportResultsButton" Grid.Row="0" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="exportResultsButton_Click">Export Results</Button>-->

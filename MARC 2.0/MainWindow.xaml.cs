@@ -67,7 +67,8 @@ namespace MARC2
             classifyPageCard.Background = Brushes.White;
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = Brushes.White;
-            this.Title = "Mobile Application Review Classifier : Home"; 
+            this.Title = "Mobile Application Review Classifier : Home";
+            exportButtonLabel.Content = "  Save Imported Reviews";
 
             homeLabel.Foreground = Brushes.White;
             classifyLabel.Foreground = Brushes.Black;
@@ -96,6 +97,7 @@ namespace MARC2
                 aboutPageCard.Background = Brushes.White;
 
                 this.Title = "Mobile Application Review Classifier : Classify";
+                exportButtonLabel.Content = " Save Classification Results";
                 homeLabel.Foreground = Brushes.Black;
                 classifyLabel.Foreground = Brushes.White;
                 summarizeLabel.Foreground = Brushes.Black;
@@ -108,7 +110,7 @@ namespace MARC2
             }
             else
             {
-                MessageBox.Show("Please import reviews before trying to classify");
+                MessageBox.Show("Looks like you haven't imported any reviews yet. Please import reviews on the left panel before trying to classify!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -135,6 +137,7 @@ namespace MARC2
                 exportButton.Visibility = Visibility.Visible;
 
                 this.Title = "Mobile Application Review Classifier : Summarize";
+                exportButtonLabel.Content = " Save Summarization Results";
                 homeLabel.Foreground = Brushes.Black;
                 classifyLabel.Foreground = Brushes.Black;
                 summarizeLabel.Foreground = Brushes.White;
@@ -142,8 +145,8 @@ namespace MARC2
             }
             else
             {
-                MessageBox.Show("Please classify reviews before trying to summarize");
-            }   
+                MessageBox.Show("Looks like you haven't classified any reviews yet. Please import and classify reviews before trying to summarize!", "Hold on!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
 
@@ -201,13 +204,17 @@ namespace MARC2
         /// </summary>
         private void ExportSummarizationResultsReview()
         {
-            if (Model.BugReportSummaryList == null || Model.BugReportSummaryList.Count == 0)
+            if (Model.BugReportSummaryList == null || Model.BugReportSummaryList.Count == 0 && Model.UserRequirementsSummaryList == null || Model.UserRequirementsSummaryList.Count == 0)
             {
-                MessageBox.Show("One or more list may be empty.");
+                MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (Model.BugReportSummaryList == null || Model.BugReportSummaryList.Count == 0)
+            {
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.UserRequirementsSummaryList == null || Model.UserRequirementsSummaryList.Count == 0)
             {
-                MessageBox.Show("One or more list may be empty.");
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             try
@@ -263,18 +270,22 @@ namespace MARC2
         /// </summary>
         private void ExportClassificationResultsReview()
         {
-            if (Model.BugReportList == null || Model.BugReportList.Count == 0)
+            if (Model.BugReportList == null || Model.BugReportList.Count == 0 && Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {
-                MessageBox.Show("One or more list may be empty.");
+                MessageBox.Show("Looks like there are no reviews to export. Please make sure at least one of the categories has reviews to export.", "No Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (Model.BugReportList == null || Model.BugReportList.Count == 0)
+            {
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else if (Model.UserRequirementList == null || Model.UserRequirementList.Count == 0)
             {
-                MessageBox.Show("One or more list may be empty.");
+                MessageBox.Show("Looks like one of the lists is empty.", "Partial Export Data", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             try
             {
-                if (Model.BugReportList.Count != 0 || Model.UserRequirementList.Count != 0)
+                if (Model.BugReportList.Count > 0 || Model.UserRequirementList.Count > 0)
                 {
                     var outputDialogFolder = ShowSelectOutputFolderDialog(Actions.Classify);
                     if (outputDialogFolder != null)
@@ -385,9 +396,8 @@ namespace MARC2
         {
             if (Model.ReviewList == null || Model.ReviewList.Count == 0)
             {
-                MessageBox.Show("No Reviews to export.");
+                MessageBox.Show("Looks like there are no reviews to export. Please import reviews before trying to export them to a local file.", "No Export Data!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
 
             try
             {
@@ -407,6 +417,11 @@ namespace MARC2
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outputFolder"></param>
         private void ExportImportedResults(string outputFolder)
         {
             //Write imports to OutputFolder
