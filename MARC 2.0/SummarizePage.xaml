@@ -106,8 +106,6 @@
             </Button>
         </StackPanel>
 
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportSummarizationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportSummarizationResults_button">Export Results</Button>
-
         <!--Right Content-->
         <Grid Grid.Column="1" Margin="20,0" >
             <Grid.RowDefinitions>

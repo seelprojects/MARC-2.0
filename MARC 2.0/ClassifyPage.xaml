@@ -157,8 +157,6 @@
             </Button>
         </StackPanel>
 
-        <Button Visibility="Hidden" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportClassificationResultsButton" Grid.Row="1" Grid.Column="1" Margin="0,-75,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="exportClassificationResults_button">Export Results</Button>
-
         <!--Right Content-->
         <Grid Grid.Column="1" Margin="20,0" >
             <Grid.RowDefinitions>

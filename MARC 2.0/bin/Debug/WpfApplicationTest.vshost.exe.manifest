@@ -474,14 +474,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfApplicationTest.exe" size="727536">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfApplicationTest.exe" size="733168">
       <assemblyIdentity name="WpfApplicationTest" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>wlyViFet5PCxr/f5w+JxP6ua+tevoB/4SFJn0tZc8cU=</dsig:DigestValue>
+        <dsig:DigestValue>C/hKpDHhVCM1le/DpNSR6E3vlHTz9H93A6FgVfWbjxk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

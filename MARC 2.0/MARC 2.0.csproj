@@ -122,6 +122,7 @@
     <Compile Include="Converter\CommonConverters.cs" />
     <Compile Include="Converter\ClassifyPageConverters.cs" />
     <Compile Include="Converter\ImportPageConverters.cs" />
+    <Compile Include="Enums\Actions.cs" />
     <Compile Include="Enums\colors.cs" />
     <Compile Include="Enums\Classifications.cs" />
     <Compile Include="Enums\SummarizationAlgorithm.cs" />

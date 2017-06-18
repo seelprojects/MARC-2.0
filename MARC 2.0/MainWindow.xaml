@@ -35,7 +35,8 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <materialDesign:Card Name="importPageCard" MouseDown="importPageButton_Click" Cursor="Hand" Grid.Column="0" Grid.Row="0" Margin="5,10,0,10" >
                 <StackPanel>
@@ -120,8 +121,13 @@
                     <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
                 </liveCharts:PieChart.DataTooltip>
             </liveCharts:PieChart>
-
-
+            <Button  Name="exportButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center" Height="auto" Grid.Column="5" Grid.Row="0" Click="exportResultsButton_Click">
+                <StackPanel Height="48" Orientation="Horizontal">
+                    <Image Source="Icons/export.png" Height="36" Width="36"/>
+                    <Label Foreground="White" FontSize="12" Margin="0,15,0,0" Content="         Export Reviews      " HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <!--<Button Visibility="Visible" Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="exportResultsButton" Grid.Row="0" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="exportResultsButton_Click">Export Results</Button>-->
         </Grid>
 
         <DockPanel Grid.Column="0" Grid.Row="1" Height="auto" Margin="10,-5,10.333,10" LastChildFill="True" Grid.ColumnSpan="4" >
