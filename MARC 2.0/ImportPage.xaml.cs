@@ -36,6 +36,11 @@ namespace MARC2
         public string appName = "";
         public string appID = "";
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
         public ImportPage(MyViewModel model)
         {
             InitializeComponent();
@@ -167,7 +172,6 @@ namespace MARC2
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message);
-                //MessageBox.Show("hello");
             }
         }
 
@@ -188,7 +192,6 @@ namespace MARC2
 
 
             //Check if app is already added
-
             var tempAppIDs = new List<string>();
             using (var sR = new StreamReader(specificFolder + @"/MyAppsList.txt"))
             {
@@ -201,7 +204,6 @@ namespace MARC2
                 sR.Close();
             }
 
-
             if (tempAppIDs.Contains(appID))
             {
                 progressBarContainer.Visibility = Visibility.Hidden;
@@ -209,7 +211,6 @@ namespace MARC2
             }
             else
             {
-                //var currDir = System.IO.Directory.GetCurrentDirectory();
                 using (var localAppDataFileStreamWriter = new StreamWriter(specificFolder + @"/MyAppsList.txt", true))
                 {
                     localAppDataFileStreamWriter.WriteLine("iOS," + appName + "," + appID);
@@ -247,37 +248,47 @@ namespace MARC2
         /// <param name="appIDFromFirstImport"></param>
         private void downloadReviewButton_Click(object sender, RoutedEventArgs e)
         {
-            progressBarContainer.Visibility = Visibility.Visible;
 
-            var selectedIndex = 0;
-            var appId = "";
-            if (null == sender)
+            if (myAppsListbox.Items.Count > 0)
             {
-                appId = appID;
+                progressBarContainer.Visibility = Visibility.Visible;
+
+                var selectedIndex = 0;
+                var appId = "";
+                if (null == sender)
+                {
+                    appId = appID;
+                }
+                else
+                {
+                    if (myAppsListbox.SelectedIndex == -1)
+                    {
+                        myAppsListbox.SelectedIndex = 0;
+                    }
+                    selectedIndex = myAppsListbox.SelectedIndex;
+                    appId = Model.AppList[selectedIndex].Split(',').ToList().Last();
+                }
+
+                try
+                {
+                    var numPage = 50;
+                    var bw = new BackgroundWorker();
+                    bw.DoWork += (o, args) => RetrieveUserReviews(appId, numPage);
+                    bw.RunWorkerCompleted += (o, args) => RetrieveUserReviewsUpdateControl();
+                    bw.RunWorkerAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Please select an app before importing reviews!");
+                    progressBarContainer.Visibility = Visibility.Hidden;
+                }
             }
             else
             {
-                if (myAppsListbox.SelectedIndex == -1)
-                {
-                    myAppsListbox.SelectedIndex = 0;
-                }
-                selectedIndex = myAppsListbox.SelectedIndex;
-                appId = Model.AppList[selectedIndex].Split(',').ToList().Last();
+                MessageBox.Show("Your app list contains no apps. Please select \"Add an app\" option to import reviews or select a local text file to import reviews.","No Saved Apps", MessageBoxButton.OK, MessageBoxImage.Question);
             }
 
-            try
-            {
-                var numPage = 50;
-                var bw = new BackgroundWorker();
-                bw.DoWork += (o, args) => RetrieveUserReviews(appId, numPage);
-                bw.RunWorkerCompleted += (o, args) => RetrieveUserReviewsUpdateControl();
-                bw.RunWorkerAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Please select an app before importing reviews!");
-                progressBarContainer.Visibility = Visibility.Hidden;
-            }
+            
         }
 
         /// <summary>
@@ -437,10 +448,8 @@ namespace MARC2
             }
             catch (Exception)
             {
-
-                MessageBox.Show("File Location is invalid.");
+                MessageBox.Show("Could not find the specified file. Please select a valid file location.", "Error opening file",MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
 
 
@@ -451,7 +460,6 @@ namespace MARC2
         /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-
             var currDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Combine the base folder with your specific folder....
