@@ -292,13 +292,19 @@
         "Entry"
         {
         "MsmKey" = "8:_465E0CD487934C3827E6E939B4771238"
-        "OwnerKey" = "8:_05CA6F1B9B2FCC5DFC0147931D1604E3"
+        "OwnerKey" = "8:_BF4771571B44C941561B16194DBCFDF5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_465E0CD487934C3827E6E939B4771238"
         "OwnerKey" = "8:_419B65A59D58419E9ECFC684DF5208A6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_465E0CD487934C3827E6E939B4771238"
+        "OwnerKey" = "8:_05CA6F1B9B2FCC5DFC0147931D1604E3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -663,12 +669,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AF70C3ADF78C4F5EA1E30A159CA2683D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_BF4771571B44C941561B16194DBCFDF5"
         "OwnerKey" = "8:_419B65A59D58419E9ECFC684DF5208A6"
         "MsmSig" = "8:_UNDEFINED"
@@ -719,18 +719,6 @@
         {
         "MsmKey" = "8:_D71685F085FB46A6A5314A0E3ABFD418"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DC34141F193725E0B0C94C9741F13A6C"
-        "OwnerKey" = "8:_BF4771571B44C941561B16194DBCFDF5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DC34141F193725E0B0C94C9741F13A6C"
-        "OwnerKey" = "8:_419B65A59D58419E9ECFC684DF5208A6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -821,12 +809,6 @@
         {
         "MsmKey" = "8:_F9426F645CB24A8BBD93E1DDAFECF391"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A138B8A4C610FC3BB52E13203EA6A870"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1042,19 +1024,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_465E0CD487934C3827E6E939B4771238"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BF4771571B44C941561B16194DBCFDF5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DC34141F193725E0B0C94C9741F13A6C"
+        "OwnerKey" = "8:_465E0CD487934C3827E6E939B4771238"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A138B8A4C610FC3BB52E13203EA6A870"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1075,6 +1057,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -1091,6 +1089,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -2137,26 +2143,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AF70C3ADF78C4F5EA1E30A159CA2683D"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\Desktop\\MyAppsList.txt"
-            "TargetName" = "8:MyAppsList.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_03BB14A911FE4DF4B00C056164F544BE"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BF4771571B44C941561B16194DBCFDF5"
             {
             "AssemblyRegister" = "3:1"
@@ -2319,37 +2305,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DC34141F193725E0B0C94C9741F13A6C"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_DC34141F193725E0B0C94C9741F13A6C"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_AB5866D87FEC4FE2A853F9EBFE6D045E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DD87B4E1F89B58B58417AFEE27C43B6A"
@@ -2603,7 +2558,7 @@
             "SourcePath" = "8:..\\..\\..\\..\\Desktop\\EMSE Journal\\Visual Studio Projects\\MARC 2.0.2\\MARC 2.0\\bin\\Debug\\MyAppsList.txt"
             "TargetName" = "8:MyAppsList.txt"
             "Tag" = "8:"
-            "Folder" = "8:_AB5866D87FEC4FE2A853F9EBFE6D045E"
+            "Folder" = "8:_03BB14A911FE4DF4B00C056164F544BE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2763,7 +2718,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MARC 2.0"
         "ProductCode" = "8:{FFCFCD9E-65EF-4739-8C78-76BB39C9DB02}"
-        "PackageCode" = "8:{E7799215-8FC3-445A-A139-68CBA76709B0}"
+        "PackageCode" = "8:{EAD94F23-C7D5-451E-ABC2-6BF4C145C10B}"
         "UpgradeCode" = "8:{837FD7DE-13A7-4684-8887-AC9FF6B3C7C6}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
