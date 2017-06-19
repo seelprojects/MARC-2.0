@@ -69,7 +69,7 @@ namespace Gma.CodeCloud.Controls
             {
                 //Changed by Nishant
                 //m_LastUsedFont = new Font(this.FontFamily, fontSize, this.FontStyle);
-                m_LastUsedFont = new Font(this.FontFamily, fontSize==0 ? 1: fontSize, this.FontStyle);
+                m_LastUsedFont = new Font(this.FontFamily, float.IsNaN(fontSize) || fontSize == 0 ? 1: fontSize, this.FontStyle);
             }
             return m_LastUsedFont;
         }
