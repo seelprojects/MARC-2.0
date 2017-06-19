@@ -39,7 +39,7 @@
                     <StackPanel>
                         <!--Classifier-->
                         <TextBlock TextDecorations="Underline" Style="{DynamicResource MaterialDesignBody2TextBlock}" Margin="0,10,0,10" Text="Select Algorithm"  HorizontalAlignment="Left"  Visibility="Visible" />
-                        <Grid>
+                        <Grid Margin="0,10,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"></RowDefinition>
                                 <RowDefinition Height="1*"></RowDefinition>
@@ -104,6 +104,22 @@
                     <Label Foreground="White"  FontSize="12" Margin="0,15,0,0" Content="         Summarize                   " HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
+
+            <Separator Margin="0,25,0,0"/>
+
+            <Button Margin="10,25,0,0" IsEnabled="False" Name="wordCloudButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="wordCloudButton_Click" >
+                <StackPanel Height="48" Orientation="Horizontal">
+                    <Image Source="Icons/Cloud.png" Height="36" Width="36"/>
+                    <Label Foreground="White"  FontSize="12" Margin="0,15,0,0" Content="      Show Word Cloud          " HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Margin="10,20,0,0" IsEnabled="False" Name="summaryResultsButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="summaryResultsButton_Click" >
+                <StackPanel Height="48" Orientation="Horizontal">
+                    <Image Source="Icons/Cloud.png" Height="36" Width="36"/>
+                    <Label Foreground="White"  FontSize="12" Margin="0,15,0,0" Content="   Show Summary Results   " HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
 
         <!--Right Content-->
@@ -116,37 +132,40 @@
             <materialDesign:Card Margin="0,5" Grid.Row="0">
                 <GroupBox Header="Bug Reports Summary" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel>
-                        <TextBlock Name="noBugReportSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no bug report summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                        <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
-                            <ListBox x:Name="bugReportSummaryListbox"  AlternationCount="2">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Margin="5" Grid.Column="0">
-                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="ListBoxItem">
-                                        <Style.Triggers>
-                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                                <Setter Property="Background" Value="AliceBlue"></Setter>
-                                            </Trigger>
-                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                                <Setter Property="Background" Value="White"></Setter>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-                            </ListBox>
-                        </ScrollViewer>
-
+                        <Grid Name="bugReportSummaryGrid">
+                            <TextBlock Name="noBugReportSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no bug report summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                            <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                                <ListBox x:Name="bugReportSummaryListbox"  AlternationCount="2">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Margin="5" Grid.Column="0">
+                                                    <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Style.Triggers>
+                                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                                                </Trigger>
+                                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                    <Setter Property="Background" Value="White"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </ScrollViewer>
+                        </Grid>
+                        <Grid Background="White" Visibility="Collapsed" Name="bugReportSummaryWordCloudGrid" Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" >
+                        </Grid>
                     </StackPanel>
                 </GroupBox>
             </materialDesign:Card>
@@ -154,36 +173,40 @@
             <materialDesign:Card Margin="0,5" Grid.Row="1">
                 <GroupBox Header="User Requirements Summary" Style="{DynamicResource MaterialDesignCardGroupBox}">
                     <StackPanel>
-                        <TextBlock Name="noUserRequirementSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no user requirement summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
-                        <ScrollViewer Name="instScroll2" Loaded="instScroll2_Loaded"  Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
-                            <ListBox x:Name="userRequirementSummaryListbox"  AlternationCount="2">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel Margin="5" Grid.Column="0">
-                                                <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="ListBoxItem">
-                                        <Style.Triggers>
-                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                                <Setter Property="Background" Value="AliceBlue"></Setter>
-                                            </Trigger>
-                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                                <Setter Property="Background" Value="White"></Setter>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
-                            </ListBox>
-                        </ScrollViewer>
+                        <Grid Name="userRequirementsSummaryGrid">
+                            <TextBlock Name="noUserRequirementSummaryTextBlock" Margin="0,20,0,20" Text="You currently have no user requirement summary." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
+                            <ScrollViewer Name="instScroll2" Loaded="instScroll2_Loaded"  Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
+                                <ListBox x:Name="userRequirementSummaryListbox"  AlternationCount="2">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Margin="5" Grid.Column="0">
+                                                    <TextBlock FontFamily="Verdana" Text="{Binding Review}"></TextBlock>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Style.Triggers>
+                                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                                                </Trigger>
+                                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                    <Setter Property="Background" Value="White"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </ScrollViewer>
+                        </Grid>
+                        <Grid Background="White" Visibility="Collapsed" Name="userRequirementsSummaryWordCloudGrid" Height="{Binding ElementName=summarizePage, Path=ActualHeight, Converter={StaticResource convertHeight}}" >
+                        </Grid>
                     </StackPanel>
                 </GroupBox>
             </materialDesign:Card>

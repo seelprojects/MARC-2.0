@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="WpfApplicationTest.exe.manifest" size="28211">
+    <dependentAssembly dependencyType="install" codebase="WpfApplicationTest.exe.manifest" size="28873">
       <assemblyIdentity name="WpfApplicationTest.exe" version="1.0.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>H2/waPRoXcfHoRRX5J4oH2qtq2RHvmhj0Eo1oGDGhx8=</dsig:DigestValue>
+        <dsig:DigestValue>pqJ6wJ22rdV+n62tv4F2jrn01TpvCfMHq3ZQYswgFfw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

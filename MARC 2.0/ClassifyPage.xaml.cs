@@ -282,9 +282,14 @@ namespace MARC2
                 }
             }
 
-            Model.UserRequirementList = userRequirements;
-            Model.BugReportList = bugReports;
-            Model.MiscellaneousList = miscellaneous;
+
+            var userRequirmentsTemp = userRequirements.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            var bugReportsTemp = bugReports.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            var miscellaneousTemp = miscellaneous.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+
+            Model.UserRequirementList = userRequirmentsTemp;
+            Model.BugReportList = bugReportsTemp;
+            Model.MiscellaneousList = miscellaneousTemp;
 
             PopulateViewFromModel();
         }

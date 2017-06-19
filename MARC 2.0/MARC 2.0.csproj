@@ -101,6 +101,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -113,6 +114,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -137,6 +139,9 @@
     <Compile Include="SummarizePage.xaml.cs">
       <DependentUpon>SummarizePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WordCloudControl\ComponentFactory.cs" />
+    <Compile Include="WordCloudControl\InfiniteProgressBarWrapper.cs" />
+    <Compile Include="WordCloudControl\ProgressBarWrapper.cs" />
     <Page Include="ClassifyPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +240,8 @@
     <Resource Include="Icons\about.png" />
     <Resource Include="Icons\github.png" />
     <Resource Include="Icons\seel.png" />
+    <Resource Include="Icons\flip.png" />
+    <Resource Include="Icons\Cloud.png" />
     <Content Include="Summarizer.dll" />
     <Resource Include="Icons\Browse-Icon.png" />
     <Resource Include="Icons\browse.ico" />
@@ -244,6 +251,10 @@
     <ProjectReference Include="..\Apple User Review Sniffer\Apple User Review Sniffer\Apple User Review Sniffer.csproj">
       <Project>{f3331d64-c161-45b2-9fcd-2f8f5e08c48c}</Project>
       <Name>Apple User Review Sniffer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controls\Controls.csproj">
+      <Project>{34649d7d-04a9-4092-ad0b-f7022c123fd7}</Project>
+      <Name>Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\FrameNetOnline\FrameNetOnline\FrameNetOnline.csproj">
       <Project>{61f09ae9-4d64-43b8-b676-e76c996efc45}</Project>

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumBasic", "SumBasic\SumBas
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MARC 2.0 Installer", "MARC 2.0 Installer\MARC 2.0 Installer.vdproj", "{81B50852-CC1D-4C75-A62D-263C7114EB62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controls", "Controls\Controls.csproj", "{34649D7D-04A9-4092-AD0B-F7022C123FD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{9DF8BD36-1891-4FDA-B502-A391A917199E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81B50852-CC1D-4C75-A62D-263C7114EB62}.Debug|Any CPU.ActiveCfg = Debug
 		{81B50852-CC1D-4C75-A62D-263C7114EB62}.Release|Any CPU.ActiveCfg = Release
+		{34649D7D-04A9-4092-AD0B-F7022C123FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34649D7D-04A9-4092-AD0B-F7022C123FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34649D7D-04A9-4092-AD0B-F7022C123FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34649D7D-04A9-4092-AD0B-F7022C123FD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

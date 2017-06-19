@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ugEYtv3+nR08VIF08xzMQr1q+Kzjxj4fLUWwM6l4fbA=</dsig:DigestValue>
+        <dsig:DigestValue>JHjGkm4UGqz6ilzcKdPxQSy/CR5ImYtNWATu60j9bWY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -73,7 +73,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iD8MJA+pNAYj+PUDjqAZQtBq3LFUlO/DG0Ij4noWxaE=</dsig:DigestValue>
+        <dsig:DigestValue>oeeKmOWviZR/ymL4BlF5y8eskg3mr1bfhvKY7D0WLQk=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Gma.CodeCloud.Controls.dll" size="48128">
+      <assemblyIdentity name="Gma.CodeCloud.Controls" version="2.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>PYdwbVr5fbP8/zqRFL1A7KAUXHDe9MEaoqmhbvznWMU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -85,7 +97,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yWTYxH6tre4jEAag0ofkSROkR+8u5Ub/tXBODUyCVRg=</dsig:DigestValue>
+        <dsig:DigestValue>MNyc6ikDEhqL3jKLGnYtz2QCGEbxGdKaKYLiU5/NpmE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -97,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uEmij3XZ45m2fcaWDcTWupuT5Epz2jlta1YL5Qch7f8=</dsig:DigestValue>
+        <dsig:DigestValue>4t74uiqd4lGpRD2HRcN25z4ckCg8hKRPr+rEkrvXOzc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -409,7 +421,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>VJBcQf7toOQqahYBBB5gV1Z15czQOB8NiziwvXzUgM0=</dsig:DigestValue>
+        <dsig:DigestValue>zlJJo3NRPN2fEzEnqqMWWVBtXEa23m5Y0Rcjdzhexsc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -421,7 +433,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IPtFD4xsR+mlnOpPBPBxlkVRoeBy9m2KDsxhUY7CTz8=</dsig:DigestValue>
+        <dsig:DigestValue>K7VxLh5h1NK9//0GXYqhBDi2dJON2zQUrHQdewLNFN4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -433,7 +445,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jkw94uPpdyAwaJnI2J0kvMNg9wPbB3uQbbdAOQqfWyY=</dsig:DigestValue>
+        <dsig:DigestValue>y4Qu3rBVi+E3ZK8oUUuN+/kCgYT2A1jG189JgC3sPJc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -469,19 +481,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TrZoeLuZsEPleBvEybLP5OPAhfp5R/cd/1dbUWgtMgA=</dsig:DigestValue>
+        <dsig:DigestValue>3i5lYHM2UKyo48gepos1HJbkBxtapwhd8jqPt8sIQQE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfApplicationTest.exe" size="734192">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfApplicationTest.exe" size="980976">
       <assemblyIdentity name="WpfApplicationTest" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>eraQ27NHFUzHEKu6EpZsMUrrTNLayRW6OAP79mY2kZU=</dsig:DigestValue>
+        <dsig:DigestValue>GAefQRu4xx5T8Oq50J0t7TY1PxxHsfjM9I1AQ8TTPRw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

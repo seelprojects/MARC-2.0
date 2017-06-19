@@ -19,6 +19,10 @@ using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Text.RegularExpressions;
 using PorterStemmer;
+using Gma.CodeCloud.Controls.TextAnalyses.Blacklist;
+using Gma.CodeCloud.Controls.TextAnalyses.Extractors;
+using Gma.CodeCloud.Controls.TextAnalyses.Stemmers;
+using Gma.CodeCloud.Controls.TextAnalyses.Processing;
 
 namespace MARC2
 {
@@ -64,6 +68,8 @@ namespace MARC2
         /// <param name="e"></param>
         private async void summarizeButton_Click(object sender, RoutedEventArgs e)
         {
+            summaryResultsButton_Click(null, null);
+
             //Show Loading Bar
             progressBarContainer.Visibility = Visibility.Visible;
 
@@ -84,7 +90,6 @@ namespace MARC2
             }
             catch (Exception expp)
             {
-
                 HTFIDFThresholdValue = 0.7;
             }
 
@@ -93,8 +98,13 @@ namespace MARC2
             await slowTask;
             PopulateViewFromModel();
 
+            if (bugReportSummaryListbox.HasItems || userRequirementSummaryListbox.HasItems)
+            {
+                wordCloudButton.IsEnabled = true;
+                summaryResultsButton.IsEnabled = true;
+            }
             //Hide Loading Bar
-            progressBarContainer.Visibility = Visibility.Hidden;
+            progressBarContainer.Visibility = Visibility.Hidden;     
         }
 
         /// <summary>
@@ -108,7 +118,7 @@ namespace MARC2
             else if (LRCheckboxCheckedState) { SummarizeReviews(SummarizationAlgorithm.LexRank); }
             else
             {
-                MessageBox.Show("Select a summarization algorithm");
+                MessageBox.Show("Looks like you didn't select a summarization algorithm. Please make a selection and try again.", "No Summarization Algorithm Selected", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -118,11 +128,9 @@ namespace MARC2
         /// <param name="SumAlgo"></param>
         private void SummarizeReviews(SummarizationAlgorithm SumAlgo)
         {
-
             List<string> noStopwordsBugReportList = ApplyStopwordsRemoval(Model.BugReportList);
             List<string> stemmedBugReportList = ApplyStemming(noStopwordsBugReportList);
             
-
             int numberOfBRReviews = (Model.BugReportList.Count <= Convert.ToInt32(threshold)) ? Model.BugReportList.Count : Convert.ToInt32(threshold);
             int numberOfURReviews = (Model.UserRequirementList.Count <= Convert.ToInt32(threshold)) ? Model.UserRequirementList.Count : Convert.ToInt32(threshold);
             switch (SumAlgo)
@@ -166,6 +174,11 @@ namespace MARC2
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="noStopwordsBugReportList"></param>
+        /// <returns></returns>
         private List<string> ApplyStemming(List<string> noStopwordsBugReportList)
         {
             List<string> stemmedList = new List<string>();
@@ -187,6 +200,12 @@ namespace MARC2
             return stemmedList;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bugReportList"></param>
+        /// <returns></returns>
         private List<string> ApplyStopwordsRemoval(List<string> bugReportList)
         {
             List<string> nostopwordsList = new List<string>();
@@ -226,9 +245,7 @@ namespace MARC2
             if (!Directory.Exists(specificFolder))
                 Directory.CreateDirectory(specificFolder);
 
-
             var tempPath = Directory.GetCurrentDirectory().ToString();
-
 
             var summarizationInputFile = specificFolder + "\\SummarizeTemp.txt";
             //Copy reviews to a temp file for LexRank to Read it
@@ -257,7 +274,6 @@ namespace MARC2
 
             //Retrieve data back
             ParseOutput(output, classification);
-
         }
 
 
@@ -306,7 +322,7 @@ namespace MARC2
         private void PopulateViewFromModel()
         {
             List<ReviewItem> items = new List<ReviewItem>();
-            if (Model.BugReportSummaryList != null)
+            if (Model.BugReportSummaryList != null && Model.BugReportSummaryList.Count >0)
             {
                 foreach (var item in Model.BugReportSummaryList)
                 {
@@ -314,10 +330,12 @@ namespace MARC2
                 }
                 bugReportSummaryListbox.ItemsSource = items;
                 noBugReportSummaryTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+
+                ShowBugReportSummaryWordCloud();
             }
 
             items = new List<ReviewItem>();
-            if (Model.UserRequirementsSummaryList != null)
+            if (Model.UserRequirementsSummaryList != null && Model.UserRequirementsSummaryList.Count >0)
             {
                 foreach (var item in Model.UserRequirementsSummaryList)
                 {
@@ -325,6 +343,14 @@ namespace MARC2
                 }
                 userRequirementSummaryListbox.ItemsSource = items;
                 noUserRequirementSummaryTextBlock.Visibility = items.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+
+                ShowUserRequirementsSummaryWordCloud();
+            }
+
+            if (bugReportSummaryListbox.HasItems || userRequirementSummaryListbox.HasItems)
+            {
+                wordCloudButton.IsEnabled = true;
+                summaryResultsButton.IsEnabled = true;
             }
         }
 
@@ -559,6 +585,123 @@ namespace MARC2
         {
             var combobox = sender as ComboBox;
             threshold = ((combobox.SelectedIndex + 1) * 5.0);
+        }
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void wordCloudButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            //ShowBugReportSummaryWordCloud();
+            //ShowUserRequirementsSummaryWordCloud();
+
+            userRequirementsSummaryWordCloudGrid.Visibility = Visibility.Visible;
+            userRequirementsSummaryGrid.Visibility = Visibility.Collapsed;
+
+            bugReportSummaryWordCloudGrid.Visibility = Visibility.Visible;
+            bugReportSummaryGrid.Visibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ShowBugReportSummaryWordCloud()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host =
+                new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            // Create the MaskedTextBox control.
+            Gma.CodeCloud.Controls.CloudControl abc = new Gma.CodeCloud.Controls.CloudControl();
+
+            System.Windows.Forms.ProgressBar abcd = new System.Windows.Forms.ProgressBar();
+
+            IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
+            //IBlacklist customBlacklist = CommonBlacklist.CreateFromTextFile(s_BlacklistTxtFileName);
+
+
+            var preProcessedList = ApplyStopwordsRemoval(Model.BugReportSummaryList);
+
+            InputType inputType = ComponentFactory.DetectInputType(String.Join(",", preProcessedList.ToArray()));
+            IProgressIndicator progress = ComponentFactory.CreateProgressBar(inputType, abcd);
+            IEnumerable<string> terms = ComponentFactory.CreateExtractor(inputType, String.Join(",", preProcessedList.ToArray()), progress);
+            IWordStemmer stemmer = ComponentFactory.CreateWordStemmer(false);
+
+            IEnumerable<IWord> words = terms
+                .Filter(blacklist)
+                .CountOccurences();
+
+            abc.WeightedWords =
+                words
+                    .GroupByStem(stemmer)
+                    .SortByOccurences()
+                    .Cast<IWord>();
+
+            // Assign the MaskedTextBox control as the host control's child.
+            host.Child = abc;
+
+            this.bugReportSummaryWordCloudGrid.Children.Add(host);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ShowUserRequirementsSummaryWordCloud()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host =
+                new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            // Create the MaskedTextBox control.
+            Gma.CodeCloud.Controls.CloudControl abc = new Gma.CodeCloud.Controls.CloudControl();
+
+            System.Windows.Forms.ProgressBar abcd = new System.Windows.Forms.ProgressBar();
+
+            IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
+            //IBlacklist customBlacklist = CommonBlacklist.CreateFromTextFile(s_BlacklistTxtFileName);
+
+            var preProcessedList = ApplyStopwordsRemoval(Model.UserRequirementsSummaryList);
+
+            InputType inputType = ComponentFactory.DetectInputType(String.Join(",", preProcessedList.ToArray()));
+            IProgressIndicator progress = ComponentFactory.CreateProgressBar(inputType, abcd);
+            IEnumerable<string> terms = ComponentFactory.CreateExtractor(inputType, String.Join(",", preProcessedList.ToArray()), progress);
+            IWordStemmer stemmer = ComponentFactory.CreateWordStemmer(false);
+
+            IEnumerable<IWord> words = terms
+                .Filter(blacklist)
+                .CountOccurences();
+
+            abc.WeightedWords =
+                words
+                    .GroupByStem(stemmer)
+                    .SortByOccurences()
+                    .Cast<IWord>();
+
+            // Assign the MaskedTextBox control as the host control's child.
+            host.Child = abc;
+
+            this.userRequirementsSummaryWordCloudGrid.Children.Add(host);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void summaryResultsButton_Click(object sender, RoutedEventArgs e)
+        {
+            userRequirementsSummaryWordCloudGrid.Visibility = Visibility.Collapsed;
+            userRequirementsSummaryGrid.Visibility = Visibility.Visible;
+
+            bugReportSummaryWordCloudGrid.Visibility = Visibility.Collapsed;
+            bugReportSummaryGrid.Visibility = Visibility.Visible;
         }
     }
 }
