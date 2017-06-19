@@ -55,7 +55,7 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
-                                <ListBox x:Name="myAppsListbox" MaxHeight="300" MaxWidth="225" FontSize="11">
+                                <ListBox x:Name="myAppsListbox" MaxHeight="280" MaxWidth="225" FontSize="11">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
