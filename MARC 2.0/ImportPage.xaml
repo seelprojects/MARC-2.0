@@ -48,7 +48,7 @@
                                 <Label Foreground="White" FontSize="11" Margin="0,15,0,0" Content="         Add an app              " HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>
-                        <Border BorderThickness="0.5" BorderBrush="Black" CornerRadius="2" Padding="5">
+                        <Border BorderThickness="0.5" BorderBrush="Teal" CornerRadius="2" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />

@@ -483,6 +483,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_62FA29E8A4F7EE0FF8E9AA517C51E883"
+        "OwnerKey" = "8:_419B65A59D58419E9ECFC684DF5208A6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_631AA5877F02C60E4EB300E8B0060905"
         "OwnerKey" = "8:_5242D2408221B6DF45D0018E664A4261"
         "MsmSig" = "8:_UNDEFINED"
@@ -1024,6 +1030,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_62FA29E8A4F7EE0FF8E9AA517C51E883"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BF4771571B44C941561B16194DBCFDF5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1096,6 +1108,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -1658,6 +1678,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_62FA29E8A4F7EE0FF8E9AA517C51E883"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Gma.CodeCloud.Controls, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_62FA29E8A4F7EE0FF8E9AA517C51E883"
+                    {
+                    "Name" = "8:Gma.CodeCloud.Controls.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Gma.CodeCloud.Controls.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_AB5866D87FEC4FE2A853F9EBFE6D045E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_631AA5877F02C60E4EB300E8B0060905"
@@ -2718,7 +2769,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MARC 2.0"
         "ProductCode" = "8:{FFCFCD9E-65EF-4739-8C78-76BB39C9DB02}"
-        "PackageCode" = "8:{EAD94F23-C7D5-451E-ABC2-6BF4C145C10B}"
+        "PackageCode" = "8:{D0F3AFB6-8B7E-4D3A-B22C-2734A9CFC196}"
         "UpgradeCode" = "8:{837FD7DE-13A7-4684-8887-AC9FF6B3C7C6}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

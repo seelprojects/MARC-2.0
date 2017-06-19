@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MARC2"
         mc:Ignorable="d"
-        Title="Enter Application ID" Height="192.23" Width="450.559" ResizeMode="NoResize" Icon="Icons/App-store-icon.ico" WindowStartupLocation="CenterScreen"  UseLayoutRounding="True">
+        Title="Enter Application ID" Height="192.23" Width="450.559" ResizeMode="NoResize" Icon="Icons/MARC.ico" WindowStartupLocation="CenterScreen"  UseLayoutRounding="True">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -17,9 +17,9 @@
             <RowDefinition Height="80" />
         </Grid.RowDefinitions>
 
-        <Image HorizontalAlignment="Center" Source="Icons/apple-icon.png" Width="48" Height="48" Grid.RowSpan="2" Margin="20,10,20,0" />
+        <Image HorizontalAlignment="Center" Source="Icons/appstore2.png" Width="48" Height="48" Grid.RowSpan="2" Margin="20,10,20,0" />
 
-        <Label HorizontalAlignment="Left" Name="lblQuestion" Grid.Column="1">Enter the Application ID</Label>
+        <Label HorizontalAlignment="Left" Name="lblQuestion" Grid.Column="1">Enter the iOS App ID</Label>
         <TextBox Margin="5,0,0,0"  Name="txtAnswer" Grid.Column="1" Grid.Row="1" MinWidth="150" BorderThickness="1"></TextBox>
 
         <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"   Margin="0,5,0,5">
