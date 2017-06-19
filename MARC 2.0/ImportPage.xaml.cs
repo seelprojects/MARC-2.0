@@ -207,7 +207,7 @@ namespace MARC2
             if (tempAppIDs.Contains(appID))
             {
                 progressBarContainer.Visibility = Visibility.Hidden;
-                MessageBox.Show("App already exists in the app list.");
+                MessageBox.Show("Looks like the app already exists in the app list. Importing review directly", "Duplicate app", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {

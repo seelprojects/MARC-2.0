@@ -612,40 +612,48 @@ namespace MARC2
         /// </summary>
         private void ShowBugReportSummaryWordCloud()
         {
-            // Create the interop host control.
-            System.Windows.Forms.Integration.WindowsFormsHost host =
-                new System.Windows.Forms.Integration.WindowsFormsHost();
+            try
+            {
+                // Create the interop host control.
+                System.Windows.Forms.Integration.WindowsFormsHost host =
+                    new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            // Create the MaskedTextBox control.
-            Gma.CodeCloud.Controls.CloudControl abc = new Gma.CodeCloud.Controls.CloudControl();
+                // Create the MaskedTextBox control.
+                Gma.CodeCloud.Controls.CloudControl abc = new Gma.CodeCloud.Controls.CloudControl();
 
-            System.Windows.Forms.ProgressBar abcd = new System.Windows.Forms.ProgressBar();
+                System.Windows.Forms.ProgressBar abcd = new System.Windows.Forms.ProgressBar();
 
-            IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
-            //IBlacklist customBlacklist = CommonBlacklist.CreateFromTextFile(s_BlacklistTxtFileName);
+                IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
+                //IBlacklist customBlacklist = CommonBlacklist.CreateFromTextFile(s_BlacklistTxtFileName);
 
 
-            var preProcessedList = ApplyStopwordsRemoval(Model.BugReportSummaryList);
+                var preProcessedList = ApplyStopwordsRemoval(Model.BugReportSummaryList);
 
-            InputType inputType = ComponentFactory.DetectInputType(String.Join(",", preProcessedList.ToArray()));
-            IProgressIndicator progress = ComponentFactory.CreateProgressBar(inputType, abcd);
-            IEnumerable<string> terms = ComponentFactory.CreateExtractor(inputType, String.Join(",", preProcessedList.ToArray()), progress);
-            IWordStemmer stemmer = ComponentFactory.CreateWordStemmer(false);
+                InputType inputType = ComponentFactory.DetectInputType(String.Join(",", preProcessedList.ToArray()));
+                IProgressIndicator progress = ComponentFactory.CreateProgressBar(inputType, abcd);
+                IEnumerable<string> terms = ComponentFactory.CreateExtractor(inputType, String.Join(",", preProcessedList.ToArray()), progress);
+                IWordStemmer stemmer = ComponentFactory.CreateWordStemmer(false);
 
-            IEnumerable<IWord> words = terms
-                .Filter(blacklist)
-                .CountOccurences();
+                IEnumerable<IWord> words = terms
+                    .Filter(blacklist)
+                    .CountOccurences();
 
-            abc.WeightedWords =
-                words
-                    .GroupByStem(stemmer)
-                    .SortByOccurences()
-                    .Cast<IWord>();
+                abc.WeightedWords =
+                    words
+                        .GroupByStem(stemmer)
+                        .SortByOccurences()
+                        .Cast<IWord>();
 
-            // Assign the MaskedTextBox control as the host control's child.
-            host.Child = abc;
+                // Assign the MaskedTextBox control as the host control's child.
+                host.Child = abc;
 
-            this.bugReportSummaryWordCloudGrid.Children.Add(host);
+                this.bugReportSummaryWordCloudGrid.Children.Add(host);
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Something went wrong in the word cloud engine.", "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Information);
+            }        
         }
 
 
@@ -654,39 +662,47 @@ namespace MARC2
         /// </summary>
         private void ShowUserRequirementsSummaryWordCloud()
         {
-            // Create the interop host control.
-            System.Windows.Forms.Integration.WindowsFormsHost host =
-                new System.Windows.Forms.Integration.WindowsFormsHost();
+            try
+            {
+                // Create the interop host control.
+                System.Windows.Forms.Integration.WindowsFormsHost host =
+                    new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            // Create the MaskedTextBox control.
-            Gma.CodeCloud.Controls.CloudControl abc = new Gma.CodeCloud.Controls.CloudControl();
+                // Create the MaskedTextBox control.
+                Gma.CodeCloud.Controls.CloudControl abc = new Gma.CodeCloud.Controls.CloudControl();
 
-            System.Windows.Forms.ProgressBar abcd = new System.Windows.Forms.ProgressBar();
+                System.Windows.Forms.ProgressBar abcd = new System.Windows.Forms.ProgressBar();
 
-            IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
-            //IBlacklist customBlacklist = CommonBlacklist.CreateFromTextFile(s_BlacklistTxtFileName);
+                IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
+                //IBlacklist customBlacklist = CommonBlacklist.CreateFromTextFile(s_BlacklistTxtFileName);
 
-            var preProcessedList = ApplyStopwordsRemoval(Model.UserRequirementsSummaryList);
+                var preProcessedList = ApplyStopwordsRemoval(Model.UserRequirementsSummaryList);
 
-            InputType inputType = ComponentFactory.DetectInputType(String.Join(",", preProcessedList.ToArray()));
-            IProgressIndicator progress = ComponentFactory.CreateProgressBar(inputType, abcd);
-            IEnumerable<string> terms = ComponentFactory.CreateExtractor(inputType, String.Join(",", preProcessedList.ToArray()), progress);
-            IWordStemmer stemmer = ComponentFactory.CreateWordStemmer(false);
+                InputType inputType = ComponentFactory.DetectInputType(String.Join(",", preProcessedList.ToArray()));
+                IProgressIndicator progress = ComponentFactory.CreateProgressBar(inputType, abcd);
+                IEnumerable<string> terms = ComponentFactory.CreateExtractor(inputType, String.Join(",", preProcessedList.ToArray()), progress);
+                IWordStemmer stemmer = ComponentFactory.CreateWordStemmer(false);
 
-            IEnumerable<IWord> words = terms
-                .Filter(blacklist)
-                .CountOccurences();
+                IEnumerable<IWord> words = terms
+                    .Filter(blacklist)
+                    .CountOccurences();
 
-            abc.WeightedWords =
-                words
-                    .GroupByStem(stemmer)
-                    .SortByOccurences()
-                    .Cast<IWord>();
+                abc.WeightedWords =
+                    words
+                        .GroupByStem(stemmer)
+                        .SortByOccurences()
+                        .Cast<IWord>();
 
-            // Assign the MaskedTextBox control as the host control's child.
-            host.Child = abc;
+                // Assign the MaskedTextBox control as the host control's child.
+                host.Child = abc;
 
-            this.userRequirementsSummaryWordCloudGrid.Children.Add(host);
+                this.userRequirementsSummaryWordCloudGrid.Children.Add(host);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong in the word cloud engine.", "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }    
         }
 
 

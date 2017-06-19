@@ -67,7 +67,9 @@ namespace Gma.CodeCloud.Controls
             float fontSize = (float)(weight - m_MinWordWeight) / (m_MaxWordWeight - m_MinWordWeight) * (MaxFontSize - MinFontSize) + MinFontSize;
             if (m_LastUsedFont.Size!=fontSize)
             {
-                m_LastUsedFont = new Font(this.FontFamily, fontSize, this.FontStyle);
+                //Changed by Nishant
+                //m_LastUsedFont = new Font(this.FontFamily, fontSize, this.FontStyle);
+                m_LastUsedFont = new Font(this.FontFamily, fontSize==0 ? 1: fontSize, this.FontStyle);
             }
             return m_LastUsedFont;
         }
