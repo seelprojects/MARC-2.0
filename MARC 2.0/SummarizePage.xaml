@@ -116,7 +116,7 @@
 
             <Button Margin="10,20,0,0" IsEnabled="False" Name="summaryResultsButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Center" VerticalAlignment="Center" Height="auto" Click="summaryResultsButton_Click" >
                 <StackPanel Height="48" Orientation="Horizontal">
-                    <Image Source="Icons/Cloud.png" Height="36" Width="36"/>
+                    <Image Source="Icons/summary-icon.png" Height="36" Width="36"/>
                     <Label Foreground="White"  FontSize="12" Margin="0,15,0,0" Content="   Show Summary Results   " HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>

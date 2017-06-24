@@ -433,7 +433,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>o/B1SR1BNmQWSrWbplSi+7O6qqL5YP8dD/QtY/ZpNKc=</dsig:DigestValue>
+        <dsig:DigestValue>XUDXB8NuIyrnZnuGbQ9sL5zScVm9pll3UugKXpHHcR0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -486,14 +486,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfApplicationTest.exe" size="1027056">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WpfApplicationTest.exe" size="1029104">
       <assemblyIdentity name="WpfApplicationTest" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vcc1kuQSn/tHn7+ezxIOEAvi0aB/W/bQjTbSz0Rs7UQ=</dsig:DigestValue>
+        <dsig:DigestValue>9A7RDl+hgzGSCSp6Crc3tCUx2yM4TqXSxB9Qjf5Y67o=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

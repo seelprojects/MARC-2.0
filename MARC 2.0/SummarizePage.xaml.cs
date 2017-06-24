@@ -125,6 +125,37 @@ namespace MARC2
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public int countNumberofWord(string input)
+        {
+            char[] delimiters = new char[] { ' ', '\r', '\n' };
+            return input.Split(delimiters, StringSplitOptions.RemoveEmptyEntries).Length;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stemmedBugReportList"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        private List<string> RemoveReviewsLessThanXWords(List<string> stemmedBugReportList, int number)
+        {
+            List<string> temp = new List<string>();
+            foreach (var item in stemmedBugReportList)
+            {
+                if (countNumberofWord(item) > number - 1)
+                {
+                    temp.Add(item);
+                }
+            }
+            return temp;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -134,48 +165,103 @@ namespace MARC2
             List<string> noStopwordsBugReportList = ApplyStopwordsRemoval(Model.BugReportList);
             List<string> stemmedBugReportList = ApplyStemming(noStopwordsBugReportList);
 
-            int numberOfBRReviews = (Model.BugReportList.Count <= Convert.ToInt32(threshold)) ? Model.BugReportList.Count : Convert.ToInt32(threshold);
-            int numberOfURReviews = (Model.UserRequirementList.Count <= Convert.ToInt32(threshold)) ? Model.UserRequirementList.Count : Convert.ToInt32(threshold);
+
+            List<string> noStopwordsUserRequirementsList = ApplyStopwordsRemoval(Model.UserRequirementList);
+            List<string> stemmedUserRequirementsList = ApplyStemming(noStopwordsUserRequirementsList);
+
+            //Remove all reviews with less than 3 words.
+            var filteredBugReportList = RemoveReviewsLessThanXWords(stemmedBugReportList, 3);
+            var filteredUserRequirementsList = RemoveReviewsLessThanXWords(stemmedUserRequirementsList, 3);
+
+            List<string> BugReportSummaryListOutput = new List<string>();
+            List<string> UserRequirementsSummaryListOutput = new List<string>();
+
+
+            int numberOfBRReviews = (filteredBugReportList.Count <= Convert.ToInt32(threshold)) ? filteredBugReportList.Count : Convert.ToInt32(threshold);
+            int numberOfURReviews = (filteredUserRequirementsList.Count <= Convert.ToInt32(threshold)) ? filteredUserRequirementsList.Count : Convert.ToInt32(threshold);
             switch (SumAlgo)
             {
                 case SummarizationAlgorithm.HTF:
-                    HybridTF.HybridTF htfBugReports = new HybridTF.HybridTF(Model.BugReportList);
+                    HybridTF.HybridTF htfBugReports = new HybridTF.HybridTF(filteredBugReportList);
                     htfBugReports.PerformHybridTF();
 
-                    Model.BugReportSummaryList = htfBugReports.SortedDictionary.Select(m => m.Key).ToList().GetRange(0, numberOfBRReviews);
+                    BugReportSummaryListOutput = htfBugReports.SortedDictionary.Select(m => m.Key).ToList().GetRange(0, numberOfBRReviews);
 
-                    HybridTF.HybridTF htfUserRequirements = new HybridTF.HybridTF(Model.UserRequirementList);
+                    HybridTF.HybridTF htfUserRequirements = new HybridTF.HybridTF(filteredUserRequirementsList);
                     htfUserRequirements.PerformHybridTF();
-                    Model.UserRequirementsSummaryList = htfUserRequirements.SortedDictionary.Select(m => m.Key).ToList().GetRange(0, numberOfURReviews);
+                    UserRequirementsSummaryListOutput = htfUserRequirements.SortedDictionary.Select(m => m.Key).ToList().GetRange(0, numberOfURReviews);
                     break;
                 case SummarizationAlgorithm.HTFIDF:
-                    HybridTFIDF.HybridTFIDF htfidfBugReports = new HybridTFIDF.HybridTFIDF(Model.BugReportList);
+                    HybridTFIDF.HybridTFIDF htfidfBugReports = new HybridTFIDF.HybridTFIDF(filteredBugReportList);
                     htfidfBugReports.PerformHybridTFIDF(HTFIDFThresholdValue);
-                    Model.BugReportSummaryList = htfidfBugReports.FinalReviewList.GetRange(0, (htfidfBugReports.FinalReviewList.Count > numberOfBRReviews ? numberOfBRReviews : htfidfBugReports.FinalReviewList.Count));
+                    BugReportSummaryListOutput = htfidfBugReports.FinalReviewList.GetRange(0, (htfidfBugReports.FinalReviewList.Count > numberOfBRReviews ? numberOfBRReviews : htfidfBugReports.FinalReviewList.Count));
 
 
-                    HybridTFIDF.HybridTFIDF htfidfUserRequirements = new HybridTFIDF.HybridTFIDF(Model.UserRequirementList);
+                    HybridTFIDF.HybridTFIDF htfidfUserRequirements = new HybridTFIDF.HybridTFIDF(filteredUserRequirementsList);
                     htfidfUserRequirements.PerformHybridTFIDF(HTFIDFThresholdValue);
                     //Todo:
-                    Model.UserRequirementsSummaryList = htfidfUserRequirements.FinalReviewList.GetRange(0, (htfidfUserRequirements.FinalReviewList.Count > numberOfURReviews ? numberOfURReviews : htfidfUserRequirements.FinalReviewList.Count));
+                    UserRequirementsSummaryListOutput = htfidfUserRequirements.FinalReviewList.GetRange(0, (htfidfUserRequirements.FinalReviewList.Count > numberOfURReviews ? numberOfURReviews : htfidfUserRequirements.FinalReviewList.Count));
                     break;
                 case SummarizationAlgorithm.SumBasic:
-                    SumBasic.SumBasic SBBugReports = new SumBasic.SumBasic(Model.BugReportList, Model.BugReportList.Count);
+                    SumBasic.SumBasic SBBugReports = new SumBasic.SumBasic(filteredBugReportList, filteredBugReportList.Count);
                     SBBugReports.PerformSumBasic();
-                    Model.BugReportSummaryList = SBBugReports.finalResult.GetRange(0, numberOfBRReviews);
+                    BugReportSummaryListOutput = SBBugReports.finalResult.GetRange(0, numberOfBRReviews);
 
-                    SumBasic.SumBasic SBUserRequirements = new SumBasic.SumBasic(Model.UserRequirementList, Model.UserRequirementList.Count);
+                    SumBasic.SumBasic SBUserRequirements = new SumBasic.SumBasic(filteredUserRequirementsList, filteredUserRequirementsList.Count);
                     SBUserRequirements.PerformSumBasic();
-                    Model.UserRequirementsSummaryList = SBUserRequirements.finalResult.GetRange(0, numberOfURReviews);
+                    UserRequirementsSummaryListOutput = SBUserRequirements.finalResult.GetRange(0, numberOfURReviews);
                     break;
                 case SummarizationAlgorithm.LexRank:
-                    PerformLexRank(Model.BugReportList, Classifications.BugReport);
-                    PerformLexRank(Model.UserRequirementList, Classifications.UserRequirements);
+                    PerformLexRank(RemoveReviewsLessThanXWords(Model.BugReportList, 3), Classifications.BugReport);
+                    PerformLexRank(RemoveReviewsLessThanXWords(Model.UserRequirementList,3), Classifications.UserRequirements);
                     break;
                 default:
                     break;
             }
+
+            if (SumAlgo != SummarizationAlgorithm.LexRank)
+            {
+                //Create Temporary list by Removing Stopwords and Index from the BugReport and User Requirements Lists
+                List<string> tempModelBugReportList = new List<string>();
+                tempModelBugReportList = Model.BugReportList;
+                List<string> tempnoStopwordsBugReportList = ApplyStopwordsRemoval(Model.BugReportList);
+                List<string> tempfilteredBugReportList = ApplyStemming(tempnoStopwordsBugReportList);
+
+
+                List<string> tempModelUserRequirementsList = new List<string>();
+                tempModelUserRequirementsList = Model.UserRequirementList;
+                List<string> tempnoStopwordsUserRequirementList = ApplyStopwordsRemoval(Model.UserRequirementList);
+                List<string> tempfilteredUserRequirementList = ApplyStemming(tempnoStopwordsUserRequirementList);
+
+                //Compare the output of Summarizer with the Temporary list above and get the index from the Temp List and pick 
+                //the index value form the unfiltered list so that the user will see the actual comment rather than the filtered output
+                //
+                List<string> finalBugReportSummary = new List<string>();
+                List<string> finalUserRequiremetsSummary = new List<string>();
+
+                foreach (var item in BugReportSummaryListOutput)
+                {
+                    //get the index from the temporary list
+                    var index = tempfilteredBugReportList.IndexOf(item);
+
+                    //Pull the value form the actual list by applying the index from above
+                    finalBugReportSummary.Add(Model.BugReportList[index]);
+                }
+
+                foreach (var item in UserRequirementsSummaryListOutput)
+                {
+                    //get the index from the temporary list
+                    var index = tempfilteredUserRequirementList.IndexOf(item);
+
+                    //Pull the value form the actual list by applying the index from above
+                    finalUserRequiremetsSummary.Add(Model.UserRequirementList[index]);
+                }
+                Model.BugReportSummaryList = finalBugReportSummary;
+                Model.UserRequirementsSummaryList = finalUserRequiremetsSummary;
+            }
         }
+
+
 
         /// <summary>
         /// 
@@ -309,7 +395,8 @@ namespace MARC2
                 if (enabled)
                 {
                     i++;
-                    newList.Add(i == 1 ? item.Substring(24) : item.Substring(3));
+                    var temp = i == 1 ? item.Substring(24) : item.Substring(3);
+                    newList.Add(temp.StartsWith("-") ? temp.Substring(1) : temp);
                 }
             }
 
