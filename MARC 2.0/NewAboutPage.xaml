@@ -24,7 +24,7 @@
             <RowDefinition Height="2*" />
             <RowDefinition Height="1.5*" />
             <RowDefinition Height="1.5*" />
-            <RowDefinition Height="3.5*" />
+            <RowDefinition Height="4.5*" />
             <RowDefinition Height="3*" />
             <RowDefinition Height="1.5*" />
             <RowDefinition Height="1*" />
@@ -39,12 +39,13 @@
         <StackPanel Margin="0,-8,0,0" Grid.Row="4">
             <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">Nishant Jha</TextBlock>
             <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">Louisiana State University</TextBlock>
-            <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">njha1@lsu.edu,(+1) 504-701-0012</TextBlock>
+            <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">njha1@lsu.edu, (504)-701-0012</TextBlock>
+            <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">mahmoud@csc.lsu.edu, (225) 578 0883</TextBlock>
         </StackPanel>
         
         <Image Height="64" Grid.Row="5" Source="Icons/github.png"></Image>
         <StackPanel HorizontalAlignment="Center" Grid.Row="6" Orientation="Horizontal">
-            <TextBlock FontSize="20" FontStyle="Italic" Margin="0,10,0,0">           
+            <TextBlock FontSize="20" Margin="0,10,0,0">           
                 <Hyperlink NavigateUri="https://github.com/seelprojects/MARC-2.0" RequestNavigate="Hyperlink_RequestNavigate">
                     https://github.com/seelprojects/MARC-2.0
                 </Hyperlink>
@@ -55,7 +56,7 @@
         <Label FontSize="20" FontWeight="ExtraBold" HorizontalAlignment="Center" Grid.Row="7"></Label>
         <Image Height="64" Grid.Row="8" Margin="20,0,5,0" Source="Icons/seel.png"></Image>
         <StackPanel HorizontalAlignment="Center" Grid.Row="9" Orientation="Horizontal">
-            <TextBlock FontSize="20" FontStyle="Italic" Margin="18,10,0,0">           
+            <TextBlock FontSize="20" Margin="18,10,0,0">           
                 <Hyperlink NavigateUri="http://seel.cse.lsu.edu/" RequestNavigate="Hyperlink_RequestNavigate">
                     http://seel.cse.lsu.edu/
                 </Hyperlink>
