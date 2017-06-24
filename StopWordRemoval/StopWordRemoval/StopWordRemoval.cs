@@ -15,12 +15,18 @@ namespace StopWordRemoval
         /// Input String Sentence
         /// </summary>
         /// <param name="sentence"></param>
-        public StopWordRemoval(string sentence, string directoryName)
+        public StopWordRemoval(string sentence, string directoryName, List<string> externalStopwords = null)
         {
             //var directoryName = Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString()).ToString());
             //var directoryName = Application.StartupPath.ToString();
 
             string[] lines = System.IO.File.ReadAllLines(directoryName + "\\InputData\\stopwords_en.txt");
+            if (externalStopwords != null)
+            {
+                var temp = lines.ToList();
+                temp.AddRange(externalStopwords);
+                lines = temp.ToArray();
+            }
             
             //StringBuilder input = new StringBuilder(sentence);
             output = string.Join(

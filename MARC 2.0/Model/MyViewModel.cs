@@ -180,6 +180,22 @@ namespace MARC2.Model
             }
         }
 
+
+
+        private string appName = "";
+        public string AppName
+        {
+            get { return appName; }
+            set
+            {
+                if (value != appName)
+                {
+                    appName = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("AppName"));
+                }
+            }
+        }
+
         private string currentSource = "Imported Reviews";
         public string CurrentSource
         {
@@ -189,6 +205,7 @@ namespace MARC2.Model
                 if (value != currentSource)
                 {
                     currentSource = value;
+                    appName = (string)value.Replace("Imported Reviews : ", "");
                     PropertyChanged(this, new PropertyChangedEventArgs("CurrentSource"));
                 }
             }

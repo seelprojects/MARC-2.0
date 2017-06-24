@@ -107,7 +107,7 @@ namespace MARC2
                 summaryResultsButton.IsEnabled = true;
             }
             //Hide Loading Bar
-            progressBarContainer.Visibility = Visibility.Hidden;     
+            progressBarContainer.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace MARC2
         {
             List<string> noStopwordsBugReportList = ApplyStopwordsRemoval(Model.BugReportList);
             List<string> stemmedBugReportList = ApplyStemming(noStopwordsBugReportList);
-            
+
             int numberOfBRReviews = (Model.BugReportList.Count <= Convert.ToInt32(threshold)) ? Model.BugReportList.Count : Convert.ToInt32(threshold);
             int numberOfURReviews = (Model.UserRequirementList.Count <= Convert.ToInt32(threshold)) ? Model.UserRequirementList.Count : Convert.ToInt32(threshold);
             switch (SumAlgo)
@@ -224,10 +224,16 @@ namespace MARC2
 
             foreach (var item in bugReportList)
             {
-                StopWordRemoval.StopWordRemoval temp = new StopWordRemoval.StopWordRemoval(item.Replace('.',' '), specificFolder);
+                List<string> appName;
+                try { appName = Model.AppName.ToLower().Split(' ').ToList(); }
+                catch
+                {
+                    appName = null;
+                }
+
+                StopWordRemoval.StopWordRemoval temp = new StopWordRemoval.StopWordRemoval(item.Replace('.', ' '), specificFolder, appName);
                 nostopwordsList.Add(temp.output);
             }
-
             return nostopwordsList;
         }
 
@@ -325,7 +331,7 @@ namespace MARC2
         private void PopulateViewFromModel()
         {
             List<ReviewItem> items = new List<ReviewItem>();
-            if (Model.BugReportSummaryList != null && Model.BugReportSummaryList.Count >0)
+            if (Model.BugReportSummaryList != null && Model.BugReportSummaryList.Count > 0)
             {
                 foreach (var item in Model.BugReportSummaryList)
                 {
@@ -338,7 +344,7 @@ namespace MARC2
             }
 
             items = new List<ReviewItem>();
-            if (Model.UserRequirementsSummaryList != null && Model.UserRequirementsSummaryList.Count >0)
+            if (Model.UserRequirementsSummaryList != null && Model.UserRequirementsSummaryList.Count > 0)
             {
                 foreach (var item in Model.UserRequirementsSummaryList)
                 {
@@ -656,7 +662,7 @@ namespace MARC2
             {
 
                 MessageBox.Show("Something went wrong in the word cloud engine.", "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Information);
-            }        
+            }
         }
 
 
@@ -705,7 +711,7 @@ namespace MARC2
             {
                 MessageBox.Show("Something went wrong in the word cloud engine.", "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            }    
+            }
         }
 
 
