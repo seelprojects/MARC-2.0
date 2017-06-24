@@ -57,6 +57,9 @@ namespace MARC2
 
             HTFCheckbox.IsChecked = true;
 
+            bugReportsSummaryHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Bug Reports Summary");
+            userRequirementsSummaryHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "User Requirements Summary");
+
             previousText = summarySizeComboBox.SelectedValue.ToString();
             PopulateViewFromModel();
         }

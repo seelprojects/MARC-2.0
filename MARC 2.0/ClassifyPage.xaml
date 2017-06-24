@@ -166,7 +166,7 @@
             </Grid.RowDefinitions>
             <!--Bug Reports List Section-->
             <materialDesign:Card Margin="0,5" Grid.Row="0">
-                <GroupBox Grid.Row="0" Header="Bug Reports" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
+                <GroupBox  Name="bugReportsHeader" Grid.Row="0" Header="Bug Reports" Style="{DynamicResource MaterialDesignCardGroupBox}"  Grid.RowSpan="1">
                     <StackPanel>
                         <TextBlock Name="noBugReportTextBlock" Margin="0,0,0,10" Text="You currently have no bug report." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                         <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=classifyPage, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">
@@ -204,7 +204,7 @@
 
             <!--User Requirements List Section-->
             <materialDesign:Card Margin="0,5" Grid.Row="1">
-                <GroupBox Grid.Row="1" Header="User Requirements" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="1">
+                <GroupBox Name="userRequirementsHeader" Grid.Row="1" Header="User Requirements" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="1">
                     <StackPanel>
                         <TextBlock Name="noUserRequirementTextBlock" Margin="0,20,0,20" Text="You currently have no user requirements." HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                         <!--<ListView x:Name="userRequirementListbox" Margin="0,0,0,0">

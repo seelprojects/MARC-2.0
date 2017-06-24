@@ -24,6 +24,10 @@ namespace MARC2.Model
         /// </summary>
         public MyViewModel()
         {
+
+
+            CurrentSource = "Test";
+
             //Initialize Import Page Pie Chart
             ImportedReviewsCollection = new SeriesCollection
             {
@@ -161,6 +165,34 @@ namespace MARC2.Model
             }
         }
 
+
+        private bool importedFromLocal = false;
+        public bool ImportedFromLocal
+        {
+            get { return importedFromLocal; }
+            set
+            {
+                if (value != importedFromLocal)
+                {
+                    importedFromLocal = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("ImportedFromLocal"));
+                }
+            }
+        }
+
+        private string currentSource = "Imported Reviews";
+        public string CurrentSource
+        {
+            get { return currentSource; }
+            set
+            {
+                if (value != currentSource)
+                {
+                    currentSource = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("CurrentSource"));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
     }

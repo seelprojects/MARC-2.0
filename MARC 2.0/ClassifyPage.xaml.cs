@@ -70,6 +70,9 @@ namespace MARC2
             NBCheckbox.IsChecked = true;
             DTCheckbox.IsChecked = true;
             BOWCheckbox.IsChecked = true;
+            
+            bugReportsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "Bug Reports");
+            userRequirementsHeader.Header = Model.CurrentSource.Replace("Imported Reviews", "User Requirements");
 
             PopulateViewFromModel();
         }

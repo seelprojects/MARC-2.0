@@ -21,6 +21,7 @@ using WpfApplicationTest;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WpfApplicationTest.Enums;
+using System.Text.RegularExpressions;
 
 namespace MARC2
 {
@@ -224,7 +225,11 @@ namespace MARC2
                     var outputDialogFolder = ShowSelectOutputFolderDialog(Actions.Summarize);
                     if (outputDialogFolder != null)
                     {
-                        ExportSummarizationResults(outputDialogFolder);
+
+                        string fileName = Model.ImportedFromLocal ? "Local" : Model.CurrentSource.Replace("Imported Reviews : ", "");
+                        fileName = Regex.Replace(fileName, "[^0-9A-Za-z]+", " ");
+
+                        ExportSummarizationResults(outputDialogFolder, fileName);
                         Process.Start("explorer.exe", outputDialogFolder);
                     }
                 }
@@ -234,14 +239,15 @@ namespace MARC2
             }
         }
 
-        /// <summary>
-        /// Export Summarization Results in User Specified Folder
-        /// </summary>
-        /// <param name="outputFolder"></param>
-        private void ExportSummarizationResults(string outputFolder)
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="outputFolder"></param>
+       /// <param name="fileName"></param>
+        private void ExportSummarizationResults(string outputFolder, string fileName)
         {
             //Write Bug Reports to OutputFolder
-            using (var brWriter = new StreamWriter(outputFolder + @"\Bug Reports Summary.txt"))
+            using (var brWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Bug Report Summary.txt", fileName)))
             {
                 if (Model.BugReportSummaryList != null && Model.BugReportSummaryList.Count > 0)
                 {
@@ -253,7 +259,7 @@ namespace MARC2
             }
 
             //Write User Requierments to OutputFolder
-            using (var urWriter = new StreamWriter(outputFolder + @"\User Requirement Summary.txt"))
+            using (var urWriter = new StreamWriter(outputFolder + String.Format(@"\{0} User Requirements Summary.txt", fileName)))
             {
                 if (Model.UserRequirementsSummaryList != null && Model.UserRequirementsSummaryList.Count > 0)
                 {
@@ -290,7 +296,10 @@ namespace MARC2
                     var outputDialogFolder = ShowSelectOutputFolderDialog(Actions.Classify);
                     if (outputDialogFolder != null)
                     {
-                        ExportClassificationResults(outputDialogFolder);
+                        string fileName = Model.ImportedFromLocal ? "Imported Reviews Local" : Model.CurrentSource.Replace("Imported Reviews : ", "");
+                        fileName = Regex.Replace(fileName, "[^0-9A-Za-z]+", " ");
+
+                        ExportClassificationResults(outputDialogFolder, fileName);
                         Process.Start("explorer.exe", outputDialogFolder);
                     }
                 }
@@ -346,13 +355,14 @@ namespace MARC2
         }
 
         /// <summary>
-        /// Main Method to Export Classification Results
+        /// 
         /// </summary>
         /// <param name="outputFolder"></param>
-        private void ExportClassificationResults(string outputFolder)
+        /// <param name="fileName"></param>
+        private void ExportClassificationResults(string outputFolder, string fileName)
         {
             //Write Bug Reports to OutputFolder
-            using (var brWriter = new StreamWriter(outputFolder + @"\Bug Reports.txt"))
+            using (var brWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Bug Reports.txt", fileName)))
             {
                 if (Model.BugReportList != null && Model.BugReportList.Count > 0)
                 {
@@ -364,7 +374,7 @@ namespace MARC2
             }
 
             //Write User Requierments to OutputFolder
-            using (var urWriter = new StreamWriter(outputFolder + @"\User Requirement.txt"))
+            using (var urWriter = new StreamWriter(outputFolder + String.Format(@"\{0} User Requirements.txt", fileName)))
             {
                 if (Model.UserRequirementList != null && Model.UserRequirementList.Count > 0)
                 {
@@ -376,7 +386,7 @@ namespace MARC2
             }
 
             //Write Miscellaneous to OutputFolder
-            using (var otWriter = new StreamWriter(outputFolder + @"\Miscellaneous.txt"))
+            using (var otWriter = new StreamWriter(outputFolder + String.Format(@"\{0} Miscellaneous.txt", fileName)))
             {
                 if (Model.MiscellaneousList != null && Model.MiscellaneousList.Count > 0)
                 {
@@ -406,7 +416,9 @@ namespace MARC2
                     var outputDialogFolder = ShowSelectOutputFolderDialog(Actions.Import);
                     if (outputDialogFolder != null)
                     {
-                        ExportImportedResults(outputDialogFolder);
+                        string fileName = Model.ImportedFromLocal ? "Imported Reviews Local" : Model.CurrentSource.Replace("Imported Reviews : ", "");
+                        fileName = Regex.Replace(fileName, "[^0-9A-Za-z]+", " ");
+                        ExportImportedResults(outputDialogFolder, fileName);
                         Process.Start("explorer.exe", outputDialogFolder);
                     }
                 }
@@ -422,19 +434,28 @@ namespace MARC2
         /// 
         /// </summary>
         /// <param name="outputFolder"></param>
-        private void ExportImportedResults(string outputFolder)
+        /// <param name="fileName"></param>
+        private void ExportImportedResults(string outputFolder, string fileName)
         {
-            //Write imports to OutputFolder
-            using (var irWriter = new StreamWriter(outputFolder + @"\Imported Reviews.txt"))
+            try
             {
-                if (Model.ReviewList != null && Model.ReviewList.Count > 0)
+                //Write imports to OutputFolder
+                using (var irWriter = new StreamWriter(outputFolder + String.Format(@"\{0}.txt", fileName)))
                 {
-                    foreach (var item in Model.ReviewList)
+                    if (Model.ReviewList != null && Model.ReviewList.Count > 0)
                     {
-                        irWriter.WriteLine(item);
+                        foreach (var item in Model.ReviewList)
+                        {
+                            irWriter.WriteLine(item);
+                        }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Something went wrong while writing output. You may not have permission to write on the selected folder. If problem persists contact the author.");
+            }
         }
+
     }
 }

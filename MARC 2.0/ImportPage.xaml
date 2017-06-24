@@ -130,7 +130,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <materialDesign:Card Margin="0,5">
-                <GroupBox Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="2">
+                <GroupBox Name="ImportedReviewsHeader" Header="Imported Reviews" Style="{DynamicResource MaterialDesignCardGroupBox}" Grid.RowSpan="2">
                     <StackPanel>
                         <TextBlock FontSize="15" FontFamily="Verdana" Name="noReviewsMessageTextBlock" Margin="0,20,0,20" Text="You currently have no reviews imported. Please select an app or browse a local file and press import button" HorizontalAlignment="Center" TextDecorations="{x:Null}" Visibility="Visible" />
                         <ScrollViewer Name="instScroll" Loaded="instScroll_Loaded"  Height="{Binding ElementName=wnd, Path=ActualHeight, Converter={StaticResource convertHeight}}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True">

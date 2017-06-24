@@ -190,7 +190,6 @@ namespace MARC2
             if (!Directory.Exists(specificFolder))
                 Directory.CreateDirectory(specificFolder);
 
-
             //Check if app is already added
             var tempAppIDs = new List<string>();
             using (var sR = new StreamReader(specificFolder + @"/MyAppsList.txt"))
@@ -217,8 +216,6 @@ namespace MARC2
                 }
                 ReadLocalAppDataFile();
             }
-
-
         }
 
         /// <summary>
@@ -248,7 +245,7 @@ namespace MARC2
         /// <param name="appIDFromFirstImport"></param>
         private void downloadReviewButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
             if (myAppsListbox.Items.Count > 0)
             {
                 progressBarContainer.Visibility = Visibility.Visible;
@@ -276,6 +273,9 @@ namespace MARC2
                     bw.DoWork += (o, args) => RetrieveUserReviews(appId, numPage);
                     bw.RunWorkerCompleted += (o, args) => RetrieveUserReviewsUpdateControl();
                     bw.RunWorkerAsync();
+                    Model.CurrentSource = "Imported Reviews : " + Model.AppList[selectedIndex].Split(',').ToList()[1];
+                    Model.ImportedFromLocal = false;
+                    ImportedReviewsHeader.Header = Model.CurrentSource;
                 }
                 catch (Exception ex)
                 {
@@ -286,9 +286,7 @@ namespace MARC2
             else
             {
                 MessageBox.Show("Your app list contains no apps. Please select \"Add an app\" option to import reviews or select a local text file to import reviews.","No Saved Apps", MessageBoxButton.OK, MessageBoxImage.Question);
-            }
-
-            
+            }            
         }
 
         /// <summary>
@@ -428,6 +426,10 @@ namespace MARC2
             }
 
             userReviews = importedComments;
+
+            Model.CurrentSource = "Imported Reviews : " + browseLocalFileTextbox.Text;
+            Model.ImportedFromLocal = true;
+            ImportedReviewsHeader.Header = Model.CurrentSource;
 
             RetrieveUserReviewsUpdateControl();
         }
