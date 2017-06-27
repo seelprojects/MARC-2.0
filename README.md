@@ -1,8 +1,8 @@
 # MARC-2.0
 Mobile Application Review Classifier 2.0
-MARC is a Mobile Application Review Classifier that automatically classifies user reviews into fine grained software maintainence requests, including bug reports and feature requests.
+MARC 2.0 is the second release of our Mobile Application Review Classifier MARC. MARC 2.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
 
-##Features
+## Features
 
 New and Improved User Interface
 
