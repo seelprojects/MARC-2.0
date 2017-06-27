@@ -11,13 +11,13 @@ MARC 2.0 provides multiple data summarization algorithms that can be used to gen
 
 # Installation
 
-MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: MARC Installer -> Debug -> MARC Installer.msi
+MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: MARC Installer -> Debug -> MARC 2.0 Installer.msi
 
 MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) in the local app data installation directory (C:\Users\{Username}\AppData\Roaming\MARC 2.0\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
 
 # Modification
 
-In order to open and modify the C# source project you will need Visual Studio 2015, FreeCommunity Edition .Net 4.5.2. Once you have loaded the project open MARC 1.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
+In order to open and modify the C# source project you will need Visual Studio 2015, FreeCommunity Edition .Net 4.5.2. Once you have loaded the project open MARC 2.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
 
 # License
 
