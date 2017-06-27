@@ -1,34 +1,26 @@
 # MARC-2.0
+
 Mobile Application Review Classifier 2.0
-MARC is a Mobile Application Review Classifier that automatically classifies user reviews into fine grained software maintainence requests, including bug reports and feature requests.
+MARC 2.0 is the second release of our Mobile Application Review Classifier MARC. MARC 2.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
 
-##Features
+# Summarization
 
-New and Improved User Interface
+MARC 2.0 provides multiple data summarization algorithms that can be used to generate concise and comprehensive summaries of user reviews. These algorithms include Hybrid TF, Hybrid TFIDF, SumBasic, and LexRank.
 
-####Automatic User Review Extraction: MARC provides a feature for extracting recent user reviews from the iOS app store. Simply enter the app store ID for any app in the iOS app store and MARC will import upto 500 most recent user reviews.
+# Installation
 
-####Text Processing Features
+MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: MARC Installer -> Debug -> MARC Installer.msi
 
-#####Stemming: MARC uses Porter Stemmer (http://www.tartarus.org/~martin/PorterStemmer) to reduce words to their morphological roots by removing derivational and inflectional suffixes.
+MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) in the local app data installation directory (C:\Program Files (x86)\LSU MARC\MARC 1.0 - Mobile App Review Classifier\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
 
-#####Stop-word Removal: MARC provides a feature for removing English words that are considered too generic (eg. the, in, will).
+# Modification
 
-#####Sentence Extraction: Since a single user review might include more than one maintainence request, MARC processes user reviews a sentence at a time.
+In order to open and modify the C# source project you will need Visual Studio 2015, FreeCommunity Edition .Net 4.5.2. Once you have loaded the project open MARC 1.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
 
-####Automatic Model Saving: MARC builds Model on the first run and saves it so that the saved Model is used each time while classification. As a result, time is saved as Model is not built every time while classification. Saved model is used until training file is changed and a new model is automatically built. 
+# License
 
-####Summarization: MARC has the capability to summarize the classified reviews. Classification algorithm includes Hybrid TF, Hybrid TFIDF, SumBasic, and LexRank
-##Installation MARC requires .Net 4.5.2 and Java 1.8 to run. 
+Please refer to the file LICENSE.md for license information.
 
-To be added in future:
-MARC can be installed by running the installer from the following directory :
+# Disclaimer
 
-MARC Installer -> Debug -> MARC Installer.msi
-
-MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) in the installation directory (C:\Program Files (x86)\LSU MARC\MARC 1.0 - Mobile App Review Classifier\InputData). You can either edit this training dataset or use one of your own. However, please make sure that the training dataset you use follows the same format as the default training dataset.
-
-##Working on Source Code In order to open and modify the C# source project you will need:
-
-Visual Studio 2015 Free Community Edition
-.Net 4.5.2. Once you have loaded the project open MARC 1.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
