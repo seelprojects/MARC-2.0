@@ -243,6 +243,7 @@
     <Resource Include="Icons\flip.png" />
     <Resource Include="Icons\Cloud.png" />
     <Resource Include="Icons\appstore2.png" />
+    <Resource Include="MARC.PNG" />
     <Content Include="Summarizer.dll" />
     <Resource Include="Icons\Browse-Icon.png" />
     <Resource Include="Icons\browse.ico" />
