@@ -255,6 +255,7 @@ namespace MARC2
                 if (null == sender)
                 {
                     appId = appID;
+                    selectedIndex = myAppsListbox.Items.Count - 1;
                 }
                 else
                 {
