@@ -1,7 +1,7 @@
 # Mobile Application Review Classifier (MARC) 2.0
 
 
-MARC 2.0 is the second release of our Mobile Application Review Classifier MARC. MARC 2.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
+MARC 2.0 is the second release of our Mobile Application Review Classifier [MARC](https://github.com/seelprojects/MARC). MARC 2.0 provides functionality for automatically classifying and summarizing user reviews on mobile application stores, an enhanced data classification engine, and a new GUI.
 
 ![ScreenShot](https://github.com/seelprojects/MARC-2.0/blob/master/MARC%202.0/MARC.PNG)
 
