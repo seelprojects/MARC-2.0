@@ -17,7 +17,7 @@ MARC provides default training datasets (BOF Dataset.arff and BOW Dataset.arff) 
 
 # Modification
 
-In order to open and modify the C# source project you will need Visual Studio 2015, FreeCommunity Edition .Net 4.5.2. Once you have loaded the project open MARC 2.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
+In order to open and modify the C# source project you will need [Visual Studio 2015, FreeCommunity Edition](https://www.visualstudio.com/vs/community/) .Net 4.5.2. Once you have loaded the project open MARC 2.0.sln in src directory in Visual Studio and select MARC as the startup project. You may also have to link references from the project directory.
 
 # License
 
