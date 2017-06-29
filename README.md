@@ -9,6 +9,15 @@ MARC 2.0 is the second release of our [Mobile Application Review Classifier MARC
 
 MARC 2.0 provides multiple data summarization algorithms that can be used to generate concise and comprehensive summaries of user reviews. These algorithms include Hybrid TF, Hybrid TFIDF, SumBasic, and LexRank.
 
+# Resources
+1- [Weka: Data Mining Software in Java](http://www.cs.waikato.ac.nz/ml/weka/)
+
+2- [LexRank](https://github.com/ericouyang/summarizer51-java)
+
+3- [Word Cloud](https://www.codeproject.com/Articles/224231/Word-Cloud-Tag-Cloud-Generator-Control-for-NET-Win)
+
+4- [Framenet Interface](http://www.cs.cmu.edu/~ark/SEMAFOR/)
+
 # Installation
 
 MARC requires .Net 4.5.2 and Java 1.8 to run. MARC can be installed by running the installer from the directory: [MARC Installer -> Debug -> MARC 2.0 Installer.msi](https://github.com/seelprojects/MARC-2.0/blob/master/MARC%202.0%20Installer/Debug/)
