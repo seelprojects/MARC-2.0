@@ -37,7 +37,7 @@
         <TextBlock FontSize="20"  HorizontalAlignment="Center" Grid.Row="2" Margin="5,0,0,10">Copyright@ 2017 SEEL</TextBlock>
         <TextBlock FontSize="18"  HorizontalAlignment="Center" Grid.Row="3" Margin="5,0,0,10">Author</TextBlock>
         <StackPanel Margin="0,-8,0,0" Grid.Row="4">
-            <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">Nishant Jha</TextBlock>
+            <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">Nishant Jha, Anas Mahmoud</TextBlock>
             <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">Louisiana State University</TextBlock>
             <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">njha1@lsu.edu, (504)-701-0012</TextBlock>
             <TextBlock FontSize="15"  HorizontalAlignment="Center" Margin="5,0,0,10">mahmoud@csc.lsu.edu, (225) 578 0883</TextBlock>

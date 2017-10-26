@@ -194,18 +194,18 @@ namespace MARC2
         /// <param name="e"></param>
         private void settingsPageButton_Click(object sender, RoutedEventArgs e)
         {
-            settingsPageCard.Background = themeColor;
-            classifyPageCard.Background = Brushes.White;
-            summarizePageCard.Background = Brushes.White;
-            aboutPageCard.Background = Brushes.White;
-            importPageCard.Background = Brushes.White;
+            //settingsPageCard.Background = themeColor;
+            //classifyPageCard.Background = Brushes.White;
+            //summarizePageCard.Background = Brushes.White;
+            //aboutPageCard.Background = Brushes.White;
+            //importPageCard.Background = Brushes.White;
 
-            this.Title = "Mobile Application Review Classifier : Settings";
-            homeLabel.Foreground = Brushes.Black;
-            classifyLabel.Foreground = Brushes.Black;
-            summarizeLabel.Foreground = Brushes.Black;
-            aboutLabel.Foreground = Brushes.Black;
-            settingsLabel.Foreground = Brushes.White;
+            //this.Title = "Mobile Application Review Classifier : Settings";
+            //homeLabel.Foreground = Brushes.Black;
+            //classifyLabel.Foreground = Brushes.Black;
+            //summarizeLabel.Foreground = Brushes.Black;
+            //aboutLabel.Foreground = Brushes.Black;
+            //settingsLabel.Foreground = Brushes.White;
 
 
             EditStopwordsWindow editStopwordsWindowDialog = new EditStopwordsWindow(this.Model);
