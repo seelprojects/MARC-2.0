@@ -68,6 +68,7 @@ namespace MARC2
             classifyPageCard.Background = Brushes.White;
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = Brushes.White;
+            settingsPageCard.Background = Brushes.White;
             this.Title = "Mobile Application Review Classifier : Home";
             exportButtonLabel.Content = "  Save Imported Reviews";
 
@@ -75,6 +76,7 @@ namespace MARC2
             classifyLabel.Foreground = Brushes.Black;
             summarizeLabel.Foreground = Brushes.Black;
             aboutLabel.Foreground = Brushes.Black;
+            settingsLabel.Foreground = Brushes.Black;
 
             ChartImportReviews.Visibility = Visibility.Visible;
             ChartClassifyReviews.Visibility = Visibility.Collapsed;
@@ -96,6 +98,7 @@ namespace MARC2
                 importPageCard.Background = Brushes.White;
                 summarizePageCard.Background = Brushes.White;
                 aboutPageCard.Background = Brushes.White;
+                settingsPageCard.Background = Brushes.White;
 
                 this.Title = "Mobile Application Review Classifier : Classify";
                 exportButtonLabel.Content = " Save Classification Results";
@@ -103,6 +106,7 @@ namespace MARC2
                 classifyLabel.Foreground = Brushes.White;
                 summarizeLabel.Foreground = Brushes.Black;
                 aboutLabel.Foreground = Brushes.Black;
+                settingsLabel.Foreground = Brushes.Black;
 
                 ChartImportReviews.Visibility = Visibility.Collapsed;
                 ChartClassifyReviews.Visibility = Visibility.Visible;
@@ -131,6 +135,7 @@ namespace MARC2
                 importPageCard.Background = Brushes.White;
                 summarizePageCard.Background = themeColor;
                 aboutPageCard.Background = Brushes.White;
+                settingsPageCard.Background = Brushes.White;
 
 
                 ChartImportReviews.Visibility = Visibility.Collapsed;
@@ -143,6 +148,7 @@ namespace MARC2
                 classifyLabel.Foreground = Brushes.Black;
                 summarizeLabel.Foreground = Brushes.White;
                 aboutLabel.Foreground = Brushes.Black;
+                settingsLabel.Foreground = Brushes.Black;
             }
             else
             {
@@ -164,11 +170,13 @@ namespace MARC2
             importPageCard.Background = Brushes.White;
             summarizePageCard.Background = Brushes.White;
             aboutPageCard.Background = themeColor;
+            settingsPageCard.Background = Brushes.White;
 
             this.Title = "Mobile Application Review Classifier : About";
             homeLabel.Foreground = Brushes.Black;
             classifyLabel.Foreground = Brushes.Black;
             summarizeLabel.Foreground = Brushes.Black;
+            settingsLabel.Foreground = Brushes.Black;
             aboutLabel.Foreground = Brushes.White;
             ChartImportReviews.Visibility = Visibility.Collapsed;
             ChartClassifyReviews.Visibility = Visibility.Collapsed;
@@ -177,6 +185,34 @@ namespace MARC2
 
             NewAboutPage newAboutPage = new NewAboutPage();
             LeftContent.Content = newAboutPage;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void settingsPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            settingsPageCard.Background = themeColor;
+            classifyPageCard.Background = Brushes.White;
+            summarizePageCard.Background = Brushes.White;
+            aboutPageCard.Background = Brushes.White;
+            importPageCard.Background = Brushes.White;
+
+            this.Title = "Mobile Application Review Classifier : Settings";
+            homeLabel.Foreground = Brushes.Black;
+            classifyLabel.Foreground = Brushes.Black;
+            summarizeLabel.Foreground = Brushes.Black;
+            aboutLabel.Foreground = Brushes.Black;
+            settingsLabel.Foreground = Brushes.White;
+
+
+            EditStopwordsWindow editStopwordsWindowDialog = new EditStopwordsWindow(this.Model);
+            if (editStopwordsWindowDialog.ShowDialog() == true)
+            {
+                
+            }
         }
 
         /// <summary>
@@ -457,5 +493,6 @@ namespace MARC2
             }
         }
 
+        
     }
 }

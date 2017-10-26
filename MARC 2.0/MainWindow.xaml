@@ -35,7 +35,8 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <materialDesign:Card Name="importPageCard" MouseDown="importPageButton_Click" Cursor="Hand" Grid.Column="0" Grid.Row="0" Margin="5,10,0,10" >
@@ -82,8 +83,20 @@
                 </StackPanel>
             </materialDesign:Card>
             <!--<Image Grid.Column="3" Grid.Row="1" Visibility="Hidden" x:Name="aboutPageArrow" HorizontalAlignment="Center" Height="42" VerticalAlignment="Center" Width="42" Source="Icons/Arrows-Down-icon.png" Margin="7,-12,0,0"/>-->
+            <materialDesign:Card Name="settingsPageCard" MouseDown="settingsPageButton_Click" Cursor="Hand" Grid.Column="4" Grid.Row="0" Margin="5,10,0,10">
+                <StackPanel>
+                    <Button x:Name="settingsPageButton" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="40" Width="50"  Margin="0,5,0,0" Click="settingsPageButton_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Icons/settings.png" Stretch="Uniform"/>
+                        </Button.Background>
+                    </Button>
+                    <Label Name="settingsLabel" FontSize="12" Foreground="Black" Content="Settings" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </materialDesign:Card>
+            <!--<Image Grid.Column="3" Grid.Row="1" Visibility="Hidden" x:Name="aboutPageArrow" HorizontalAlignment="Center" Height="42" VerticalAlignment="Center" Width="42" Source="Icons/Arrows-Down-icon.png" Margin="7,-12,0,0"/>-->
+
             <liveCharts:PieChart 
-                Grid.Column="4" 
+                Grid.Column="5" 
                 Height="90" 
                 Width="90" 
                 Name="ChartImportReviews" 
@@ -103,7 +116,7 @@
             </liveCharts:PieChart>
 
             <liveCharts:PieChart 
-                Grid.Column="4" 
+                Grid.Column="5" 
                 Height="90" 
                 Width="90" 
                 Name="ChartClassifyReviews" 
@@ -121,7 +134,7 @@
                     <liveCharts:DefaultTooltip BulletSize="20"></liveCharts:DefaultTooltip>
                 </liveCharts:PieChart.DataTooltip>
             </liveCharts:PieChart>
-            <Button  Name="exportButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center" Height="auto" Grid.Column="5" Grid.Row="0" Click="exportResultsButton_Click">
+            <Button  Name="exportButton" Style="{DynamicResource MaterialDesignRaisedAccentButton}"   HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center" Height="auto" Grid.Column="6" Grid.Row="0" Click="exportResultsButton_Click">
                 <StackPanel Height="48" Orientation="Horizontal">
                     <Image Source="Icons/export.png" Height="36" Width="36"/>
                     <Label Name="exportButtonLabel" Foreground="White" FontSize="12" Margin="0,15,0,0" Content=" Save Imported Reviews " HorizontalAlignment="Center"/>

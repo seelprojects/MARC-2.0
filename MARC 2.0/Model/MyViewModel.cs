@@ -108,6 +108,21 @@ namespace MARC2.Model
             }
         }
 
+
+        private List<string> stopwordsList;
+        public List<string> StopwordsList
+        {
+            get { return stopwordsList; }
+            set
+            {
+                if (value != stopwordsList)
+                {
+                    stopwordsList = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs("StopwordsList"));
+                }
+            }
+        }
+
         private List<string> userRequirementList;
         public List<string> UserRequirementList
         {

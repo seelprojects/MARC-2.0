@@ -692,7 +692,6 @@ namespace MARC2
         /// <param name="e"></param>
         private void wordCloudButton_Click(object sender, RoutedEventArgs e)
         {
-
             //ShowBugReportSummaryWordCloud();
             //ShowUserRequirementsSummaryWordCloud();
 
@@ -719,8 +718,18 @@ namespace MARC2
 
                 System.Windows.Forms.ProgressBar abcd = new System.Windows.Forms.ProgressBar();
 
-                IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
-                //IBlacklist customBlacklist = CommonBlacklist.CreateFromTextFile(s_BlacklistTxtFileName);
+                //IBlacklist blacklist = ComponentFactory.CreateBlacklist(false);
+
+                var currDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData);
+
+                // Combine the base folder with your specific folder....
+                string specificFolder = System.IO.Path.Combine(currDir, "MARC 2.0");
+
+                // Check if folder exists and if not, create it
+                if (!Directory.Exists(specificFolder))
+                    Directory.CreateDirectory(specificFolder);
+
+                IBlacklist blacklist = CommonBlacklist.CreateFromTextFile(specificFolder + "\\InputData\\stopwords_en.txt");
 
 
                 var preProcessedList = ApplyStopwordsRemoval(Model.BugReportSummaryList);

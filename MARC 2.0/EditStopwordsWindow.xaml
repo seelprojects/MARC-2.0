@@ -1,0 +1,78 @@
+﻿<Window x:Class="WpfApplicationTest.EditStopwordsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplicationTest"
+        mc:Ignorable="d"
+        Title="Edit Stopwords List" Height="620" Width="520" WindowStartupLocation="CenterScreen" MaxHeight="700" MinWidth="490" MaxWidth="700" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+    
+   
+    <Grid Margin="15,15,15,15" HorizontalAlignment="Stretch" Width="460" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label HorizontalAlignment="Left" Name="lblQuestion" Grid.Row="0">Enter new stopword:</Label>
+        <TextBox Margin="5,0,0,0"  Name="newStopwordTextbox" Grid.Column="1"  HorizontalAlignment="Center" Width="Auto" Height="Auto" Grid.Row="0" MinWidth="245" BorderThickness="1"></TextBox>
+        <Button x:Name="addStopwordButton" Click="addStopwordButton_Click" Content="Add" Margin="5,0,0,0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
+
+        <Label HorizontalAlignment="Left" Margin="0,15,0,0" Grid.Row="1" Grid.ColumnSpan="3">Current Stopword List (Right-Click to delete stopwords)</Label>
+        <Border Margin="0,10,0,0" Grid.Row="2" Grid.ColumnSpan="3" CornerRadius="6" BorderBrush="Gray" Background="White" BorderThickness="2" DockPanel.Dock="Top">
+            <Grid   >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+
+                </Grid.RowDefinitions>
+
+                <ListBox x:Name="stopwordsListbox" MaxHeight="400" FontSize="11" AlternationCount="2">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="5" Grid.Column="0">
+                                    <TextBlock FontFamily="Verdana" Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="AliceBlue"></Setter>
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="White"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Delete" Click="MenuItem_Click"></MenuItem>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+                <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Name="toastBox" Padding="5,5,5,5" Background="Black" Foreground="White" Visibility="Hidden"></TextBlock>
+                </WrapPanel>
+            </Grid>
+        </Border>
+        <Button Margin="0,15,0,15" Click="clearSavedModelButton_Click" x:Name="clearSavedModelButton" Content="Clear Saved Model" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="2,2,2,2" Width="175"/>
+
+    </Grid>
+
+   
+
+</Window>

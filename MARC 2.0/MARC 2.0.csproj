@@ -124,6 +124,9 @@
     <Compile Include="Converter\CommonConverters.cs" />
     <Compile Include="Converter\ClassifyPageConverters.cs" />
     <Compile Include="Converter\ImportPageConverters.cs" />
+    <Compile Include="EditStopwordsWindow.xaml.cs">
+      <DependentUpon>EditStopwordsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Enums\Actions.cs" />
     <Compile Include="Enums\colors.cs" />
     <Compile Include="Enums\Classifications.cs" />
@@ -143,6 +146,10 @@
     <Compile Include="WordCloudControl\InfiniteProgressBarWrapper.cs" />
     <Compile Include="WordCloudControl\ProgressBarWrapper.cs" />
     <Page Include="ClassifyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditStopwordsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +251,7 @@
     <Resource Include="Icons\Cloud.png" />
     <Resource Include="Icons\appstore2.png" />
     <Resource Include="MARC.PNG" />
+    <Resource Include="Icons\settings.png" />
     <Content Include="Summarizer.dll" />
     <Resource Include="Icons\Browse-Icon.png" />
     <Resource Include="Icons\browse.ico" />
