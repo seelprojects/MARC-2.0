@@ -238,7 +238,7 @@
     <Resource Include="Icons\summary-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\add-icon.png" />
+    <Resource Include="Icons\add.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\export.png" />
