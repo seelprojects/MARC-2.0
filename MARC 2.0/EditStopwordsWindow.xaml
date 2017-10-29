@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:WpfApplicationTest"
         mc:Ignorable="d"
         Title="Edit Stopwords List" Height="600" Width="520" WindowStartupLocation="CenterScreen" MaxHeight="700" MinWidth="490" MaxWidth="700" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-    
-   
+
+
     <Grid Margin="15,15,15,15" HorizontalAlignment="Stretch" Width="460" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -21,8 +21,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label HorizontalAlignment="Left" Name="lblQuestion" Grid.Row="0">Enter new stopword:</Label>
-        <TextBox Margin="5,0,0,0"  Name="newStopwordTextbox" Grid.Column="1"  HorizontalAlignment="Center" Width="Auto" Height="Auto" Grid.Row="0" MinWidth="245" BorderThickness="1"></TextBox>
-        <Button x:Name="addStopwordButton" Click="addStopwordButton_Click" Content="Add" Margin="5,0,0,0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
+        <TextBox Margin="9.333,0,4.667,10.333"  Name="newStopwordTextbox" Grid.Column="1"  HorizontalAlignment="Center" Width="Auto" Height="Auto" Grid.Row="0" MinWidth="245" BorderThickness="1"></TextBox>
+        <Button x:Name="addStopwordButton" Click="addStopwordButton_Click" Content="Add" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="27"/>
 
         <Label HorizontalAlignment="Left" Margin="0,15,0,0" Grid.Row="1" Grid.ColumnSpan="3">Current Stopword List (Right-Click to delete stopwords)</Label>
         <Border Margin="0,10,0,0" Grid.Row="2" Grid.ColumnSpan="3" CornerRadius="6" BorderBrush="Gray" Background="White" BorderThickness="2" DockPanel.Dock="Top">
@@ -69,10 +69,10 @@
                 </WrapPanel>
             </Grid>
         </Border>
-        
+
         <!--<Button Margin="0,15,0,15" Click="clearSavedModelButton_Click" x:Name="clearSavedModelButton" Content="Clear Saved Model" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="2,2,2,2" Width="175"/>-->
     </Grid>
 
-   
+
 
 </Window>
