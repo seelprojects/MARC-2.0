@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplicationTest"
         mc:Ignorable="d"
-        Title="Edit Stopwords List" Height="620" Width="520" WindowStartupLocation="CenterScreen" MaxHeight="700" MinWidth="490" MaxWidth="700" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        Title="Edit Stopwords List" Height="600" Width="520" WindowStartupLocation="CenterScreen" MaxHeight="700" MinWidth="490" MaxWidth="700" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
     
    
     <Grid Margin="15,15,15,15" HorizontalAlignment="Stretch" Width="460" >
@@ -69,8 +69,8 @@
                 </WrapPanel>
             </Grid>
         </Border>
-        <Button Margin="0,15,0,15" Click="clearSavedModelButton_Click" x:Name="clearSavedModelButton" Content="Clear Saved Model" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="2,2,2,2" Width="175"/>
-
+        
+        <!--<Button Margin="0,15,0,15" Click="clearSavedModelButton_Click" x:Name="clearSavedModelButton" Content="Clear Saved Model" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Padding="2,2,2,2" Width="175"/>-->
     </Grid>
 
    

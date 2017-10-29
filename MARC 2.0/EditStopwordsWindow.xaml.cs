@@ -161,11 +161,13 @@ namespace WpfApplicationTest
                 Array.ForEach(Directory.GetFiles(SVMFolder), File.Delete);
                 Array.ForEach(Directory.GetFiles(NBFolder), File.Delete);
 
-                toastBox.Text = "Models Successfully Deleted";
-                toastBox.Background = Brushes.Red;
-                toastBox.Visibility = Visibility.Visible;
-                await Task.Delay(1000);
-                toastBox.Visibility = Visibility.Hidden;
+
+                //Toast to show Model deletion
+                //toastBox.Text = "Models Successfully Deleted";
+                //toastBox.Background = Brushes.Red;
+                //toastBox.Visibility = Visibility.Visible;
+                //await Task.Delay(1000);
+                //toastBox.Visibility = Visibility.Hidden;
             }
             catch (Exception ex)
             {
